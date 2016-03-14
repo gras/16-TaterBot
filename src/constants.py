@@ -1,5 +1,5 @@
+# 16-TaterBot constants.py
 
-# constants.py
 '''
 Created on Mar 13, 2016
 

@@ -1,4 +1,4 @@
-#motors.py
+# 16-TaterBot motors.py
 
 '''
 Created on Mar 13, 2016

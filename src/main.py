@@ -1,4 +1,4 @@
-# main.py
+# 16-TaterBot main.py
 
 '''
 Created on Mar 13, 2016

@@ -1,9 +1,9 @@
-# servos.py
+# 16-TaterBot servos.py
 
 '''
 Created on Mar 13, 2016
 
-@author: Botball
+@author: Dead Robot Society
 '''
 import constants as c
 import wallaby as w
