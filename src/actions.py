@@ -71,7 +71,7 @@ def goToBin1():
     if c.isClone:
         m.driveTimed(95, 100, 3700) # (98,100) for clone
     else:
-        m.driveTimed(95, 90, 1500)
+        m.driveTimed(95, 90, 3700)
     
 # Backs up from the bin, grabbing it
 def backUpFromBin():
@@ -85,6 +85,7 @@ def backUpFromBin():
 
 # After bin is grabbed, turns to pile 2 
 def driveToFirstGreenPile():
+    s.moveBin(c.RELEASE, 100)
     s.moveServo(c.ARM, c.UP, 20)
     w.msleep(200)
     s.moveServo(c.CLAW, c.CLOSE, 20)

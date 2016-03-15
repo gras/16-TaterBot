@@ -7,20 +7,19 @@ Created on Mar 13, 2016
 '''
 
 import actions as act
-import constants as c
-import wallaby as w
-import helpers as h
+
+from helpers import DEBUG
 
 def main():
     print 'Hello Tater\n'
     act.init()
     act.pile1()
-    h.DEBUG()
     act.grabPile()
     act.goToBin1()
     act.deposit()
     act.backUpFromBin()
     act.driveToFirstGreenPile()
+    DEBUG()
     
     
 if __name__ == '__main__':
@@ -30,8 +29,4 @@ if __name__ == '__main__':
     sys.stdout = os.fdopen(sys.stdout.fileno(),'w',0)
     main()
     
-# Test Servo Function
-def testServo():
-    w.set_servo_position(c.CLAW, c.OPEN)
-    w.set_servo_position(c.CLAW, c.CLOSE)
     
