@@ -8,18 +8,17 @@ Created on Mar 13, 2016
 
 import actions as act
 
-from helpers import DEBUG
+from sensors import DEBUG
 
 def main():
-    print 'Hello Tater\n'
     act.init()
-    act.pile1()
+    act.goToSouthernPile()
     act.grabPile()
-    act.goToBin1()
+    act.goToTaterBin() 
     act.deposit()
-    act.backUpFromBin()
-    act.driveToFirstGreenPile()
     DEBUG()
+    act.backUpFromBin()
+    act.goToNorthernPile() 
     
     
 if __name__ == '__main__':

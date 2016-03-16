@@ -6,109 +6,133 @@ Created on Mar 13, 2016
 @author: Dead Robot Society
 '''
 
-import constants as c
-import wallaby as w
-import servos as s
-import motors as m
+from sensors import getRBUTTON
+from sensors import isPrime
+from sensors import DEBUG
+
+from servos import moveClaw
+from servos import moveArm
+from servos import moveBin
+from servos import testServos
+
+from drive import testMotors
+from drive import driveTimed
+
+from wallaby import msleep
+
+from constants import OPEN 
+from constants import FRONT
+from constants import UP
+from constants import CLOSE
+from constants import MID
+from constants import GRAB
+from constants import RELEASE
+from constants import setVars
+
+
+
+'''
+Four piles are called Western, Northern, Southern, and Center
+
+'''
 
 # tests sensors and sets prime and clone values
 def init():
-    c.setVars()
-    #Placeholder for other sensors to test
-    s.testServos()
-    m.testMotors()
-    while not c.RBUTTON:
-        w.msleep(500)
-        print("End init")
-    w.msleep(1000)
+    print("Running Tater")
+    setVars()
+    testServos()
+    testMotors()
+    while not getRBUTTON():
+        msleep(50)
+    msleep(1000)
+
+# goes to the fist pile
+def goToSouthernPile():
+    print("goToSouthernPile")
+    if isPrime():
+        driveTimed(100, 100, 3700)
+    else:
+        driveTimed(95, 100, 3615)
 
 # Starts run
 def grabPile():
-    print("GRAB")
-    m.driveTimed(0,0,0)
-    
-    if c.isClone:   # if clone
-        s.moveServo(c.CLAW, c.OPEN, 20)
-        w.msleep(300)
-        s.moveServo(c.ARM, c.FRONT, 20)
-        w.msleep(300)
-        s.moveServo(c.CLAW, c.CLOSE, 10)
-        w.msleep(300)
-        s.moveServo(c.ARM, c.UP, 20);
-        w.msleep(300)
+    print("grabPile")
+    driveTimed(0,0,0)
+    if isPrime():   
+        moveClaw(OPEN, 20)
+        msleep(300)
+        moveArm(FRONT, 20)
+        msleep(300)
+        moveClaw(CLOSE, 5)
+        msleep(300)
+        moveClaw(OPEN, 10)
+        msleep(300)
+        driveTimed(100, 100, 450)
+        msleep(300)
+        moveClaw(CLOSE, 10)
+        msleep(300)
+        moveArm(UP, 20);
+        msleep(300)
     else:
-        s.moveServo(c.CLAW, c.OPEN, 20)
-        w.msleep(300)
-        s.moveServo(c.ARM, c.FRONT, 15)
-        w.msleep(300)
-        m.driveTimed(95, 90, 250)
-        w.msleep(200)
-        s.moveServo(c.CLAW, c.CLOSE, 10)
-        w.msleep(300)
-        s.moveServo(c.ARM, c.UP, 5)
-        w.msleep(300)
-
-# Follows line. Currently obsolete as there is no tophat    
-def lineTimed(time):
-    end = w.seconds() + time
-    while w.seconds() < end:
-        if w.analog(0) < 500:
-            m.driveTimed(20, 60, 0)
-        else:
-            m.driveTimed(60, 20, 0)
-    print("line over")
-
-# goes to the fist pile
-def pile1():
-    if c.isClone:
-        m.driveTimed(95, 100, 3615)
-    else:
-        print("drive straight\n")
-        m.driveTimed(100, 100, 3900)
-
+        moveClaw(OPEN, 20)
+        msleep(300)
+        moveArm(FRONT, 15)
+        msleep(300)
+        driveTimed(95, 90, 250)
+        msleep(200)
+        moveClaw(CLOSE, 10)
+        msleep(300)
+        moveArm(UP, 5)
+        msleep(300)
+        
 # Go to the bin
-def goToBin1():
-    if c.isClone:
-        m.driveTimed(95, 100, 3700) # (98,100) for clone
+def goToTaterBin():
+    print("goToTaterBin")
+    if isPrime():
+        driveTimed(95, 90, 3600)
     else:
-        m.driveTimed(95, 90, 3700)
-    
-# Backs up from the bin, grabbing it
-def backUpFromBin():
-    s.moveServo(c.ARM, c.UP, 15)
-    w.msleep(300)
-    s.moveServo(c.BIN, c.GRAB, 20)
-    w.msleep(200)
-    s.moveServo(c.CLAW, c.CLOSE, 20)
-    w.msleep(200)
-    m.driveTimed(-95, -90, 500)
-
-# After bin is grabbed, turns to pile 2 
-def driveToFirstGreenPile():
-    s.moveBin(c.RELEASE, 100)
-    s.moveServo(c.ARM, c.UP, 20)
-    w.msleep(200)
-    s.moveServo(c.CLAW, c.CLOSE, 20)
-    m.driveTimed(-100, 100, 300)
-    m.driveTimed(95, 90, 400)
-    w.msleep(300)
-    
+        driveTimed(95, 100, 3700)
+        
 # Places the poms in the potato bin
 def deposit():
-    if c.isClone:
-        m.driveTimed(0, 0, 0)
-        s.moveServo(c.ARM, 518, 25)
-        w.msleep(300)
-        s.moveServo(c.CLAW, c.OPEN, 10)
+    print("deposit")
+    if isPrime():
+        driveTimed(0, 0, 0)
+        moveArm(MID, 5)
+        msleep(300)
+        moveClaw(OPEN, 10)
+        msleep(300)
+        moveArm(UP, 15)
+        msleep(300)
+        moveClaw(CLOSE, 15)
     else:
-        m.driveTimed(0, 0, 0)
-        s.moveServo(c.ARM, c.MID, 5)
-        w.msleep(300)
-        s.moveServo(c.CLAW, c.OPEN, 10)
-        w.msleep(300)
-        s.moveServo(c.ARM, c.UP, 15)
-        w.msleep(300)
-        s.moveServo(c.CLAW, c.CLOSE, 15)
+        driveTimed(0, 0, 0)
+        moveArm(518, 25)
+        msleep(300)
+        moveClaw(OPEN, 10)
+        
+# Backs up from the bin, grabbing it
+def backUpFromBin():
+    print("backUpFromBin")
+    moveArm(UP, 15)
+    msleep(300)
+    moveBin(GRAB, 20)
+    msleep(200)
+    moveClaw(CLOSE, 20)
+    msleep(200)
+    driveTimed(-95, -90, 500)
+
+# After bin is grabbed, turns to pile 2 
+def goToNorthernPile():
+    print("goToNorhternPile")
+    moveBin(RELEASE, 100)
+    moveArm(UP, 20)
+    msleep(200)
+    moveClaw(CLOSE, 20)
+    driveTimed(-100, 100, 300)
+    driveTimed(95, 90, 400)
+    msleep(300)
+   
 
 
     
