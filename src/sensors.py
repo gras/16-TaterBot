@@ -28,7 +28,8 @@ def isClone():
 
 # returns inverse of clone switch    
 def isPrime(): 
-    return not isClone()
+    return not digital(CLONE_SWITCH)
+    #return not isClone()
 
 # stop program for testing
 def DEBUG():
