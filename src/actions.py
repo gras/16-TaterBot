@@ -9,6 +9,7 @@ Created on Mar 13, 2016
 from sensors import getRBUTTON
 from sensors import isPrime
 from sensors import DEBUG
+from sensors import atArmLength
 
 from servos import moveClaw
 from servos import moveArm
@@ -17,6 +18,7 @@ from servos import testServos
 
 from drive import testMotors
 from drive import driveTimed
+from drive import drive
 
 from wallaby import msleep
 
@@ -89,7 +91,12 @@ def grabPile():
 def goToTaterBin():
     print("goToTaterBin")
     if isPrime():
-        driveTimed(95, 90, 3600)
+        driveTimed(95, 90, 2000)
+        drive(30,25)
+        while not atArmLength():
+            pass
+        drive(0,0)
+        #driveTimed(95, 90, 3600)
     else:
         driveTimed(95, 100, 3700)
         

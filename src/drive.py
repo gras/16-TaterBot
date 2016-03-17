@@ -10,6 +10,7 @@ from constants import LMOTOR
 from constants import RMOTOR
 
 from sensors import isPrime
+from sensors import onBlack
 
 from wallaby import motor
 from wallaby import msleep
@@ -20,7 +21,9 @@ from sensors import getET
 # tests motors
 def testMotors():
     # testing motors
-    driveTimed(100, 100, 1000)
+    drive(100, 100)
+    while not onBlack(): #wait to see line
+        pass
     driveTimed(0, 0, 0)
     driveTimed(-100, 100, 500)
     driveTimed(100, -100, 400)

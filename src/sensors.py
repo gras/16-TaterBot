@@ -13,6 +13,9 @@ from wallaby import analog
 from constants import ET
 from constants import CLONE_SWITCH
 from constants import RBUTTON
+from constants import MID_VALUE
+from constants import LINE_FOLLOWER
+from constants import ARM_LENGTH
 
 # reads the right button
 def getRBUTTON():
@@ -36,3 +39,13 @@ def DEBUG():
     ao()
     print("Program stop for DEBUG\n")
     exit(0)
+    
+def onBlack():
+    return analog(LINE_FOLLOWER) > MID_VALUE 
+
+def atArmLength():
+    return analog (ET) > ARM_LENGTH
+
+def testET():
+    x = analog(ET)
+    print("ET = ",x)

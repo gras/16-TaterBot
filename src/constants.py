@@ -20,6 +20,7 @@ BIN = 3
 
 # ANALOG ports
 ET = 1
+LINE_FOLLOWER = 0
 
 # DIGITAL ports
 CLONE_SWITCH = 9
@@ -27,13 +28,17 @@ RBUTTON = 13
 
 # PRIME servo positions
 FRONT = 120 #Arm forward on ground 
-MID = 580 #Arm to score at bin
+MID = 540 #Arm to score at bin
 UP = 1100 #Arm at 90 degrees up
 BACK = 1500 #Arm backwards
 OPEN = 0 #Claw open
 CLOSE = 1100 #Claw closed
 GRAB = 1150 #Grab bin
 RELEASE = 1750 #Release bin
+
+# PRIME analog sensors values
+MID_VALUE = 2000 #value between black and white top hat values
+ARM_LENGTH = 2350 #robot 1 claw length from bin
 
 def setVars():
     if sensor.isPrime():
@@ -56,6 +61,7 @@ def setVars():
         GRAB = 1275 #Grab bin
         global RELEASE
         RELEASE = 1800 #Release bin
+
 
     
     
