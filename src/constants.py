@@ -38,7 +38,7 @@ binRelease = 1750 #Release bin
 
 # PRIME analog sensors values
 topHatMidValue = 2000 #value between black and white top hat values
-armLength = 2550 #robot 1 claw length from bin
+armLength = 2550 #2350 #robot 1 claw length from bin
 
 def setVars():
     if sensor.isPrime():

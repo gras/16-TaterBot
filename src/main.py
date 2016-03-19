@@ -15,8 +15,8 @@ def main():
     a.goToSouthernPile()
     a.grabPile()
     a.goToTaterBin() 
-    sensors.DEBUG()
     a.deposit()
+    sensors.DEBUG()
     a.backUpFromBin()
     a.goToNorthernPile() 
     

@@ -51,7 +51,8 @@ def grabPile():
         msleep(300)
         servos.moveArm(c.armFront, 20)
         msleep(300)
-        servos.moveClaw(c.clawClose, 5)
+        #clawClose - 100 because of issue with pushing pom out of reach
+        servos.moveClaw(c.clawClose-100, 5)
         msleep(300)
         servos.moveClaw(c.clawOpen, 10)
         msleep(300)
