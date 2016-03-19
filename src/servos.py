@@ -5,15 +5,7 @@ Created on Mar 13, 2016
 
 @author: Dead Robot Society
 '''
-from constants import ARM
-from constants import armFront
-from constants import CLAW
-from constants import clawClose
-from constants import BIN
-from constants import binRelease
-from constants import armUp
-from constants import clawOpen
-from constants import binGrab
+import constants as c
 
 import wallaby as w
 
@@ -21,34 +13,34 @@ import wallaby as w
 def testServos():
     print "Testing servos"
     
-    w.set_servo_position(ARM, armUp)
-    w.set_servo_position(CLAW, clawClose)
-    w.set_servo_position(BIN, binRelease)
+    w.set_servo_position(c.ARM, c.armUp)
+    w.set_servo_position(c.CLAW, c.clawClose)
+    w.set_servo_position(c.BIN, c.binRelease)
     w.enable_servos()
     w.msleep(1000)
-    moveArm(armUp, 25)
+    moveArm(c.armUp, 25)
     w.msleep(500)
-    moveArm(armFront, 10)
+    moveArm(c.armFront, 10)
     w.msleep(500)
-    moveClaw(clawOpen, 25)
+    moveClaw(c.clawOpen, 25)
     w.msleep(500)
-    moveClaw(clawClose, 25)
+    moveClaw(c.clawClose, 25)
     w.msleep(500)
-    moveBin(binGrab, 25)
+    moveBin(c.binGrab, 25)
     w.msleep(500)
-    moveBin(binRelease, 25)
+    moveBin(c.binRelease, 25)
     w.msleep(500)
-    moveArm(armUp, 25)
+    moveArm(c.armUp, 25)
     w.msleep(500)
     
 def moveArm( endPos, speed=10 ):
-    moveServo( ARM, endPos, speed )
+    moveServo( c.ARM, endPos, speed )
 
 def moveClaw( endPos, speed=10 ):
-    moveServo( CLAW, endPos, speed )
+    moveServo( c.CLAW, endPos, speed )
 
 def moveBin( endPos, speed=10 ):
-    moveServo( BIN, endPos, speed )
+    moveServo( c.BIN, endPos, speed )
 
 
 def moveServo( servo, endPos, speed=10 ) :

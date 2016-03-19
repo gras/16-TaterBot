@@ -1,4 +1,4 @@
-# 16-TaterBot actions.py
+# 16-TaterBot actionservos.py
 
 '''
 Created on Mar 13, 2016
@@ -6,30 +6,15 @@ Created on Mar 13, 2016
 @author: Dead Robot Society
 '''
 
-from sensors import getRBUTTON
-from sensors import isPrime
-from sensors import DEBUG
-from sensors import atArmLength
+import sensors as sensors
 
-from servos import moveClaw
-from servos import moveArm
-from servos import moveBin
-from servos import testServos
+import servos as servos
 
-from drive import testMotors
-from drive import driveTimed
-from drive import drive
+import drive as d
 
 from wallaby import msleep
 
-from constants import clawOpen 
-from constants import armFront
-from constants import armUp
-from constants import clawClose
-from constants import armMid
-from constants import binGrab
-from constants import binRelease
-from constants import setVars
+import constants as c
 
 
 
@@ -41,104 +26,104 @@ Four piles are called Western, Northern, Southern, and Center
 # tests sensors and sets prime and clone values
 def init():
     print("Running Tater")
-    setVars()
-    print(clawOpen)
-    testServos()
-    testMotors()
-    while not getRBUTTON():
+    c.setVars()
+    print(c.clawOpen)
+    servos.testServos()
+    d.testMotors()
+    while not sensors.getRBUTTON():
         msleep(50)
     msleep(1000)
 
 # goes to the fist pile
 def goToSouthernPile():
     print("goToSouthernPile")
-    if isPrime():
-        driveTimed(100, 100, 3700)
+    if sensors.isPrime():
+        d.driveTimed(100, 100, 3700)
     else:
-        driveTimed(95, 100, 3615)
+        d.driveTimed(95, 100, 3615)
 
 # Starts run
 def grabPile():
     print("grabPile")
-    driveTimed(0,0,0)
-    if isPrime():   
-        moveClaw(clawOpen, 20)
+    d.driveTimed(0,0,0)
+    if sensors.isPrime():   
+        servos.moveClaw(c.clawOpen, 20)
         msleep(300)
-        moveArm(armFront, 20)
+        servos.moveArm(c.armFront, 20)
         msleep(300)
-        moveClaw(clawClose, 5)
+        servos.moveClaw(c.clawClose, 5)
         msleep(300)
-        moveClaw(clawOpen, 10)
+        servos.moveClaw(c.clawOpen, 10)
         msleep(300)
-        driveTimed(100, 100, 450)
+        d.driveTimed(100, 100, 450)
         msleep(300)
-        moveClaw(clawClose, 10)
+        servos.moveClaw(c.clawClose, 10)
         msleep(300)
-        moveArm(armUp, 20);
+        servos.moveArm(c.armUp, 20);
         msleep(300)
     else:
-        moveClaw(clawOpen, 20)
+        servos.moveClaw(c.clawOpen, 20)
         msleep(300)
-        moveArm(armFront, 15)
+        servos.moveArm(c.armFront, 15)
         msleep(300)
-        driveTimed(95, 90, 250)
+        d.driveTimed(95, 90, 250)
         msleep(200)
-        moveClaw(clawClose, 10)
+        servos.moveClaw(c.clawClose, 10)
         msleep(300)
-        moveArm(armUp, 5)
+        servos.moveArm(c.armUp, 5)
         msleep(300)
         
 # Go to the bin
 def goToTaterBin():
     print("goToTaterBin")
-    if isPrime():
-        driveTimed(95, 90, 2000)
-        drive(30,25)
-        while not atArmLength():
+    if sensors.isPrime():
+        d.driveTimed(95, 90, 2000)
+        d.drive(30,25)
+        while not sensors.atArmLength():
             pass
-        drive(0,0)
+        d.drive(0,0)
         #driveTimed(95, 90, 3600)
     else:
-        driveTimed(95, 100, 3700)
+        d.driveTimed(95, 100, 3700)
         
 # Places the poms in the potato bin
 def deposit():
     print("deposit")
-    if isPrime():
-        driveTimed(0, 0, 0)
-        moveArm(armMid, 5)
+    if sensors.isPrime():
+        d.driveTimed(0, 0, 0)
+        servos.moveArm(c.armMid, 5)
         msleep(300)
-        moveClaw(clawOpen, 10)
+        servos.moveClaw(c.clawOpen, 10)
         msleep(300)
-        moveArm(armUp, 15)
+        servos.moveArm(c.armUp, 15)
         msleep(300)
-        moveClaw(clawClose, 15)
+        servos.moveClaw(c.clawClose, 15)
     else:
-        driveTimed(0, 0, 0)
-        moveArm(518, 25)
+        d.driveTimed(0, 0, 0)
+        servos.moveArm(518, 25)
         msleep(300)
-        moveClaw(clawOpen, 10)
+        servos.moveClaw(c.clawOpen, 10)
         
 # Backs up from the bin, grabbing it
 def backUpFromBin():
     print("backUpFromBin")
-    moveArm(armUp, 15)
+    servos.moveArm(c.armUp, 15)
     msleep(300)
-    moveBin(binGrab, 20)
+    servos.moveBin(c.binGrab, 20)
     msleep(200)
-    moveClaw(clawClose, 20)
+    servos.moveClaw(c.clawClose, 20)
     msleep(200)
-    driveTimed(-95, -90, 500)
+    d.driveTimed(-95, -90, 500)
 
 # After bin is grabbed, turns to pile 2 
 def goToNorthernPile():
     print("goToNorhternPile")
-    moveBin(binRelease, 100)
-    moveArm(armUp, 20)
+    servos.moveBin(c.binRelease, 100)
+    servos.moveArm(c.armUp, 20)
     msleep(200)
-    moveClaw(clawClose, 20)
-    driveTimed(-100, 100, 300)
-    driveTimed(95, 90, 400)
+    servos.moveClaw(c.clawClose, 20)
+    d.driveTimed(-100, 100, 300)
+    d.driveTimed(95, 90, 400)
     msleep(300)
    
 

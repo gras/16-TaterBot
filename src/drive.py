@@ -6,11 +6,9 @@ Created on Mar 13, 2016
 @author: Dead Robot Society
 '''
 
-from constants import LMOTOR
-from constants import RMOTOR
+import constants as c
 
-from sensors import isPrime
-from sensors import onBlack
+import sensors as sensors
 
 from wallaby import motor
 from wallaby import msleep
@@ -22,7 +20,7 @@ from sensors import getET
 def testMotors():
     # testing motors
     drive(100, 100)
-    while not onBlack(): #wait to see line
+    while not sensors.onBlack(): #wait to see line
         pass
     driveTimed(0, 0, 0)
     driveTimed(-100, 100, 500)
@@ -37,12 +35,12 @@ def testMotors():
         pass
 
 def drive(left, right):
-    if isPrime:
-        motor(LMOTOR,left)
-        motor(RMOTOR,right)
+    if sensors.isPrime:
+        motor(c.LMOTOR,left)
+        motor(c.RMOTOR,right)
     else:
-        motor(LMOTOR,left)
-        motor(RMOTOR,right)
+        motor(c.LMOTOR,left)
+        motor(c.RMOTOR,right)
 
 def driveTimed(left,right,time):
     drive(left,right)

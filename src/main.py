@@ -6,19 +6,19 @@ Created on Mar 13, 2016
 @author: Dead Robot Society
 '''
 
-import actions as act
+import actions as a
 
-from sensors import DEBUG
+import sensors as sensors
 
 def main():
-    act.init()
-    act.goToSouthernPile()
-    act.grabPile()
-    act.goToTaterBin() 
-    DEBUG()
-    act.deposit()
-    act.backUpFromBin()
-    act.goToNorthernPile() 
+    a.init()
+    a.goToSouthernPile()
+    a.grabPile()
+    a.goToTaterBin() 
+    sensors.DEBUG()
+    a.deposit()
+    a.backUpFromBin()
+    a.goToNorthernPile() 
     
     
 if __name__ == '__main__':
