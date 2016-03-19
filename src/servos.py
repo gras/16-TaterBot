@@ -20,17 +20,19 @@ import wallaby as w
 # tests servos
 def testServos():
     print "Testing servos"
-    w.set_servo_position(ARM, armFront)
+    
+    w.set_servo_position(ARM, armUp)
     w.set_servo_position(CLAW, clawClose)
     w.set_servo_position(BIN, binRelease)
     w.enable_servos()
     w.msleep(1000)
     moveArm(armUp, 25)
+    w.msleep(500)
+    moveArm(armFront, 10)
+    w.msleep(500)
     moveClaw(clawOpen, 25)
     w.msleep(500)
     moveClaw(clawClose, 25)
-    w.msleep(500)
-    moveArm(armFront, 10)
     w.msleep(500)
     moveBin(binGrab, 25)
     w.msleep(500)

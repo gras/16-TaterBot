@@ -12,12 +12,11 @@ from sensors import DEBUG
 
 def main():
     act.init()
-    DEBUG()
     act.goToSouthernPile()
     act.grabPile()
     act.goToTaterBin() 
-    act.deposit()
     DEBUG()
+    act.deposit()
     act.backUpFromBin()
     act.goToNorthernPile() 
     
