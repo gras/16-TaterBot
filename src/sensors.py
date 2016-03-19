@@ -10,28 +10,23 @@ from wallaby import ao
 from wallaby import digital 
 from wallaby import analog 
 
-from constants import ET
-from constants import CLONE_SWITCH
-from constants import RBUTTON
-from constants import topHatMidValue
-from constants import LINE_FOLLOWER
-from constants import armLength
+import constants as c
 
 # reads the right button
 def getRBUTTON():
-    return digital (RBUTTON)
+    return digital (c.RBUTTON)
 
 # reads the ET sensor
 def getET():
-    return analog(ET) 
+    return analog(c.ET) 
 
 # reads the clone switch
 def isClone():
-    return digital(CLONE_SWITCH)
+    return digital(c.CLONE_SWITCH)
 
 # returns inverse of clone switch    
 def isPrime(): 
-    return not digital(CLONE_SWITCH)
+    return not digital(c.CLONE_SWITCH)
     #return not isClone()
 
 # stop program for testing
@@ -41,11 +36,11 @@ def DEBUG():
     exit(0)
     
 def onBlack():
-    return analog(LINE_FOLLOWER) > topHatMidValue 
+    return analog(c.LINE_FOLLOWER) > c.topHatMidValue 
 
 def atArmLength():
-    return analog (ET) > armLength
+    return analog (c.ET) > c.armLength
 
 def testET():
-    x = analog(ET)
+    x = analog(c.ET)
     print("ET = ",x)

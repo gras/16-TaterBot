@@ -6,8 +6,7 @@ Created on Mar 13, 2016
 @author: Dead Robot Society
 '''
 
-from constants import LMOTOR
-from constants import RMOTOR
+import constants as c
 
 from sensors import isPrime
 from sensors import onBlack
@@ -38,11 +37,11 @@ def testMotors():
 
 def drive(left, right):
     if isPrime:
-        motor(LMOTOR,left)
-        motor(RMOTOR,right)
+        motor(c.LMOTOR,left)
+        motor(c.RMOTOR,right)
     else:
-        motor(LMOTOR,left)
-        motor(RMOTOR,right)
+        motor(c.LMOTOR,left)
+        motor(c.RMOTOR,right)
 
 def driveTimed(left,right,time):
     drive(left,right)

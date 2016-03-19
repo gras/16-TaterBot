@@ -22,14 +22,7 @@ from drive import drive
 
 from wallaby import msleep
 
-from constants import clawOpen 
-from constants import armFront
-from constants import armUp
-from constants import clawClose
-from constants import armMid
-from constants import binGrab
-from constants import binRelease
-from constants import setVars
+import constants as c
 
 
 
@@ -41,8 +34,8 @@ Four piles are called Western, Northern, Southern, and Center
 # tests sensors and sets prime and clone values
 def init():
     print("Running Tater")
-    setVars()
-    print(clawOpen)
+    c.setVars()
+    print(c.clawOpen)
     testServos()
     testMotors()
     while not getRBUTTON():
@@ -62,30 +55,31 @@ def grabPile():
     print("grabPile")
     driveTimed(0,0,0)
     if isPrime():   
-        moveClaw(clawOpen, 20)
+        moveClaw(c.clawOpen, 20)
         msleep(300)
-        moveArm(armFront, 20)
+        moveArm(c.armFront, 20)
         msleep(300)
-        moveClaw(clawClose, 5)
+        #clawClose - 100 because of issue with pushing pom out of reach
+        moveClaw(c.clawClose-100, 5)
         msleep(300)
-        moveClaw(clawOpen, 10)
+        moveClaw(c.clawOpen, 10)
         msleep(300)
         driveTimed(100, 100, 450)
         msleep(300)
-        moveClaw(clawClose, 10)
+        moveClaw(c.clawClose, 10)
         msleep(300)
-        moveArm(armUp, 20);
+        moveArm(c.armUp, 20);
         msleep(300)
     else:
-        moveClaw(clawOpen, 20)
+        moveClaw(c.clawOpen, 20)
         msleep(300)
-        moveArm(armFront, 15)
+        moveArm(c.armFront, 15)
         msleep(300)
         driveTimed(95, 90, 250)
         msleep(200)
-        moveClaw(clawClose, 10)
+        moveClaw(c.clawClose, 10)
         msleep(300)
-        moveArm(armUp, 5)
+        moveArm(c.armUp, 5)
         msleep(300)
         
 # Go to the bin
@@ -106,37 +100,37 @@ def deposit():
     print("deposit")
     if isPrime():
         driveTimed(0, 0, 0)
-        moveArm(armMid, 5)
+        moveArm(c.armMid, 5)
         msleep(300)
-        moveClaw(clawOpen, 10)
+        moveClaw(c.clawOpen, 10)
         msleep(300)
-        moveArm(armUp, 15)
+        moveArm(c.armUp, 15)
         msleep(300)
-        moveClaw(clawClose, 15)
+        moveClaw(c.clawClose, 15)
     else:
         driveTimed(0, 0, 0)
         moveArm(518, 25)
         msleep(300)
-        moveClaw(clawOpen, 10)
+        moveClaw(c.clawOpen, 10)
         
 # Backs up from the bin, grabbing it
 def backUpFromBin():
     print("backUpFromBin")
-    moveArm(armUp, 15)
+    moveArm(c.armUp, 15)
     msleep(300)
-    moveBin(binGrab, 20)
+    moveBin(c.binGrab, 20)
     msleep(200)
-    moveClaw(clawClose, 20)
+    moveClaw(c.clawClose, 20)
     msleep(200)
     driveTimed(-95, -90, 500)
 
 # After bin is grabbed, turns to pile 2 
 def goToNorthernPile():
     print("goToNorhternPile")
-    moveBin(binRelease, 100)
-    moveArm(armUp, 20)
+    moveBin(c.binRelease, 100)
+    moveArm(c.armUp, 20)
     msleep(200)
-    moveClaw(clawClose, 20)
+    moveClaw(c.clawClose, 20)
     driveTimed(-100, 100, 300)
     driveTimed(95, 90, 400)
     msleep(300)
