@@ -12,6 +12,7 @@ from sensors import DEBUG
 
 def main():
     act.init()
+    DEBUG()
     act.goToSouthernPile()
     act.grabPile()
     act.goToTaterBin() 

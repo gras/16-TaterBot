@@ -6,37 +6,37 @@ Created on Mar 13, 2016
 @author: Dead Robot Society
 '''
 from constants import ARM
-from constants import FRONT
+from constants import armFront
 from constants import CLAW
-from constants import CLOSE
+from constants import clawClose
 from constants import BIN
-from constants import RELEASE
-from constants import UP
-from constants import OPEN
-from constants import GRAB
+from constants import binRelease
+from constants import armUp
+from constants import clawOpen
+from constants import binGrab
 
 import wallaby as w
 
 # tests servos
 def testServos():
     print "Testing servos"
-    w.set_servo_position(ARM, FRONT)
-    w.set_servo_position(CLAW, CLOSE)
-    w.set_servo_position(BIN, RELEASE)
+    w.set_servo_position(ARM, armFront)
+    w.set_servo_position(CLAW, clawClose)
+    w.set_servo_position(BIN, binRelease)
     w.enable_servos()
     w.msleep(1000)
-    moveArm(UP, 25)
-    moveClaw(OPEN, 25)
+    moveArm(armUp, 25)
+    moveClaw(clawOpen, 25)
     w.msleep(500)
-    moveClaw(CLOSE, 25)
+    moveClaw(clawClose, 25)
     w.msleep(500)
-    moveArm(FRONT, 10)
+    moveArm(armFront, 10)
     w.msleep(500)
-    moveBin(GRAB, 25)
+    moveBin(binGrab, 25)
     w.msleep(500)
-    moveBin(RELEASE, 25)
+    moveBin(binRelease, 25)
     w.msleep(500)
-    moveArm(UP, 25)
+    moveArm(armUp, 25)
     w.msleep(500)
     
 def moveArm( endPos, speed=10 ):
