@@ -7,7 +7,6 @@ Created on Mar 13, 2016
 '''
 
 from sensors import getRBUTTON
-from sensors import isPrime
 from sensors import DEBUG
 from sensors import atArmLength
 
@@ -34,7 +33,6 @@ Four piles are called Western, Northern, Southern, and Center
 # tests sensors and sets prime and clone values
 def init():
     print("Running Tater")
-    c.setVars()
     print(c.clawOpen)
     testServos()
     testMotors()
@@ -45,7 +43,7 @@ def init():
 # goes to the fist pile
 def goToSouthernPile():
     print("goToSouthernPile")
-    if isPrime():
+    if c.isPrime:
         driveTimed(100, 100, 3700)
     else:
         driveTimed(95, 100, 3615)
@@ -54,7 +52,7 @@ def goToSouthernPile():
 def grabPile():
     print("grabPile")
     driveTimed(0,0,0)
-    if isPrime():   
+    if c.isPrime:   
         moveClaw(c.clawOpen, 20)
         msleep(300)
         moveArm(c.armFront, 20)
@@ -85,7 +83,7 @@ def grabPile():
 # Go to the bin
 def goToTaterBin():
     print("goToTaterBin")
-    if isPrime():
+    if c.isPrime:
         driveTimed(95, 90, 2000)
         drive(30,25)
         while not atArmLength():
@@ -98,7 +96,7 @@ def goToTaterBin():
 # Places the poms in the potato bin
 def deposit():
     print("deposit")
-    if isPrime():
+    if c.isPrime:
         driveTimed(0, 0, 0)
         moveArm(c.armMid, 5)
         msleep(300)

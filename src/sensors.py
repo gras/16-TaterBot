@@ -20,15 +20,6 @@ def getRBUTTON():
 def getET():
     return analog(c.ET) 
 
-# reads the clone switch
-def isClone():
-    return digital(c.CLONE_SWITCH)
-
-# returns inverse of clone switch    
-def isPrime(): 
-    return not digital(c.CLONE_SWITCH)
-    #return not isClone()
-
 # stop program for testing
 def DEBUG():
     ao()

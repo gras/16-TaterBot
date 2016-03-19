@@ -5,9 +5,7 @@ Created on Mar 13, 2016
 
 @author: Dead Robot Society
 '''
-
-#from sensors import isPrime
-from sensors import isPrime
+import wallaby as w
 
 # MOTOR ports
 RMOTOR = 0
@@ -40,31 +38,24 @@ binRelease = 1750 #Release bin
 topHatMidValue = 2000 #value between black and white top hat values
 armLength = 2550 #2350 #robot 1 claw length from bin
 
-def setVars():
-    if isPrime():
-        print("running PRIME")
-    else:
-        print("running CLONE!")
-        global RMOTOR
-        RMOTOR = 3
-        global LMOTOR
-        LMOTOR = 0
-        global armFront
-        armFront = 80 #120
-        global armMid
-        armMid = 580 #Arm to score at bin
-        global armUp
-        armUp =  1000 #Arm at 90 degrees up
-        global armBack
-        armBack =  1350 #1500 #Arm backwards
-        global clawOpen 
-        clawOpen = 525 #356 #Claw open 
-        global clawClose
-        clawClose = 1425 #1450 #Claw closed
-        global binGrab
-        binGrab = 1275 #Grab bin
-        global binRelease
-        binRelease = 1800 #Release bin
+
+isClone = w.digital(CLONE_SWITCH)
+isPrime = not isClone
+
+if isPrime:
+    print("running PRIME")
+else:
+    print("running CLONE!")
+    RMOTOR = 3
+    LMOTOR = 0
+    armFront = 80 #120
+    armMid = 580 #Arm to score at bin
+    armUp =  1000 #Arm at 90 degrees up
+    armBack =  1350 #1500 #Arm backwards
+    clawOpen = 525 #356 #Claw open 
+    clawClose = 1425 #1450 #Claw closed
+    binGrab = 1275 #Grab bin
+    binRelease = 1800 #Release bin
 
 
     

@@ -8,7 +8,6 @@ Created on Mar 13, 2016
 
 import constants as c
 
-from sensors import isPrime
 from sensors import onBlack
 from sensors import getRBUTTON
 from sensors import getET
@@ -37,7 +36,7 @@ def testMotors():
         pass
 
 def drive(left, right):
-    if isPrime:
+    if c.isPrime:
         motor(c.LMOTOR,left)
         motor(c.RMOTOR,right)
     else:
