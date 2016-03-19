@@ -12,53 +12,30 @@ import wallaby as w
 # tests servos
 def testServos():
     print "Testing servos"
-<<<<<<< HEAD
-    w.set_servo_position(c.ARM, c.armFront)
-=======
-    
-    w.set_servo_position(c.ARM, c.armUp)
->>>>>>> branch 'master' of ssh://git@github.com/gras/16-TaterBot.git
-    w.set_servo_position(c.CLAW, c.clawClose)
-    w.set_servo_position(c.BIN, c.binRelease)
-    w.enable_servos()
-    w.msleep(1000)
-    moveArm(c.armUp, 25)
-<<<<<<< HEAD
-    moveClaw(c.clawOpen, 25)
-=======
->>>>>>> branch 'master' of ssh://git@github.com/gras/16-TaterBot.git
-    w.msleep(500)
-<<<<<<< HEAD
-    moveClaw(c.clawClose, 25)
-=======
+    set_servo_position(c.ARM, c.armFront)
+    set_servo_position(c.ARM, c.armUp)
+    set_servo_position(c.CLAW, c.clawClose)
+    set_servo_position(c.BIN, c.binRelease)
+    enable_servos()
+    msleep(1000)
+    moveArm(armUp, 25)
+    moveClaw(c.clawOpen, 25
+    msleep(500)
+    moveClaw(c.clawClose, 25
+    msleep(500)
     moveArm(c.armFront, 10)
->>>>>>> branch 'master' of ssh://git@github.com/gras/16-TaterBot.git
-    w.msleep(500)
-<<<<<<< HEAD
-    moveArm(c.armFront, 10)
-=======
     moveClaw(c.clawOpen, 25)
->>>>>>> branch 'master' of ssh://git@github.com/gras/16-TaterBot.git
-    w.msleep(500)
-<<<<<<< HEAD
+    msleep(500)
     moveBin(c.binGrab, 25)
-=======
     moveClaw(c.clawClose, 25)
->>>>>>> branch 'master' of ssh://git@github.com/gras/16-TaterBot.git
-    w.msleep(500)
-<<<<<<< HEAD
+    msleep(500)
     moveBin(c.binRelease, 25)
-=======
     moveBin(c.binGrab, 25)
->>>>>>> branch 'master' of ssh://git@github.com/gras/16-TaterBot.git
-    w.msleep(500)
-<<<<<<< HEAD
-=======
+    msleep(500)
     moveBin(c.binRelease, 25)
-    w.msleep(500)
->>>>>>> branch 'master' of ssh://git@github.com/gras/16-TaterBot.git
+    msleep(500)
     moveArm(c.armUp, 25)
-    w.msleep(500)
+    msleep(500)
     
 def moveArm( endPos, speed=10 ):
     moveServo( c.ARM, endPos, speed )
