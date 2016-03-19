@@ -24,8 +24,8 @@ def testMotors():
     while not onBlack(): #wait to see line
         pass
     driveTimed(0, 0, 0)
-    driveTimed(-100, 100, 500)
-    driveTimed(100, -100, 400)
+    driveTimed(100, -100, 500)
+    driveTimed(-100, 100, 400)
     print("Put your hand in front of ET")
     while getET() < 2000: 
         pass

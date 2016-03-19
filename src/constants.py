@@ -8,8 +8,8 @@ Created on Mar 13, 2016
 import wallaby as w
 
 # MOTOR ports
-RMOTOR = 0
-LMOTOR = 3
+LMOTOR = 0
+RMOTOR = 3
 
 # SERVO ports
 ARM = 0
@@ -17,8 +17,8 @@ CLAW = 1
 BIN = 3
 
 # ANALOG ports
-ET = 1
 LINE_FOLLOWER = 0
+ET = 1
 
 # DIGITAL ports
 CLONE_SWITCH = 9
@@ -30,6 +30,7 @@ armMid = 540 #Arm to score at bin
 armUp = 1100 #Arm at 90 degrees up
 armBack = 1500 #Arm backwards
 clawOpen = 0 #Claw open
+clawMid = 480 #Claw mid
 clawClose = 1100 #Claw closed
 binGrab = 1150 #Grab bin
 binRelease = 1750 #Release bin

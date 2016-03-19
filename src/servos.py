@@ -16,7 +16,6 @@ from wallaby import ao
 # tests servos
 def testServos():
     print "Testing servos"
-    set_servo_position(c.ARM, c.armFront)
     set_servo_position(c.ARM, c.armUp)
     set_servo_position(c.CLAW, c.clawClose)
     set_servo_position(c.BIN, c.binRelease)
@@ -28,12 +27,10 @@ def testServos():
     moveClaw(c.clawClose, 25)
     msleep(500)
     moveArm(c.armFront, 10)
-    moveClaw(c.clawOpen, 25)
+    moveClaw(c.clawMid, 25)
     msleep(500)
-    moveBin(c.binGrab, 25)
     moveClaw(c.clawClose, 25)
     msleep(500)
-    moveBin(c.binRelease, 25)
     moveBin(c.binGrab, 25)
     msleep(500)
     moveBin(c.binRelease, 25)
