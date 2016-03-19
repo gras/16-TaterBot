@@ -7,7 +7,11 @@ Created on Mar 13, 2016
 '''
 import constants as c
 
-import wallaby as w
+from wallaby import set_servo_position
+from wallaby import msleep
+from wallaby import enable_servos
+from wallaby import get_servo_position
+from wallaby import ao
 
 # tests servos
 def testServos():
@@ -18,10 +22,10 @@ def testServos():
     set_servo_position(c.BIN, c.binRelease)
     enable_servos()
     msleep(1000)
-    moveArm(armUp, 25)
-    moveClaw(c.clawOpen, 25
+    moveArm(c.armUp, 25)
+    moveClaw(c.clawOpen, 25)
     msleep(500)
-    moveClaw(c.clawClose, 25
+    moveClaw(c.clawClose, 25)
     msleep(500)
     moveArm(c.armFront, 10)
     moveClaw(c.clawOpen, 25)
@@ -51,7 +55,7 @@ def moveServo( servo, endPos, speed=10 ) :
     # speed of 1 is slow
     # speed of 2000 is fast
     # speed of 10 is the default
-    now = w.get_servo_position( servo )
+    now = get_servo_position( servo )
     if now > 2048 :
         PROGRAMMER_ERROR ("Servo setting too large")
     if now < 0 :
@@ -59,12 +63,12 @@ def moveServo( servo, endPos, speed=10 ) :
     if now > endPos:
         speed = -speed
     for i in range (now, endPos, speed ):
-        w.set_servo_position( servo, i)
-        w.msleep(10)
-    w.set_servo_position( servo, endPos )
-    w.msleep(10)  
+        set_servo_position( servo, i)
+        msleep(10)
+    set_servo_position( servo, endPos )
+    msleep(10)  
     
 def PROGRAMMER_ERROR( msg ) :
-    w.ao()
+    ao()
     print msg
     exit()  

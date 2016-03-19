@@ -10,12 +10,13 @@ import constants as c
 
 from sensors import isPrime
 from sensors import onBlack
+from sensors import getRBUTTON
+from sensors import getET
 
 from wallaby import motor
 from wallaby import msleep
 from wallaby import ao
-from sensors import getRBUTTON
-from sensors import getET
+
 
 # tests motors
 def testMotors():
@@ -37,7 +38,6 @@ def testMotors():
 
 def drive(left, right):
     if isPrime:
-    if sensors.isPrime:
         motor(c.LMOTOR,left)
         motor(c.RMOTOR,right)
     else:

@@ -7,7 +7,7 @@ Created on Mar 13, 2016
 '''
 
 #from sensors import isPrime
-import sensors as sensor
+from sensors import isPrime
 
 # MOTOR ports
 RMOTOR = 0
@@ -41,7 +41,7 @@ topHatMidValue = 2000 #value between black and white top hat values
 armLength = 2550 #2350 #robot 1 claw length from bin
 
 def setVars():
-    if sensor.isPrime():
+    if isPrime():
         print("running PRIME")
     else:
         print("running CLONE!")

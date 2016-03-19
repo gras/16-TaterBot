@@ -6,19 +6,25 @@ Created on Mar 13, 2016
 @author: Dead Robot Society
 '''
 
-import actions as a
+from actions import init
+from actions import goToSouthernPile
+from actions import grabPile
+from actions import goToTaterBin
+from actions import deposit
+from actions import backUpFromBin
+from actions import goToNorthernPile
 
-import sensors as sensors
+from sensors import DEBUG
 
 def main():
-    a.init()
-    a.goToSouthernPile()
-    a.grabPile()
-    a.goToTaterBin() 
-    a.deposit()
-    sensors.DEBUG()
-    a.backUpFromBin()
-    a.goToNorthernPile() 
+    init()
+    goToSouthernPile()
+    grabPile()
+    goToTaterBin() 
+    deposit()
+    DEBUG()
+    backUpFromBin()
+    goToNorthernPile() 
     
     
 if __name__ == '__main__':
