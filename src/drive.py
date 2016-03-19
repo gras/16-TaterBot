@@ -8,8 +8,7 @@ Created on Mar 13, 2016
 
 import constants as c
 
-from sensors import isPrime
-from sensors import onBlack
+import sensors as sensors
 
 from wallaby import motor
 from wallaby import msleep
@@ -21,7 +20,7 @@ from sensors import getET
 def testMotors():
     # testing motors
     drive(100, 100)
-    while not onBlack(): #wait to see line
+    while not sensors.onBlack(): #wait to see line
         pass
     driveTimed(0, 0, 0)
     driveTimed(-100, 100, 500)
@@ -36,7 +35,11 @@ def testMotors():
         pass
 
 def drive(left, right):
+<<<<<<< HEAD
     if isPrime:
+=======
+    if sensors.isPrime:
+>>>>>>> branch 'master' of ssh://git@github.com/gras/16-TaterBot.git
         motor(c.LMOTOR,left)
         motor(c.RMOTOR,right)
     else:
