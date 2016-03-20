@@ -29,6 +29,7 @@ RBUTTON = 13
 
 # PRIME servo positions
 armFront = 120 #Arm forward on ground 
+armBump = 260 #Arm clears the bump
 armMid = 590 #540 #Arm to score at bin
 armUp = 1100 #Arm at 90 degrees up
 armBack = 1500 #Arm backwards

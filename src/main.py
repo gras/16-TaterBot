@@ -17,6 +17,7 @@ from actions import goToNorthernPile
 from actions import backUpToBin
 from actions import turnToSouth
 from actions import grabMiddlePile
+from actions import grabSouthPile
 
 from sensors import DEBUG
 
@@ -32,6 +33,7 @@ def main():
     backUpToBin()
     turnToSouth()
     grabMiddlePile()
+    grabSouthPile()
     DEBUG() 
     
     

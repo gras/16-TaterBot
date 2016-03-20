@@ -146,5 +146,26 @@ def grabMiddlePile():
     msleep(500)
     driveTimed(0,0,0)
     moveArm(c.armBack, 15)
-    driveTimed(-50, -50, 500)
+    moveBin(c.binRelease, 15)
+    driveTimed(-50, -50, 1000)
+    moveBin(c.binGrab, 15)
     moveClaw(c.clawOpen, 15)
+
+#Grab south pile    
+def grabSouthPile():
+    print ("grabSouthPile")
+    driveTimed(100, 91, 2000)
+    moveArm(c.armBump, 15)
+    driveTimed(50, 50, 500)
+    moveClaw(c.clawMid, 10)
+    drive(50, 50)
+    moveClaw(c.clawClose, 5)
+    msleep(500)
+    driveTimed(0,0,0)
+    moveArm(c.armBack, 15)
+    moveBin(c.binRelease, 15)
+    driveTimed(-50, -50, 1000)
+    moveBin(c.binGrab, 15)
+    moveClaw(c.clawOpen, 15)
+
+    
