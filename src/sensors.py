@@ -9,6 +9,7 @@ Created on Mar 13, 2016
 from wallaby import ao
 from wallaby import digital 
 from wallaby import analog 
+from wallaby import seconds
 
 import constants as c
 
@@ -23,11 +24,19 @@ def getET():
 # stop program for testing
 def DEBUG():
     ao()
-    print("Program stop for DEBUG\n")
+    print 'Program stop for DEBUG\nSeconds: ', seconds() - c.startTime
     exit(0)
     
 def onBlack():
     return analog(c.LINE_FOLLOWER) > c.topHatMidValue 
+
+def crossBlack():
+    while not onBlack(): # wait for black
+        pass
+    while onBlack(): # wait for white
+        pass
+    
+
 
 def atArmLength():
     return analog (c.ET) > c.armLength

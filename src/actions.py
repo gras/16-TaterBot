@@ -9,6 +9,7 @@ Created on Mar 13, 2016
 from sensors import getRBUTTON
 from sensors import DEBUG
 from sensors import atArmLength
+from sensors import onBlack
 
 from servos import moveClaw
 from servos import moveArm
@@ -20,6 +21,7 @@ from drive import driveTimed
 from drive import drive
 
 from wallaby import msleep
+from wallaby import seconds 
 
 import constants as c
 from constants import binGrab
@@ -34,12 +36,12 @@ Four piles are called Western, Northern, Southern, and Center
 # tests sensors and sets prime and clone values
 def init():
     print("Running Tater")
-    print(c.clawOpen)
     testServos()
     testMotors()
     while not getRBUTTON():
         msleep(50)
     msleep(1000)
+    c.startTime = seconds()
 
 # goes to the fist pile
 def goToWestPile():
@@ -58,7 +60,7 @@ def grabPile():
     drive(45, 50)
     moveClaw(c.clawClose, 5)
     msleep(500)
-    moveArm(c.armUp, 15)
+    moveArm(c.armMid, 15)
         
 # Go to the bin
 def goToTaterBin():
@@ -78,7 +80,7 @@ def deposit():
     msleep(300)
     moveClaw(c.clawMid, 10)
     msleep(300)
-    moveArm(c.armUp, 15)
+    moveArm(c.armMid, 15)
     msleep(300)
     moveClaw(c.clawClose, 15)
         
@@ -91,25 +93,30 @@ def backUpFromBin():
 # After bin is grabbed, turns to pile 2 
 def goToNorthernPile():
     print("goToNorhternPile")
-    driveTimed(100, 90, 3500)
-    driveTimed(-90, -100, 1000)
+    driveTimed(100, 90, 1500) #3500
+    driveTimed(100, 70, 2250)
+    driveTimed(-35, -100, 750) # driveTimed(-70, -100, 1000)
+    driveTimed(-100, -100, 500)
+    driveTimed(50, 100, 1000)
+    driveTimed(100, 0, 250)
     moveClaw(c.clawOpen, 15)
     moveArm(c.armFront, 10)
 
 # Grab the northern pile    
 def grabNorthPile():
     print("grabNorthPile")
-    driveTimed(95, 100, 1000)
+    driveTimed(70, 100, 1000)
     moveClaw(c.clawMid, 10)
     drive(45, 50)
     moveClaw(c.clawClose, 5)
     msleep(500)
-    moveArm(c.armUp, 15)
+    driveTimed(0,0,0)
+    moveArm(c.armMid, 15)
 
 # Back up to bin
 def backUpToBin():
     print("backUpToBin")
-    driveTimed(-95, -100, 2000)
+    driveTimed(-90, -100, 2750)
     moveBin(binGrab, 10)
     moveArm(c.armBack, 10)
     msleep(500)
@@ -120,6 +127,24 @@ def backUpToBin():
     
 #turns to south and towards center pile
 def turnToSouth():
-    print("turnToSouth") 
-    driveTimed(100, 0, 1000)
-    driveTimed(100, 20, 4000)
+    print("turnToSouth")
+    drive(100, 0) 
+    while not onBlack(): # wait for black
+        pass
+    driveTimed(70, 70, 1000)
+    driveTimed(100, 0, 1100)
+    moveClaw(c.clawOpen, 15)
+    moveArm(c.armFront, 15)
+
+# Grab the middle pile    
+def grabMiddlePile():
+    print("grabMiddlePile")
+    driveTimed(70, 70, 1000)
+    moveClaw(c.clawMid, 10)
+    drive(50, 50)
+    moveClaw(c.clawClose, 5)
+    msleep(500)
+    driveTimed(0,0,0)
+    moveArm(c.armBack, 15)
+    driveTimed(-50, -50, 500)
+    moveClaw(c.clawOpen, 15)
