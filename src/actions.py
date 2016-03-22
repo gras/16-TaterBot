@@ -19,6 +19,7 @@ from servos import testServos
 from drive import testMotors
 from drive import driveTimed
 from drive import drive
+from drive import timedLineFollowRight
 
 from wallaby import msleep
 from wallaby import seconds 
@@ -146,26 +147,45 @@ def grabMiddlePile():
     msleep(500)
     driveTimed(0,0,0)
     moveArm(c.armBack, 15)
-    moveBin(c.binRelease, 15)
+    #Releasing the bin created problems
+    '''moveBin(c.binRelease, 15)
+    msleep(500)
     driveTimed(-50, -50, 1000)
-    moveBin(c.binGrab, 15)
+    moveBin(c.binGrab, 15)'''
     moveClaw(c.clawOpen, 15)
 
 #Grab south pile    
 def grabSouthPile():
     print ("grabSouthPile")
-    driveTimed(100, 91, 2000)
-    moveArm(c.armBump, 15)
-    driveTimed(50, 50, 500)
-    moveClaw(c.clawMid, 10)
-    drive(50, 50)
+    driveTimed(100, 82, 1375)
+    moveArm(c.armShovel, 15) 
+    #Raises front of claw in order to pass bump; works better than armBump
+    driveTimed(0,0,0)
+    #msleep is for debugging
+    msleep(2000)
+    driveTimed(50, 40, 1500)
+    driveTimed(0,0,0)
+    #msleep is for debugging
+    msleep(2000)
+    moveClaw(c.clawOpen, 10) 
+    drive(50, 41)
+    msleep(3500)
+    moveArm(c.armFront, 15)
     moveClaw(c.clawClose, 5)
-    msleep(500)
     driveTimed(0,0,0)
     moveArm(c.armBack, 15)
-    moveBin(c.binRelease, 15)
+    #Releasing the bin created problems
+    '''moveBin(c.binRelease, 15)
+    msleep(500)
     driveTimed(-50, -50, 1000)
-    moveBin(c.binGrab, 15)
-    moveClaw(c.clawOpen, 15)
-
+    moveBin(c.binGrab, 15)'''
+    moveClaw(c.clawOpen, 15) 
     
+#Returns to base with pom filled bin
+def returnToBase ():
+    print ("returntobase")
+    drive(100, 100)
+    while not onBlack(): #wait to see line
+        pass
+    drive(0,0)
+    timedLineFollowRight(5000)

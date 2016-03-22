@@ -24,7 +24,7 @@ def getET():
 # stop program for testing
 def DEBUG():
     ao()
-    print 'Program stop for DEBUG\nSeconds: ', seconds() - c.startTime
+    print 'Program stop for DEBUG\nSeconds: ', seconds() - c.startTime 
     exit(0)
     
 def onBlack():

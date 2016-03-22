@@ -30,14 +30,15 @@ RBUTTON = 13
 # PRIME servo positions
 armFront = 120 #Arm forward on ground 
 armBump = 260 #Arm clears the bump
+armShovel= 0 #Pushes poms forward past bump
 armMid = 590 #540 #Arm to score at bin
 armUp = 1100 #Arm at 90 degrees up
 armBack = 1500 #Arm backwards
 clawOpen = 0 #Claw open
 clawMid = 480 #Claw mid
 clawClose = 1100 #Claw closed
-binGrab = 1350 #Grab bin
-binRelease = 1750 #Release bin
+binGrab = 1200 #Grab bin
+binRelease = 600 #Release bin
 
 # PRIME analog sensors values
 topHatMidValue = 2000 #value between black and white top hat values
