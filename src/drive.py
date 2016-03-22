@@ -15,6 +15,7 @@ from sensors import getET
 from wallaby import motor
 from wallaby import msleep
 from wallaby import ao
+from wallaby import seconds
 
 
 # tests motors
@@ -47,4 +48,13 @@ def driveTimed(left,right,time):
     drive(left,right)
     msleep(time)
     ao()
+#Follows black line on right for specified amount of time
+def timedLineFollowRight(time):
+    sec = seconds() + time
+    while seconds() < sec:
+        if not onBlack():
+            driveTimed(20,90,20)
+        else:
+            driveTimed(90, 20, 20)
+        msleep(10)
     
