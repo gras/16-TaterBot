@@ -6,37 +6,25 @@ Created on Mar 13, 2016
 @author: Dead Robot Society
 '''
 
-from actions import init 
-from actions import grabNorthPile
-from actions import goToWestPile
-from actions import grabPile
-from actions import goToTaterBin
-from actions import deposit
-from actions import backUpFromBin
-from actions import goToNorthernPile
-from actions import backUpToBin
-from actions import turnToSouth
-from actions import grabMiddlePile
-from actions import grabSouthPile
-from actions import returnToBase
+import actions as act
 
 from sensors import DEBUG
 
 
 def main():
-    init()
-    goToWestPile()
-    grabPile()
-    goToTaterBin() 
-    deposit()
-    backUpFromBin()
-    goToNorthernPile()
-    grabNorthPile()
-    backUpToBin()
-    turnToSouth()
-    grabMiddlePile()
-    grabSouthPile()
-    returnToBase() 
+    act.init()
+    act.goToWestPile()
+    act.grabWestPile()
+    act.goToTaterBin() 
+    act.depositWestPile()
+    act.backUpFromBin()
+    act.goToNorthernPile()
+    act.grabNorthPile()
+    act.backUpToBin()
+    act.turnToSouth()
+    act.grabMiddlePile()
+    act.grabSouthPile()
+    act.returnToBase() 
     DEBUG() 
     
     

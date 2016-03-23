@@ -36,18 +36,17 @@ def testMotors():
     while not getRBUTTON():
         pass
 
+# start left & right motors
 def drive(left, right):
-    if c.isPrime:
-        motor(c.LMOTOR,left)
-        motor(c.RMOTOR,right)
-    else:
-        motor(c.LMOTOR,left)
-        motor(c.RMOTOR,right)
+    motor(c.LMOTOR,left)
+    motor(c.RMOTOR,right)
 
+# power and time of motors
 def driveTimed(left,right,time):
     drive(left,right)
     msleep(time)
     ao()
+
 #Follows black line on right for specified amount of time
 def timedLineFollowRight(time):
     sec = seconds() + time
@@ -58,3 +57,6 @@ def timedLineFollowRight(time):
             driveTimed(90, 20, 20)
         msleep(10)
     
+# stop all motors
+def stop():
+    ao()
