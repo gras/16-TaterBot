@@ -59,9 +59,11 @@ else:
     armUp =  1000 #Arm at 90 degrees up
     armBack =  1350 #1500 #Arm backwards
     clawOpen = 525 #356 #Claw open 
-    clawClose = 1425 #1450 #Claw closed
-    binGrab = 1275 #Grab bin
-    binRelease = 1800 #Release bin
+    clawMid = 900
+    clawClose = 1525 #1450 #Claw closed
+    binGrab = 1100 #Grab bin
+    binRelease = 700 #Release bin
+    armLength = 1000
 
 
     

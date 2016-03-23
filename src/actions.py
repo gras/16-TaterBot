@@ -42,6 +42,7 @@ def init():
         msleep(50)
     msleep(1000)
     c.startTime = seconds()
+    
 
 # goes to the fist pile
 def goToWestPile():
@@ -51,7 +52,10 @@ def goToWestPile():
     moveArm(c.armFront, 10)
     moveClaw(c.clawOpen,20)
     msleep(500)
-    driveTimed(95, 100, 1500)
+    if c.isPrime:
+        driveTimed(95, 100, 1500)
+    else: 
+        driveTimed(95, 100, 1000)
 
 # Starts run
 def grabWestPile():
@@ -65,7 +69,10 @@ def grabWestPile():
 # Go to the bin
 def goToTaterBin():
     print("goToTaterBin")
-    driveTimed(95, 100, 3000)
+    if c.isPrime:
+        driveTimed(95, 100, 3000)
+    else:
+        driveTimed(95, 100, 2000)
     drive(25,30)
     while not atArmLength():
         pass
@@ -93,12 +100,16 @@ def goToNorthernPile():
     print("goToNorthernPile")
     driveTimed(100, 90, 1500) 
     driveTimed(100, 70, 2250)
-    driveTimed(-35, -100, 750) 
-    driveTimed(-100, -100, 500)
+    driveTimed(-35, -100, 750)
+    if c.isPrime: 
+        driveTimed(-100, -100, 500)
+    else: 
+        driveTimed(-100, -100, 750)
     driveTimed(50, 100, 1000)
     driveTimed(100, 0, 250)
     moveClaw(c.clawOpen, 15)
     moveArm(c.armFront, 10)
+    DEBUG()
 
 # Grab the northern pile    
 def grabNorthPile():

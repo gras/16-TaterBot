@@ -18,15 +18,14 @@ def main():
     act.goToTaterBin() 
     act.depositWestPile()
     act.backUpFromBin()
-    act.goToNorthernPile()
+    act.goToNorthernPile() 
     act.grabNorthPile()
     act.backUpToBin()
     act.turnToSouth()
     act.grabMiddlePile()
     act.grabSouthPile()
     act.returnToBase() 
-    DEBUG() 
-    
+  
     
 if __name__ == '__main__':
     # set print to unbuffered

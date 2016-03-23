@@ -15,6 +15,10 @@ from wallaby import ao
 
 # tests servos
 def testServos():
+    if c.isPrime:
+        print ("Running Prime")
+    else:
+        print ("Running Clone")
     print "Testing servos"
     set_servo_position(c.ARM, c.armUp)
     set_servo_position(c.CLAW, c.clawClose)
