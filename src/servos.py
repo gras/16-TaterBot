@@ -37,6 +37,13 @@ def testServos():
     msleep(500)
     moveArm(c.armBack, 15)
     msleep(1000)
+  
+def deliverPoms():  
+    moveArm(c.armBack, 10)
+    msleep(500)
+    moveClaw(c.clawMid, 15)
+    msleep(500)
+
     
 def moveArm( endPos, speed=10 ):
     moveServo( c.ARM, endPos, speed )

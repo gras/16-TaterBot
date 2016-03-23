@@ -14,6 +14,7 @@ from sensors import onBlack
 from servos import moveClaw
 from servos import moveArm
 from servos import moveBin
+from servos import deliverPoms
 from servos import testServos
 
 from drive import testMotors
@@ -77,18 +78,16 @@ def depositWestPile():
     moveArm(c.armMid, 5)
     msleep(300)
     moveClaw(c.clawMid, 10)
-    msleep(300)
-    moveArm(c.armMid, 15)
-    msleep(300)
+    msleep(500)
     moveClaw(c.clawClose, 15)
         
-# Backs up from the bin, grabbing it
+# Backs up from the bin
 def backUpFromBin():
     print("backUpFromBin")
     driveTimed(-100, -50, 1500)
     driveTimed(100, 0, 750)
 
-# After bin is grabbed, turns to pile 2 
+# Turn to north pile
 def goToNorthernPile():
     print("goToNorthernPile")
     driveTimed(100, 90, 1500) 
@@ -116,10 +115,7 @@ def backUpToBin():
     print("backUpToBin")
     driveTimed(-90, -100, 2750)
     moveBin(c.binGrab, 10)
-    moveArm(c.armBack, 10)
-    msleep(500)
-    moveClaw(c.clawMid, 15)
-    msleep(500)
+    deliverPoms()
     moveClaw(c.clawClose, 10)
     moveArm(c.armUp, 10)
     
@@ -143,21 +139,23 @@ def grabMiddlePile():
     moveClaw(c.clawClose, 5)
     msleep(500)
     stop()
-    moveArm(c.armBack, 15)
-    moveClaw(c.clawOpen, 15)
+    deliverPoms()
+    moveClaw(c.clawOpen, 10)
 
-#Grab south pilE, raising front of claw in order to pass bump  
+#Grab south pile, raising front of claw in order to pass bump  
 def grabSouthPile():
     print ("grabSouthPile")
+    moveClaw(c.clawOpen, 10)
     driveTimed(100, 82, 1375)
     moveArm(c.armShovel, 15) 
-    driveTimed(50, 50, 5000)
+    driveTimed(55, 50, 3000)
+    DEBUG()
+    driveTimed(50, 50, 2000)
     drive(50, 41)
     moveArm(c.armFront, 15)
     moveClaw(c.clawClose, 5)
     stop()
-    moveArm(1350, 10)
-    moveClaw(c.clawOpen, 15)
+    deliverPoms()
     DEBUG() 
     
 #Returns to base with pom filled bin
