@@ -66,7 +66,7 @@ def grabWestPile():
 # Go to the bin
 def goToTaterBin():
     print("goToTaterBin")
-    driveTimed(95, 100, 3000)
+    driveTimed(95, 100, 2500)
     drive(25,30)
     while not atArmLength():
         pass
@@ -149,18 +149,18 @@ def grabSouthPile():
     driveTimed(100, 82, 1375)
     moveArm(c.armShovel, 15) 
     driveTimed(55, 50, 3000)
-    DEBUG()
-    driveTimed(50, 50, 2000)
     drive(50, 41)
     moveArm(c.armFront, 15)
     moveClaw(c.clawClose, 5)
     stop()
     deliverPoms()
-    DEBUG() 
     
 #Returns to base with pom filled bin
 def returnToBase ():
     print ("returntobase")
+    driveTimed(70, 70, 1000)
+    driveTimed(50, 0, 1500)
+    DEBUG()
     drive(100, 100)
     while not onBlack(): #wait to see line
         pass
