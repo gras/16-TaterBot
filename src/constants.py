@@ -22,6 +22,7 @@ BIN = 3
 # ANALOG ports
 LINE_FOLLOWER = 0
 ET = 1
+STARBOARD = 5
 
 # DIGITAL ports
 CLONE_SWITCH = 9
@@ -61,7 +62,7 @@ else:
     clawOpen = 525 #356 #Claw open 
     clawMid = 900
     clawClose = 1525 #1450 #Claw closed
-    binGrab = 1100 #Grab bin
+    binGrab = 1200 #Grab bin
     binRelease = 700 #Release bin
     armLength = 1000
 

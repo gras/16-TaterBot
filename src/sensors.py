@@ -10,6 +10,7 @@ from wallaby import ao
 from wallaby import digital 
 from wallaby import analog 
 from wallaby import seconds
+from wallaby import msleep
 
 import constants as c
 
@@ -30,6 +31,9 @@ def DEBUG():
 def onBlack():
     return analog(c.LINE_FOLLOWER) > c.topHatMidValue 
 
+def onBlackLineFollower():
+    return analog(c.STARBOARD) > c.topHatMidValue
+
 def crossBlack():
     while not onBlack(): # wait for black
         pass
@@ -37,7 +41,10 @@ def crossBlack():
         pass
     
 
-
+def waitForButton():
+    while not getRBUTTON():
+        msleep(50)
+        
 def atArmLength():
     return analog (c.ET) > c.armLength
 

@@ -6,7 +6,7 @@ Created on Mar 13, 2016
 @author: Dead Robot Society
 '''
 
-from sensors import getRBUTTON
+from sensors import getRBUTTON, waitForButton
 from sensors import DEBUG
 from sensors import atArmLength
 from sensors import onBlack
@@ -17,11 +17,13 @@ from servos import moveBin
 from servos import deliverPoms
 from servos import testServos
 
+
 from drive import testMotors
 from drive import driveTimed
 from drive import drive
 from drive import timedLineFollowRight
 from drive import stop
+from drive import testET
 
 from wallaby import msleep
 from wallaby import seconds 
@@ -39,8 +41,8 @@ def init():
     print("Running Tater")
     testServos()
     testMotors()
-    while not getRBUTTON():
-        msleep(50)
+    testET()
+    waitForButton()
     msleep(1000)
     c.startTime = seconds()
 
@@ -72,7 +74,7 @@ def goToTaterBin():
     if c.isPrime:
         driveTimed(95, 100, 2500)
     else:
-        driveTimed(95, 100, 2000)
+        driveTimed(95, 100, 2300)
     drive(25,30)
     while not atArmLength():
         pass
@@ -93,21 +95,25 @@ def backUpFromBin():
     driveTimed(-100, -50, 1500)
     driveTimed(100, 0, 750)
 
-# Turn to north pile
+# Turn to north pile 
 def goToNorthernPile():
     print("goToNorthernPile")
-    driveTimed(100, 90, 1500) 
-    driveTimed(100, 70, 2250)
-    driveTimed(-35, -100, 750)
-    if c.isPrime: 
+    if c.isPrime:
+        driveTimed(100, 90, 1500)
+        driveTimed(100, 70, 2250)
+        driveTimed(-35, -100, 750)
         driveTimed(-100, -100, 500)
-    else: 
-        driveTimed(-100, -100, 750)
-    driveTimed(50, 100, 1000)
+        driveTimed(50, 100, 1000)
+    else:
+        driveTimed(95, 90, 2000)
+        driveTimed(100, 70, 2000) 
+        driveTimed(-25, -45, 1200)
+        driveTimed(-100, -100, 1000)
+        driveTimed(50, 100, 800)
+    
     driveTimed(100, 0, 250)
     moveClaw(c.clawOpen, 15)
     moveArm(c.armFront, 10)
-    DEBUG()
 
 # Grab the northern pile    
 def grabNorthPile():

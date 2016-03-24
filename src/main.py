@@ -8,6 +8,7 @@ Created on Mar 13, 2016
 
 import actions as act
 
+
 from sensors import DEBUG
 
 
@@ -18,12 +19,13 @@ def main():
     act.goToTaterBin() 
     act.depositWestPile()
     act.backUpFromBin()
-    act.goToNorthernPile() 
+    act.goToNorthernPile()
     act.grabNorthPile()
     act.backUpToBin()
     act.turnToSouth()
     act.grabMiddlePile()
     act.grabSouthPile()
+    DEBUG()
     act.returnToBase() 
   
     
