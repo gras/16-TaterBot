@@ -19,13 +19,15 @@ def main():
     act.goToTaterBin() 
     act.depositWestPile()
     act.backUpFromBin()
+    act.grabBin()
     act.goToNorthernPile()
     act.grabNorthPile()
-    act.backUpToBin()
     act.turnToSouth()
     act.grabMiddlePile()
-    DEBUG()
     act.grabSouthPile()
+    act.goToHome()
+    act.deliverBin()
+    DEBUG()
     act.returnToBase() 
   
     

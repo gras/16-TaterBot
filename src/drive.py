@@ -59,6 +59,15 @@ def driveTimed(left,right,time):
     msleep(time)
     ao()
 
+def driveTilLineStarboard(left, right):
+    driveTilLine(c.STARBOARD, left, right)
+
+def driveTilLine(port,left,right):
+    drive(left,right)
+    while not onBlack(port):
+        pass
+    stop()
+
 #Follows black line on right for specified amount of time
 def timedLineFollowRight(port, time):
     sec = seconds() + time

@@ -26,11 +26,13 @@ from drive import timedLineFollowRight
 from drive import stop
 from drive import testET
 from drive import timedLineFollowLeft
+from drive import driveTilLineStarboard
 
 from wallaby import msleep
 from wallaby import seconds 
 
 import constants as c
+from constants import isPrime
 
 
 '''
@@ -97,23 +99,29 @@ def backUpFromBin():
     driveTimed(-100, -50, 1500)
     driveTimed(100, 0, 750)
 
-# Turn to north pile 
-def goToNorthernPile():
-    print("goToNorthernPile")
+# Grab the Bin
+def grabBin():
+    print("grabBin")
     if c.isPrime:
         driveTimed(100, 90, 1500)
         driveTimed(100, 70, 2250)
         driveTimed(-35, -100, 750)
-        driveTimed(-100, -100, 500)
-        DEBUG()
-        driveTimed(50, 100, 1000)
+        driveTimed(-100, -100, 700)
     else:
         driveTimed(95, 90, 2000)
         driveTimed(100, 70, 2000) 
         driveTimed(-25, -45, 1200)
         driveTimed(-100, -100, 1000)
-        driveTimed(50, 100, 800)
+    driveTimed(0, 0, 500)
+    moveBin(c.binGrab, 5)
     
+# Turn to north pile
+def goToNorthernPile():
+    print("goToNorthernPile")
+    if c.isPrime:
+        driveTimed(50, 100, 1000)
+    else:
+        driveTimed(50, 100, 800)
     driveTimed(100, 0, 250)
     moveClaw(c.clawOpen, 15)
     moveArm(c.armFront, 10)
@@ -128,6 +136,7 @@ def grabNorthPile():
     msleep(500)
     stop()
     moveArm(c.armMid, 15)
+    deliverPoms()
 
 # Back up to bin
 def backUpToBin():
@@ -141,42 +150,54 @@ def backUpToBin():
 #turns to south and towards center pile
 def turnToSouth():
     print("turnToSouth")
-    drive(100, 0) 
-    while not onBlack(c.LINE_FOLLOWER): # wait for black
-        pass
-    driveTimed(70, 70, 1000)
-    driveTimed(100, 0, 1100)
-    moveClaw(c.clawOpen, 15)
-    moveArm(c.armFront, 15)
+    driveTimed(-100, -50, 3000)
+    driveTilLineStarboard(100, 0)
+    driveTimed(100, 0, 100)
+    
 
-def goToHome ():
-    timedLineFollowLeft(c.STARBOARD, 10)
     
 # Grab the middle pile    
 def grabMiddlePile():
     print("grabMiddlePile")
-    driveTimed(70, 70, 1000)
+    moveClaw(c.clawOpen, 15)
+    moveArm(c.armFront, 10)
+    driveTimed(100, 100, 1000)
     moveClaw(c.clawMid, 10)
     drive(50, 50)
     moveClaw(c.clawClose, 5)
     msleep(500)
     stop()
+    moveArm(c.armMid, 15)
     deliverPoms()
-    moveClaw(c.clawOpen, 10)
 
 #Grab south pile, raising front of claw in order to pass bump  
 def grabSouthPile():
     print ("grabSouthPile")
     moveClaw(c.clawOpen, 10)
-    driveTimed(100, 82, 1375)
-    moveArm(c.armShovel, 15) 
-    driveTimed(55, 50, 3000)
-    drive(50, 41)
     moveArm(c.armFront, 15)
+    timedLineFollowLeft(c.STARBOARD, 3)
+    moveArm(c.armShovel, 10)
+    timedLineFollowLeft(c.STARBOARD, 2)
+    drive(50, 41)
+    moveArm(c.armFront, 50)
     moveClaw(c.clawClose, 5)
+    msleep(500)
     stop()
+    moveArm(c.armMid, 15)
     deliverPoms()
-    
+
+#line follows to home    
+def goToHome ():
+    print("goToHome")
+    timedLineFollowLeft(c.STARBOARD, 3)
+ 
+#Delivers bin    
+def deliverBin():
+    print("deliverBin")
+    driveTimed(-100, 0, 3000) 
+    driveTimed(-100, -100, 1000) 
+    driveTimed(-100, -80, 1000)
+      
 #Returns to base with pom filled bin
 def returnToBase (port):
     print ("returntobase")
