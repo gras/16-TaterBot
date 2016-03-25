@@ -28,16 +28,18 @@ def DEBUG():
     print 'Program stop for DEBUG\nSeconds: ', seconds() - c.startTime 
     exit(0)
     
-def onBlack():
-    return analog(c.LINE_FOLLOWER) > c.topHatMidValue 
+def onBlack(port):
+    return analog(port) > c.topHatMidValue 
+
+
 
 def onBlackLineFollower():
     return analog(c.STARBOARD) > c.topHatMidValue
 
-def crossBlack():
-    while not onBlack(): # wait for black
+def crossBlack(port):
+    while not onBlack(port): # wait for black
         pass
-    while onBlack(): # wait for white
+    while onBlack(port): # wait for white
         pass
     
 

@@ -6,7 +6,8 @@ Created on Mar 13, 2016
 @author: Dead Robot Society
 '''
 
-from sensors import getRBUTTON, waitForButton
+from sensors import waitForButton
+from sensors import getRBUTTON
 from sensors import DEBUG
 from sensors import atArmLength
 from sensors import onBlack
@@ -24,6 +25,7 @@ from drive import drive
 from drive import timedLineFollowRight
 from drive import stop
 from drive import testET
+from drive import timedLineFollowLeft
 
 from wallaby import msleep
 from wallaby import seconds 
@@ -103,6 +105,7 @@ def goToNorthernPile():
         driveTimed(100, 70, 2250)
         driveTimed(-35, -100, 750)
         driveTimed(-100, -100, 500)
+        DEBUG()
         driveTimed(50, 100, 1000)
     else:
         driveTimed(95, 90, 2000)
@@ -139,13 +142,16 @@ def backUpToBin():
 def turnToSouth():
     print("turnToSouth")
     drive(100, 0) 
-    while not onBlack(): # wait for black
+    while not onBlack(c.LINE_FOLLOWER): # wait for black
         pass
     driveTimed(70, 70, 1000)
     driveTimed(100, 0, 1100)
     moveClaw(c.clawOpen, 15)
     moveArm(c.armFront, 15)
 
+def goToHome ():
+    timedLineFollowLeft(c.STARBOARD, 10)
+    
 # Grab the middle pile    
 def grabMiddlePile():
     print("grabMiddlePile")
@@ -172,13 +178,13 @@ def grabSouthPile():
     deliverPoms()
     
 #Returns to base with pom filled bin
-def returnToBase ():
+def returnToBase (port):
     print ("returntobase")
     driveTimed(70, 70, 1000)
     driveTimed(50, 0, 1500)
     DEBUG()
     drive(100, 100)
-    while not onBlack(): #wait to see line
+    while not onBlack(port): #wait to see line
         pass
     stop()
     timedLineFollowRight(5000)

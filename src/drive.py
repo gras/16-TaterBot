@@ -25,7 +25,7 @@ from wallaby import seconds
 def testMotors():
     # testing motors
     drive(100, 100)
-    while not onBlack(): #wait to see line
+    while not onBlack(c.LINE_FOLLOWER): #wait to see line
         pass
     stop()
     msleep(300)
@@ -60,15 +60,25 @@ def driveTimed(left,right,time):
     ao()
 
 #Follows black line on right for specified amount of time
-def timedLineFollowRight(time):
+def timedLineFollowRight(port, time):
     sec = seconds() + time
     while seconds() < sec:
-        if not onBlack():
+        if not onBlack(port):
             driveTimed(20,90,20)
         else:
             driveTimed(90, 20, 20)
         msleep(10)
     
+#Follows black line on left for specified amount of time
+def timedLineFollowLeft(port, time):
+    sec = seconds() + time
+    while seconds() < sec:
+        if not onBlack(port):
+            driveTimed(90,50,20)
+        else:
+            driveTimed(50, 90, 20)
+        msleep(10)
+        
 # stop all motors
 def stop():
     ao()

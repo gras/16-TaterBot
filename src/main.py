@@ -24,8 +24,8 @@ def main():
     act.backUpToBin()
     act.turnToSouth()
     act.grabMiddlePile()
-    act.grabSouthPile()
     DEBUG()
+    act.grabSouthPile()
     act.returnToBase() 
   
     
