@@ -44,7 +44,7 @@ binRelease = 600 # Release bin
 # PRIME analog sensors values
 topHatMidValue = 2000 # value between black and white top hat values
 armLength = 1000 # 2550 # 2350 #robot 1 claw length from bin
-
+ceilingHeight = 700 #value of ET beneath crater rim
 
 isClone = w.digital(CLONE_SWITCH)
 isPrime = not isClone

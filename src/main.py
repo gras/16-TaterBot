@@ -27,6 +27,8 @@ def main():
     act.grabSouthPile()
     act.goToHome()
     act.deliverBin()
+    act.releaseBin()
+    act.goToCube()
     DEBUG()
     act.returnToBase() 
   

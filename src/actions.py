@@ -27,6 +27,8 @@ from drive import stop
 from drive import testET
 from drive import timedLineFollowLeft
 from drive import driveTilLineStarboard
+from drive import ETLineFollowRight
+from drive import timedLineFollowRightSmooth
 
 from wallaby import msleep
 from wallaby import seconds 
@@ -178,7 +180,7 @@ def grabSouthPile():
     timedLineFollowLeft(c.STARBOARD, 3)
     moveArm(c.armShovel, 10)
     timedLineFollowLeft(c.STARBOARD, 2)
-    drive(50, 41)
+    drive(50, 50)#50,41
     moveArm(c.armFront, 50)
     moveClaw(c.clawClose, 5)
     msleep(500)
@@ -194,10 +196,24 @@ def goToHome ():
 #Delivers bin    
 def deliverBin():
     print("deliverBin")
-    driveTimed(-100, 0, 3000) 
+    driveTimed(-100, 0, 3250)#3000
     driveTimed(-100, -100, 1000) 
-    driveTimed(-100, -80, 1000)
-      
+    driveTimed(-40, 0, 800)
+
+#Releases bin in home
+def releaseBin():
+    print ("releaseBin")
+    moveBin(c.binRelease, 15)
+    moveArm(c.armUp, 15)
+    driveTimed(100, 100, 1000)
+    
+#line follows to cube    
+def goToCube():
+    print("goToCube")
+    ETLineFollowRight(c.LINE_FOLLOWER, True)
+    timedLineFollowRight(c.LINE_FOLLOWER, 9)
+    timedLineFollowRightSmooth(c.LINE_FOLLOWER, 4)
+    
 #Returns to base with pom filled bin
 def returnToBase (port):
     print ("returntobase")

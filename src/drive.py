@@ -8,10 +8,12 @@ Created on Mar 13, 2016
 
 import constants as c
 
-from sensors import onBlack
+from sensors import onBlack 
+from sensors import atArmLength
 from sensors import getRBUTTON
 from sensors import getET
 from sensors import onBlackLineFollower
+from sensors import atCeilingHeight
 
 
 from wallaby import motor
@@ -87,7 +89,28 @@ def timedLineFollowLeft(port, time):
         else:
             driveTimed(50, 90, 20)
         msleep(10)
+
+def timedLineFollowRightSmooth(port, time):
+    sec = seconds() + time
+    while seconds() < sec:
+        if not onBlack(port):
+            driveTimed(20,40,20)
+    
+        else:
+            driveTimed(40, 20, 20)
+    
+        msleep(10)
         
+#Follows black line on right until under or not under ceiling
+#if findCeiling is true, will go until ET finds ceiling
+def ETLineFollowRight(port, findCeiling): 
+    while atArmLength() ^ findCeiling :
+        if not onBlack(port):
+            driveTimed(50,100,20)
+        else:
+            driveTimed(100, 50, 20)
+        msleep(10)
+
 # stop all motors
 def stop():
     ao()

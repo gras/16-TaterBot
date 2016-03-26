@@ -50,6 +50,9 @@ def waitForButton():
 def atArmLength():
     return analog (c.ET) > c.armLength
 
+def atCeilingHeight():
+    return analog (c.ET) > c.ceilingHeight
+
 def testET():
     x = analog(c.ET)
     print("ET = ",x)
