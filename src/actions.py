@@ -139,7 +139,7 @@ def grabNorthPile():
     stop()
     moveArm(c.armMid, 15)
     deliverPoms()
-
+'''
 # Back up to bin
 def backUpToBin():
     print("backUpToBin")
@@ -148,13 +148,13 @@ def backUpToBin():
     deliverPoms()
     moveClaw(c.clawClose, 10)
     moveArm(c.armUp, 10)
-    
+'''    
 #turns to south and towards center pile
 def turnToSouth():
     print("turnToSouth")
     driveTimed(-100, -50, 3000)
     driveTilLineStarboard(100, 0)
-    driveTimed(100, 0, 100)
+    driveTimed(100, 0, 50)
     
 
     
@@ -164,6 +164,7 @@ def grabMiddlePile():
     moveClaw(c.clawOpen, 15)
     moveArm(c.armFront, 10)
     driveTimed(100, 100, 1000)
+    #timedLineFollowLeft(c.STARBOARD, 1)
     moveClaw(c.clawMid, 10)
     drive(50, 50)
     moveClaw(c.clawClose, 5)
@@ -213,6 +214,33 @@ def goToCube():
     ETLineFollowRight(c.LINE_FOLLOWER, True)
     timedLineFollowRight(c.LINE_FOLLOWER, 9)
     timedLineFollowRightSmooth(c.LINE_FOLLOWER, 4)
+    moveClaw(c.clawOpen, 10)
+    moveArm(c.armFront, 10)
+    driveTimed(70, 70, 1000)
+    drive(50, 50)
+    while not onBlack(c.LINE_FOLLOWER):
+        pass 
+    drive(0, 0)
+    moveArm(c.armShovel, 10) 
+    drive(50, 50)
+    while onBlack(c.LINE_FOLLOWER):
+        pass
+    drive(0, 0)
+    driveTimed(50,50,500)
+    driveTimed(0,0,1000)
+    driveTimed(-50,-50,500)
+    moveArm(c.armUp, 15)
+    moveClaw(c.clawClose, 10)
+    driveTimed(70,-70,1000)
+
+#Grabs Cube
+def grabCube():
+    print("grabCube")
+    moveClaw(c.clawOpen, 15)
+    moveArm(c.armFront, 15)
+    driveTimed(100, 100, 400)
+    moveClaw(c.clawClose, 10)
+    moveArm(c.armUp, 10)
     
 #Returns to base with pom filled bin
 def returnToBase (port):

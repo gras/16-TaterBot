@@ -29,6 +29,7 @@ def main():
     act.deliverBin()
     act.releaseBin()
     act.goToCube()
+    act.grabCube()
     DEBUG()
     act.returnToBase() 
   
