@@ -13,6 +13,7 @@ startTime = -1
 # MOTOR ports
 LMOTOR = 0
 RMOTOR = 3
+OUTRIGGER = 2
 
 # SERVO ports
 ARM = 0
@@ -58,9 +59,9 @@ else:
     armFront = 80 #120
     armMid = 580 #Arm to score at bin
     armUp =  1000 #Arm at 90 degrees up
-    armBack =  1350 #1500 #Arm backwards
+    armBack =  1550 #1500 #Arm backwards
     clawOpen = 525 #356 #Claw open 
-    clawMid = 900
+    clawMid = 800
     clawClose = 1525 #1450 #Claw closed
     binGrab = 1200 #Grab bin
     binRelease = 700 #Release bin

@@ -29,6 +29,7 @@ from drive import timedLineFollowLeft
 from drive import driveTilLineStarboard
 from drive import ETLineFollowRight
 from drive import timedLineFollowRightSmooth
+from drive import outriggerOut
 
 from wallaby import msleep
 from wallaby import seconds 
@@ -44,7 +45,11 @@ Four piles are called Western, Northern, Southern, and Center
 
 # tests sensors and sets prime and clone values
 def init():
-    print("Running Tater")
+    if c.isPrime:
+        print "Running Tater - Prime"
+    else:
+        print "Running Tater - Clone"
+    print c.armFront
     testServos()
     testMotors()
     testET()
@@ -111,7 +116,7 @@ def grabBin():
         driveTimed(-100, -100, 700)
     else:
         driveTimed(95, 90, 2000)
-        driveTimed(100, 70, 2000) 
+        driveTimed(100, 65, 2000) 
         driveTimed(-25, -45, 1200)
         driveTimed(-100, -100, 1000)
     driveTimed(0, 0, 500)
@@ -153,6 +158,9 @@ def backUpToBin():
 def turnToSouth():
     print("turnToSouth")
     driveTimed(-100, -50, 3000)
+    driveTimed(100,0,1000)
+    outriggerOut()
+    msleep(2000)
     driveTilLineStarboard(100, 0)
     driveTimed(100, 0, 50)
     

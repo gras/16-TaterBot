@@ -21,24 +21,49 @@ from wallaby import msleep
 from wallaby import ao
 from wallaby import seconds
 
+from actions import DEBUG
 
 
 # tests motors
 def testMotors():
     # testing motors
+    outriggerOut()
+    msleep(1000)
+    outriggerIn()
+    msleep(1000)
     drive(100, 100)
     while not onBlack(c.LINE_FOLLOWER): #wait to see line
         pass
     stop()
     msleep(300)
-    drive(-100, -100)
-    while not onBlackLineFollower(): #wait to see line
+    driveTimed(100, -100, 500)
+    drive(-100, 100)
+    while not onBlack(c.LINE_FOLLOWER):
         pass
     stop()
-    msleep(300)
-    driveTimed(100, 100, 1000)
-    driveTimed(100, -100, 500)
-    driveTimed(-100, 100, 400)
+    msleep(1000)
+    outriggerOut()
+    msleep(1000)
+    drive(0,-75)
+    while not onBlack(c.STARBOARD):
+        pass
+    stop()
+    msleep(1000)
+    drive(0, 75)
+    while not onBlack(c.LINE_FOLLOWER):
+        pass
+    stop()
+    msleep(1000)
+    outriggerIn()
+    msleep(1000)
+
+def outriggerOut():
+    driveMotorTimed(c.OUTRIGGER, 100, 500)
+    driveMotor(c.OUTRIGGER, 10)
+    
+def outriggerIn():
+    driveMotorTimed(c.OUTRIGGER, -100, 500)
+    driveMotor(c.OUTRIGGER, -10)
 
 def testET():
     print("Put your hand in front of ET")
@@ -60,6 +85,13 @@ def driveTimed(left,right,time):
     drive(left,right)
     msleep(time)
     ao()
+    
+def driveMotorTimed(motorport, speed, time):
+    motor(motorport, speed)
+    msleep(time)
+    
+def driveMotor(motorport, speed):
+    motor(motorport, speed)
 
 def driveTilLineStarboard(left, right):
     driveTilLine(c.STARBOARD, left, right)

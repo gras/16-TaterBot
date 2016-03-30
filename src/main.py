@@ -23,6 +23,7 @@ def main():
     act.goToNorthernPile()
     act.grabNorthPile()
     act.turnToSouth()
+    DEBUG()
     act.grabMiddlePile()
     act.grabSouthPile()
     act.goToHome()
