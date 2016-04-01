@@ -19,7 +19,7 @@ from servos import deliverPoms
 from servos import testServos
 
 
-from drive import testMotors
+from drive import testMotors, driveMotorTimed
 from drive import driveTimed
 from drive import drive
 from drive import timedLineFollowRight
@@ -35,7 +35,7 @@ from wallaby import msleep
 from wallaby import seconds 
 
 import constants as c
-from constants import isPrime
+from constants import isPrime, STARBOARD
 
 
 '''
@@ -144,16 +144,7 @@ def grabNorthPile():
     stop()
     moveArm(c.armMid, 15)
     deliverPoms()
-'''
-# Back up to bin
-def backUpToBin():
-    print("backUpToBin")
-    driveTimed(-90, -100, 2750)
-    moveBin(c.binGrab, 10)
-    deliverPoms()
-    moveClaw(c.clawClose, 10)
-    moveArm(c.armUp, 10)
-'''    
+
 #turns to south and towards center pile
 def turnToSouth():
     print("turnToSouth")
@@ -162,7 +153,8 @@ def turnToSouth():
     outriggerOut()
     msleep(2000)
     driveTilLineStarboard(100, 0)
-    driveTimed(100, 0, 50)
+    driveTimed(-100, 0, 50)
+    #driveTimed(100, 0, 50)
     
 
     
@@ -206,8 +198,15 @@ def goToHome ():
 def deliverBin():
     print("deliverBin")
     driveTimed(-100, 0, 3250)#3000
-    driveTimed(-100, -100, 1000) 
-    driveTimed(-40, 0, 800)
+    driveMotorTimed(c.OUTRIGGER, 0, 0)
+    msleep(5000)
+    drive(-100, -100)
+    while not onBlack(c. STARBOARD):
+        pass
+    stop()
+    DEBUG()
+    #driveTimed(-100, -100, 1000) 
+    #driveTimed(-40, 0, 800)
 
 #Releases bin in home
 def releaseBin():

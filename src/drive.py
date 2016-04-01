@@ -84,7 +84,7 @@ def drive(left, right):
 def driveTimed(left,right,time):
     drive(left,right)
     msleep(time)
-    ao()
+    drive(0, 0)
     
 def driveMotorTimed(motorport, speed, time):
     motor(motorport, speed)
@@ -145,4 +145,4 @@ def ETLineFollowRight(port, findCeiling):
 
 # stop all motors
 def stop():
-    ao()
+    drive(0, 0)
