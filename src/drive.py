@@ -24,13 +24,14 @@ from wallaby import seconds
 from actions import DEBUG
 
 
+
 # tests motors
 def testMotors():
     # testing motors
-    outriggerOut()
-    msleep(1000)
-    outriggerIn()
-    msleep(1000)
+    binGrabUp()
+    msleep(500)
+    binGrabDown()
+    msleep(500)
     drive(100, 100)
     while not onBlack(c.LINE_FOLLOWER): #wait to see line
         pass
@@ -42,38 +43,36 @@ def testMotors():
         pass
     stop()
     msleep(1000)
-    outriggerOut()
-    msleep(1000)
-    drive(0,-75)
-    while not onBlack(c.STARBOARD):
+
+    #moveServo(c.OUTRIGGER, c.outriggerFront)
+    drive(75,0)
+    while not onBlack(c.STARBOARD_TOPHAT):
         pass
     stop()
     msleep(1000)
-    drive(0, 75)
+    drive(-75, 0)
     while not onBlack(c.LINE_FOLLOWER):
         pass
+    msleep(100)
     stop()
     msleep(1000)
-    outriggerIn()
-    msleep(1000)
-
-def outriggerOut():
-    driveMotorTimed(c.OUTRIGGER, 100, 500)
-    driveMotor(c.OUTRIGGER, 10)
+   
     
-def outriggerIn():
-    driveMotorTimed(c.OUTRIGGER, -100, 500)
-    driveMotor(c.OUTRIGGER, -10)
-
+def binGrabUp():
+    driveMotorTimed(c.BIN, 70, 500)
+    driveMotor(c.BIN, 10)
+    
+def binGrabDown():
+    driveMotorTimed(c.BIN, -100, 500)
+    driveMotor(c.BIN, -10)
+    
 def testET():
     print("Put your hand in front of ET")
     while getET() < 2000: 
         pass
     driveTimed(-100, -100, 1000)
     driveTimed(0, 0, 0)
-    print("Press the right button to start...")
-    while not getRBUTTON():
-        pass
+   
   
 # start left & right motors
 def drive(left, right):
@@ -94,7 +93,7 @@ def driveMotor(motorport, speed):
     motor(motorport, speed)
 
 def driveTilLineStarboard(left, right):
-    driveTilLine(c.STARBOARD, left, right)
+    driveTilLine(c.STARBOARD_TOPHAT, left, right)
 
 def driveTilLine(port,left,right):
     drive(left,right)

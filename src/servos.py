@@ -12,20 +12,26 @@ from wallaby import msleep
 from wallaby import enable_servos
 from wallaby import get_servo_position
 from wallaby import ao
+from constants import OUTRIGGER
+from drive import stop
+from drive import onBlack
+from drive import driveTimed
+from drive import drive
 
 # tests servos
 def testServos():
+    '''
     if c.isPrime:
         print ("Running Prime")
     else:
         print ("Running Clone")
+    '''
     print "Testing servos"
     set_servo_position(c.ARM, c.armUp)
     set_servo_position(c.CLAW, c.clawClose)
-    set_servo_position(c.BIN, c.binRelease)
+    set_servo_position(c.OUTRIGGER, c.outriggerIn)
     enable_servos()
     msleep(1000)
-    moveArm(c.armUp, 15)
     moveClaw(c.clawOpen, 25)
     msleep(500)
     moveClaw(c.clawClose, 25)
@@ -35,19 +41,19 @@ def testServos():
     msleep(500)
     moveClaw(c.clawClose, 25)
     msleep(500)
-    moveBin(c.binGrab, 25)
+    moveArm(c.armUp, 15)
     msleep(500)
-    moveBin(c.binRelease, 25)
+    moveOutrigger(c.outriggerOut, 15)
     msleep(500)
-    moveArm(c.armBack, 15)
-    msleep(1000)
-  
+
 def deliverPoms():  
     moveArm(c.armBack, 10)
     msleep(500)
     moveClaw(c.clawMid, 15)
     msleep(500)
 
+def moveOutrigger( endPos, speed=10 ):
+    moveServo( c.OUTRIGGER, endPos, speed )
     
 def moveArm( endPos, speed=10 ):
     moveServo( c.ARM, endPos, speed )
@@ -55,11 +61,8 @@ def moveArm( endPos, speed=10 ):
 def moveClaw( endPos, speed=10 ):
     moveServo( c.CLAW, endPos, speed )
 
-def moveBin( endPos, speed=10 ):
-    moveServo( c.BIN, endPos, speed )
 
-
-def moveServo( servo, endPos, speed=10 ) :
+def moveServo( servo, endPos, speed=10 ):
     # speed of 1 is slow
     # speed of 2000 is fast
     # speed of 10 is the default

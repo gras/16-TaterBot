@@ -31,10 +31,8 @@ def DEBUG():
 def onBlack(port):
     return analog(port) > c.topHatMidValue 
 
-
-
 def onBlackLineFollower():
-    return analog(c.STARBOARD) > c.topHatMidValue
+    return analog(c.STARBOARD_TOPHAT) > c.topHatMidValue
 
 def crossBlack(port):
     while not onBlack(port): # wait for black
@@ -44,8 +42,10 @@ def crossBlack(port):
     
 
 def waitForButton():
+    print("Press the right button to start...")
     while not getRBUTTON():
-        msleep(50)
+        pass
+
         
 def atArmLength():
     return analog (c.ET) > c.armLength

@@ -7,19 +7,18 @@ Created on Mar 13, 2016
 '''
 
 from sensors import waitForButton
-from sensors import getRBUTTON
+#from sensors import getRBUTTON
 from sensors import DEBUG
 from sensors import atArmLength
 from sensors import onBlack
 
 from servos import moveClaw
 from servos import moveArm
-from servos import moveBin
+from servos import moveOutrigger
 from servos import deliverPoms
 from servos import testServos
 
-
-from drive import testMotors, driveMotorTimed
+from drive import testMotors, driveMotorTimed, binGrabUp
 from drive import driveTimed
 from drive import drive
 from drive import timedLineFollowRight
@@ -29,13 +28,14 @@ from drive import timedLineFollowLeft
 from drive import driveTilLineStarboard
 from drive import ETLineFollowRight
 from drive import timedLineFollowRightSmooth
-from drive import outriggerOut
+from drive import binGrabUp
 
 from wallaby import msleep
 from wallaby import seconds 
 
 import constants as c
-from constants import isPrime, STARBOARD
+#from constants import STARBOARD_TOPHAT
+
 
 
 '''
@@ -45,6 +45,7 @@ Four piles are called Western, Northern, Southern, and Center
 
 # tests sensors and sets prime and clone values
 def init():
+    c.startTime = seconds()
     if c.isPrime:
         print "Running Tater - Prime"
     else:
@@ -52,11 +53,12 @@ def init():
     print c.armFront
     testServos()
     testMotors()
+    moveOutrigger(c.outriggerIn, 15)
     testET()
     waitForButton()
-    msleep(1000)
     c.startTime = seconds()
-
+    msleep(1000)
+    
 # goes to the fist pile
 def goToWestPile():
     print("goToWestPile")
@@ -120,8 +122,9 @@ def grabBin():
         driveTimed(-25, -45, 1200)
         driveTimed(-100, -100, 1000)
     driveTimed(0, 0, 500)
-    moveBin(c.binGrab, 5)
-    
+    binGrabUp()
+    driveTimed(0, 0, 500)
+     
 # Turn to north pile
 def goToNorthernPile():
     print("goToNorthernPile")
@@ -150,11 +153,13 @@ def turnToSouth():
     print("turnToSouth")
     driveTimed(-100, -50, 3000)
     driveTimed(100,0,1000)
-    outriggerOut()
-    msleep(2000)
-    driveTilLineStarboard(100, 0)
-    driveTimed(-100, 0, 50)
-    #driveTimed(100, 0, 50)
+    msleep(500)
+    moveOutrigger(c.outriggerOut, 15)
+    msleep(500)
+    driveTimed(100, 0, 1000)
+    driveTilLineStarboard(30, 0)
+    #driveTimed(-100, 0, 50)
+    #driveTimed(100, 0, 100) #PRIME DOESN'T USE THIS
     
 
     
@@ -163,8 +168,8 @@ def grabMiddlePile():
     print("grabMiddlePile")
     moveClaw(c.clawOpen, 15)
     moveArm(c.armFront, 10)
-    driveTimed(100, 100, 1000)
-    #timedLineFollowLeft(c.STARBOARD, 1)
+    drive(100, 100)
+    timedLineFollowLeft(c.STARBOARD_TOPHAT, 2.5)# was 3
     moveClaw(c.clawMid, 10)
     drive(50, 50)
     moveClaw(c.clawClose, 5)
@@ -178,9 +183,9 @@ def grabSouthPile():
     print ("grabSouthPile")
     moveClaw(c.clawOpen, 10)
     moveArm(c.armFront, 15)
-    timedLineFollowLeft(c.STARBOARD, 3)
+    timedLineFollowLeft(c.STARBOARD_TOPHAT, 3)
     moveArm(c.armShovel, 10)
-    timedLineFollowLeft(c.STARBOARD, 2)
+    timedLineFollowLeft(c.STARBOARD_TOPHAT, 2)
     drive(50, 50)#50,41
     moveArm(c.armFront, 50)
     moveClaw(c.clawClose, 5)
@@ -192,7 +197,7 @@ def grabSouthPile():
 #line follows to home    
 def goToHome ():
     print("goToHome")
-    timedLineFollowLeft(c.STARBOARD, 3)
+    timedLineFollowLeft(c.STARBOARD_TOPHAT, 3)
  
 #Delivers bin    
 def deliverBin():
@@ -201,7 +206,7 @@ def deliverBin():
     driveMotorTimed(c.OUTRIGGER, 0, 0)
     msleep(5000)
     drive(-100, -100)
-    while not onBlack(c. STARBOARD):
+    while not onBlack(c. STARBOARD_TOPHAT):
         pass
     stop()
     DEBUG()
@@ -211,7 +216,6 @@ def deliverBin():
 #Releases bin in home
 def releaseBin():
     print ("releaseBin")
-    moveBin(c.binRelease, 15)
     moveArm(c.armUp, 15)
     driveTimed(100, 100, 1000)
     

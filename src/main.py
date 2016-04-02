@@ -14,6 +14,7 @@ from sensors import DEBUG
 
 def main():
     act.init()
+   
     act.goToWestPile()
     act.grabWestPile()
     act.goToTaterBin() 
@@ -23,12 +24,14 @@ def main():
     act.goToNorthernPile()
     act.grabNorthPile()
     act.turnToSouth()
+    DEBUG()
     act.grabMiddlePile()
     act.grabSouthPile()
+    DEBUG()
     act.goToHome()
     act.deliverBin()
-    act.releaseBin()
     DEBUG()
+    act.releaseBin()
     act.goToCube()
     act.grabCube()
     DEBUG()
