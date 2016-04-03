@@ -8,7 +8,6 @@ Created on Mar 13, 2016
 
 import actions as act
 
-
 from sensors import DEBUG
 
 
@@ -24,17 +23,15 @@ def main():
     act.goToNorthernPile()
     act.grabNorthPile()
     act.turnToSouth()
-    DEBUG()
     act.grabMiddlePile()
     act.grabSouthPile()
-    DEBUG()
     act.goToHome()
-    act.deliverBin()
     DEBUG()
+    act.deliverBin()
     act.releaseBin()
     act.goToCube()
     act.grabCube()
-    DEBUG()
+    act.scoreCube()
     act.returnToBase() 
   
     

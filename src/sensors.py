@@ -10,7 +10,7 @@ from wallaby import ao
 from wallaby import digital 
 from wallaby import analog 
 from wallaby import seconds
-from wallaby import msleep
+#from wallaby import msleep
 
 import constants as c
 

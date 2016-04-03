@@ -12,11 +12,11 @@ from wallaby import msleep
 from wallaby import enable_servos
 from wallaby import get_servo_position
 from wallaby import ao
-from constants import OUTRIGGER
-from drive import stop
-from drive import onBlack
-from drive import driveTimed
-from drive import drive
+#from constants import OUTRIGGER
+#from drive import stop
+#from drive import onBlack
+#from drive import driveTimed
+#from drive import drive
 
 # tests servos
 def testServos():

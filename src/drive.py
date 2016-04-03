@@ -10,18 +10,18 @@ import constants as c
 
 from sensors import onBlack 
 from sensors import atArmLength
-from sensors import getRBUTTON
+#from sensors import getRBUTTON
 from sensors import getET
-from sensors import onBlackLineFollower
-from sensors import atCeilingHeight
+#from sensors import onBlackLineFollower
+#from sensors import atCeilingHeight
 
 
 from wallaby import motor
 from wallaby import msleep
-from wallaby import ao
+#from wallaby import ao
 from wallaby import seconds
 
-from actions import DEBUG
+#from actions import DEBUG
 
 
 
@@ -59,7 +59,7 @@ def testMotors():
    
     
 def binGrabUp():
-    driveMotorTimed(c.BIN, 70, 500)
+    driveMotorTimed(c.BIN, 55, 600)#70,500
     driveMotor(c.BIN, 10)
     
 def binGrabDown():

@@ -18,7 +18,8 @@ from servos import moveOutrigger
 from servos import deliverPoms
 from servos import testServos
 
-from drive import testMotors, driveMotorTimed, binGrabUp
+from drive import testMotors 
+from drive import binGrabDown
 from drive import driveTimed
 from drive import drive
 from drive import timedLineFollowRight
@@ -97,7 +98,7 @@ def goToTaterBin():
 def depositWestPile():
     print("depositWestPile")
     moveArm(c.armMid, 5)
-    msleep(300)
+    #msleep(300)
     moveClaw(c.clawMid, 10)
     msleep(500)
     moveClaw(c.clawClose, 15)
@@ -118,7 +119,7 @@ def grabBin():
         driveTimed(-100, -100, 700)
     else:
         driveTimed(95, 90, 2000)
-        driveTimed(100, 65, 2000) 
+        driveTimed(100, 60, 2000) 
         driveTimed(-25, -45, 1200)
         driveTimed(-100, -100, 1000)
     driveTimed(0, 0, 500)
@@ -153,9 +154,9 @@ def turnToSouth():
     print("turnToSouth")
     driveTimed(-100, -50, 3000)
     driveTimed(100,0,1000)
-    msleep(500)
-    moveOutrigger(c.outriggerOut, 15)
-    msleep(500)
+    #msleep(500)
+    moveOutrigger(c.outriggerOut, 100)
+    #msleep(500)
     driveTimed(100, 0, 1000)
     driveTilLineStarboard(30, 0)
     #driveTimed(-100, 0, 50)
@@ -183,9 +184,14 @@ def grabSouthPile():
     print ("grabSouthPile")
     moveClaw(c.clawOpen, 10)
     moveArm(c.armFront, 15)
-    timedLineFollowLeft(c.STARBOARD_TOPHAT, 3)
-    moveArm(c.armShovel, 10)
-    timedLineFollowLeft(c.STARBOARD_TOPHAT, 2)
+    if c.isPrime:
+        timedLineFollowLeft(c.STARBOARD_TOPHAT, 3)
+        moveArm(c.armShovel, 10)
+        timedLineFollowLeft(c.STARBOARD_TOPHAT, 2)
+    else:
+        timedLineFollowLeft(c.STARBOARD_TOPHAT, 2)
+        moveArm(c.armShovel, 10)
+        timedLineFollowLeft(c.STARBOARD_TOPHAT, 3)
     drive(50, 50)#50,41
     moveArm(c.armFront, 50)
     moveClaw(c.clawClose, 5)
@@ -197,34 +203,38 @@ def grabSouthPile():
 #line follows to home    
 def goToHome ():
     print("goToHome")
-    timedLineFollowLeft(c.STARBOARD_TOPHAT, 3)
+    if c.isPrime:
+        timedLineFollowLeft(c.STARBOARD_TOPHAT, 3)
+    else:
+        timedLineFollowLeft(c.STARBOARD_TOPHAT, 1.8)
  
 #Delivers bin    
 def deliverBin():
     print("deliverBin")
-    driveTimed(-100, 0, 3250)#3000
-    driveMotorTimed(c.OUTRIGGER, 0, 0)
-    msleep(5000)
-    drive(-100, -100)
+    driveTimed(-100, 0, 3150) #3250
+    moveOutrigger(c.outriggerBack, 100)
+    drive(-50, -50)
     while not onBlack(c. STARBOARD_TOPHAT):
         pass
     stop()
-    DEBUG()
-    #driveTimed(-100, -100, 1000) 
-    #driveTimed(-40, 0, 800)
+    driveTimed(-80, -65, 600) 
+    driveTimed(-40, 0, 400)
+    
 
 #Releases bin in home
 def releaseBin():
     print ("releaseBin")
     moveArm(c.armUp, 15)
+    binGrabDown()
     driveTimed(100, 100, 1000)
+    moveOutrigger(c.outriggerIn, 100)
     
 #line follows to cube    
 def goToCube():
     print("goToCube")
     ETLineFollowRight(c.LINE_FOLLOWER, True)
-    timedLineFollowRight(c.LINE_FOLLOWER, 9)
-    timedLineFollowRightSmooth(c.LINE_FOLLOWER, 4)
+    timedLineFollowRight(c.LINE_FOLLOWER, 11)#9
+    timedLineFollowRightSmooth(c.LINE_FOLLOWER, 3)
     moveClaw(c.clawOpen, 10)
     moveArm(c.armFront, 10)
     driveTimed(70, 70, 1000)
@@ -252,6 +262,13 @@ def grabCube():
     driveTimed(100, 100, 400)
     moveClaw(c.clawClose, 10)
     moveArm(c.armUp, 10)
+    
+def scoreCube():
+    print("scoreCube")
+    driveTimed(-100, -100, 400)
+    driveTimed(70,-70,1000)
+    moveArm(c.armFront, 15)
+    moveClaw(c.clawOpen, 15)
     
 #Returns to base with pom filled bin
 def returnToBase (port):

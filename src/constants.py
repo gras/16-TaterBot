@@ -41,9 +41,11 @@ clawOpen = 0 # Claw open
 clawMid = 480 # Claw mid
 clawClose = 1100 # Claw closed
 
-outriggerOut  = 1600
 outriggerIn = 150
+outriggerBack = 450
+outriggerOut  = 1500
 outriggerFront = 1900
+
 
 # PRIME analog sensors values
 topHatMidValue = 2000 # value between black and white top hat values
@@ -66,8 +68,8 @@ else:
     clawMid = 800
     clawClose = 1525 #1450 #Claw closed
     
-    outriggerOut  = 1450
     outriggerIn = 350
+    outriggerOut  = 1750
     outriggerFront = 2047
 
     
