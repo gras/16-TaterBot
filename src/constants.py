@@ -45,6 +45,7 @@ outriggerIn = 150
 outriggerBack = 450
 outriggerOut  = 1500
 outriggerFront = 1900
+outriggerSpin = 416
 
 
 # PRIME analog sensors values

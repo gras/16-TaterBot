@@ -46,6 +46,13 @@ def testServos():
     moveOutrigger(c.outriggerOut, 15)
     msleep(500)
 
+# temp
+def tempServos():
+    set_servo_position(c.ARM, c.armUp)
+    set_servo_position(c.CLAW, c.clawClose)
+    set_servo_position(c.OUTRIGGER, c.outriggerIn)
+    enable_servos()
+
 def deliverPoms():  
     moveArm(c.armBack, 10)
     msleep(500)

@@ -17,8 +17,10 @@ from servos import moveArm
 from servos import moveOutrigger
 from servos import deliverPoms
 from servos import testServos
+from servos import tempServos
 
 from drive import testMotors 
+from drive import turnUntilBlack
 from drive import binGrabDown
 from drive import driveTimed
 from drive import drive
@@ -30,6 +32,8 @@ from drive import driveTilLineStarboard
 from drive import ETLineFollowRight
 from drive import timedLineFollowRightSmooth
 from drive import binGrabUp
+from drive import lineFollowUntilEndLeft
+from drive import timedLineFollowLeftSmooth
 
 from wallaby import msleep
 from wallaby import seconds 
@@ -203,23 +207,24 @@ def grabSouthPile():
 #line follows to home    
 def goToHome ():
     print("goToHome")
-    if c.isPrime:
-        timedLineFollowLeft(c.STARBOARD_TOPHAT, 3)
-    else:
-        timedLineFollowLeft(c.STARBOARD_TOPHAT, 1.8)
- 
+    turnUntilBlack(c.STARBOARD_TOPHAT, 100, 0)
+    lineFollowUntilEndLeft(c.STARBOARD_TOPHAT)
+    driveTimed(100, 75, 1000)
+    drive(0, 100)
+    while not onBlack(c.LINE_FOLLOWER):
+        pass
+    stop()
+    moveOutrigger(c.outriggerSpin, 100)
+    timedLineFollowRightSmooth(c.LINE_FOLLOWER, 6)
+
 #Delivers bin    
 def deliverBin():
     print("deliverBin")
-    driveTimed(-100, 0, 3150) #3250
-    moveOutrigger(c.outriggerBack, 100)
-    drive(-50, -50)
-    while not onBlack(c. STARBOARD_TOPHAT):
+    drive(-100, 0)
+    while not onBlack(c.STARBOARD_TOPHAT):
         pass
     stop()
-    driveTimed(-80, -65, 600) 
-    driveTimed(-40, 0, 400)
-    
+    driveTimed(100, 100, 500)
 
 #Releases bin in home
 def releaseBin():
@@ -232,9 +237,15 @@ def releaseBin():
 #line follows to cube    
 def goToCube():
     print("goToCube")
-    ETLineFollowRight(c.LINE_FOLLOWER, True)
-    timedLineFollowRight(c.LINE_FOLLOWER, 11)#9
-    timedLineFollowRightSmooth(c.LINE_FOLLOWER, 3)
+    drive(95, 100)
+    while not atArmLength():
+        pass
+    turnUntilBlack(c.LINE_FOLLOWER, 100, 10)
+    timedLineFollowLeft(c.LINE_FOLLOWER, 5)
+    lineFollowUntilEndLeft(c.LINE_FOLLOWER)
+    
+# old code -- maybe pushes poms? have not yet tested
+ 
     moveClaw(c.clawOpen, 10)
     moveArm(c.armFront, 10)
     driveTimed(70, 70, 1000)
@@ -245,15 +256,9 @@ def goToCube():
     moveArm(c.armShovel, 10) 
     drive(50, 50)
     while onBlack(c.LINE_FOLLOWER):
-        pass
-    drive(0, 0)
-    driveTimed(50,50,500)
-    driveTimed(0,0,1000)
-    driveTimed(-50,-50,500)
-    moveArm(c.armUp, 15)
-    moveClaw(c.clawClose, 10)
-    driveTimed(70,-70,1000)
-
+        pass    
+    stop()
+    
 #Grabs Cube
 def grabCube():
     print("grabCube")
@@ -281,3 +286,12 @@ def returnToBase (port):
         pass
     stop()
     timedLineFollowRight(5000)
+    
+def tempInit():
+    tempServos()
+    moveOutrigger(c.outriggerOut, 100)
+    moveArm(c.armBack, 10)
+    msleep(500)
+    moveClaw(c.clawMid, 15)
+    msleep(500)
+    binGrabUp()

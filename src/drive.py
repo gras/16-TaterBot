@@ -132,6 +132,33 @@ def timedLineFollowRightSmooth(port, time):
     
         msleep(10)
         
+def timedLineFollowLeftSmooth(port, time):
+    sec = seconds() + time
+    while seconds() < sec:
+        if onBlack(port):
+            driveTimed(20,40,20)
+    
+        else:
+            driveTimed(40, 20, 20)
+    
+        msleep(10)
+        
+def lineFollowUntilEndLeft(port):
+    i = 0
+    while (i < 10):
+        if onBlack(port):
+            i = 0
+            driveTimed(50, 90, 20)
+        else:
+            i = i + 1
+            driveTimed(90, 50, 20)
+
+def turnUntilBlack(port, left, right):
+    drive(left, right)
+    while (not onBlack(port)):
+        pass
+    stop()
+
 #Follows black line on right until under or not under ceiling
 #if findCeiling is true, will go until ET finds ceiling
 def ETLineFollowRight(port, findCeiling): 
