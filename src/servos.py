@@ -10,6 +10,7 @@ import constants as c
 from wallaby import set_servo_position
 from wallaby import msleep
 from wallaby import enable_servos
+from wallaby import disable_servos
 from wallaby import get_servo_position
 from wallaby import ao
 #from constants import OUTRIGGER
@@ -41,10 +42,14 @@ def testServos():
     msleep(500)
     moveClaw(c.clawClose, 25)
     msleep(500)
-    moveArm(c.armUp, 15)
+    moveArm(c.armBack, 15)
     msleep(500)
     moveOutrigger(c.outriggerOut, 15)
     msleep(500)
+    moveArm(c.armFront, 15)
+    moveClaw(c.clawMid, 25)
+    msleep(500)
+
 
 # temp
 def tempServos():

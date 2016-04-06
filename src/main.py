@@ -12,11 +12,12 @@ from sensors import DEBUG
 
 
 def main():
-    '''
     act.init()
-   
+    act.disposeOfDirt()
     act.goToWestPile()
+    DEBUG()
     act.grabWestPile()
+    DEBUG()
     act.goToTaterBin() 
     act.depositWestPile()
     act.backUpFromBin()
@@ -29,8 +30,6 @@ def main():
     act.goToHome() 
     act.deliverBin()
     act.releaseBin()
-    '''
-    act.tempInit()
     act.goToCenter()
     act.grabCube()
     act.scoreCube()

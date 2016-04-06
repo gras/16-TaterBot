@@ -27,6 +27,10 @@ def DEBUG():
     ao()
     print 'Program stop for DEBUG\nSeconds: ', seconds() - c.startTime 
     exit(0)
+
+def currentTime():
+    print 'Current time: ', seconds() - c.startTime 
+
     
 def onBlack(port):
     return analog(port) > c.topHatMidValue 

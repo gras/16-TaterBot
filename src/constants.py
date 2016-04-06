@@ -36,7 +36,8 @@ armShovel= 0 # Pushes poms forward past bump
 armMid = 590 # 540 #Arm to score at bin
 armUp = 1100 # Arm at 90 degrees up
 armBack = 1600 # Arm backwards
-armBlock = 465
+armBlock = 465 #move the block
+armOver = 713 #over the block
 
 clawOpen = 0 # Claw open
 clawMid = 480 # Claw mid

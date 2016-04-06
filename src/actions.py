@@ -11,6 +11,7 @@ from sensors import waitForButton, crossBlack
 from sensors import DEBUG
 from sensors import atArmLength
 from sensors import onBlack
+from sensors import currentTime
 
 from servos import moveClaw
 from servos import moveArm
@@ -37,6 +38,8 @@ from drive import timedLineFollowLeftSmooth
 
 from wallaby import msleep
 from wallaby import seconds 
+from wallaby import enable_servos
+from wallaby import disable_servos
 
 import constants as c
 #from constants import STARBOARD_TOPHAT
@@ -60,15 +63,26 @@ def init():
     testMotors()
     moveOutrigger(c.outriggerIn, 15)
     testET()
+    disable_servos()
     waitForButton()
     c.startTime = seconds()
+    enable_servos()
     msleep(1000)
-    
+
+def disposeOfDirt():
+    driveTimed(95, 100, 500)
+    drive(95, 100)
+    moveClaw(c.clawClose, 20)
+    moveArm(c.armBack, 25)
+    moveClaw(c.clawOpen, 10)
+    msleep(100)
+    moveClaw(c.clawMid, 15)
+
 # goes to the fist pile
 def goToWestPile():
     print("goToWestPile")
     drive(95,100)
-    msleep(2000)
+    msleep(1000)
     moveArm(c.armFront, 10)
     moveClaw(c.clawOpen,20)
     msleep(500)
@@ -215,7 +229,7 @@ def goToHome ():
         pass
     stop()
     moveOutrigger(c.outriggerSpin, 100)
-    timedLineFollowRightSmooth(c.LINE_FOLLOWER, 4)
+    timedLineFollowRightSmooth(c.LINE_FOLLOWER, 3)
 
 #Delivers bin    
 def deliverBin():
@@ -267,19 +281,18 @@ def grabCube():
 
     moveClaw(c.clawOpen, 15)
     moveArm(c.armFront, 15)
-    driveTimed(100, 100, 400)
-    driveTimed(0, 100, 100)
-    driveTimed(100, 100, 1000)
+    driveTimed(100, 0, 100)
+    driveTimed(100, 100, 1100)
     moveClaw(c.clawClose, 10)
     moveArm(c.armBlock, 10)
     
 def scoreCube():
     print("scoreCube")
-    driveTimed(100, 75, 750)
+    driveTimed(100, 75, 500)
     driveTimed(100, 0, 1250)
     moveClaw(c.clawOpen, 10)
-    driveTimed(-100, -100, 500)
-    turnUntilBlack(c.LINE_FOLLOWER, 0, 100)
+    driveTimed(-100, -100, 1000)
+    #turnUntilBlack(c.LINE_FOLLOWER, 0, 100)
     '''
     driveTimed(-100, -100, 400)
     driveTimed(70,-70,1000)
