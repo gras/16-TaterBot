@@ -6,7 +6,7 @@ Created on Mar 13, 2016
 @author: Dead Robot Society
 '''
 
-from sensors import waitForButton
+from sensors import waitForButton, crossBlack
 #from sensors import getRBUTTON
 from sensors import DEBUG
 from sensors import atArmLength
@@ -215,7 +215,7 @@ def goToHome ():
         pass
     stop()
     moveOutrigger(c.outriggerSpin, 100)
-    timedLineFollowRightSmooth(c.LINE_FOLLOWER, 6)
+    timedLineFollowRightSmooth(c.LINE_FOLLOWER, 4)
 
 #Delivers bin    
 def deliverBin():
@@ -235,7 +235,7 @@ def releaseBin():
     moveOutrigger(c.outriggerIn, 100)
     
 #line follows to cube    
-def goToCube():
+def goToCenter():
     print("goToCube")
     drive(95, 100)
     while not atArmLength():
@@ -243,9 +243,7 @@ def goToCube():
     turnUntilBlack(c.LINE_FOLLOWER, 100, 10)
     timedLineFollowLeft(c.LINE_FOLLOWER, 5)
     lineFollowUntilEndLeft(c.LINE_FOLLOWER)
-    
-# old code -- maybe pushes poms? have not yet tested
- 
+     
     moveClaw(c.clawOpen, 10)
     moveArm(c.armFront, 10)
     driveTimed(70, 70, 1000)
@@ -258,23 +256,36 @@ def goToCube():
     while onBlack(c.LINE_FOLLOWER):
         pass    
     stop()
+
     
 #Grabs Cube
 def grabCube():
     print("grabCube")
+    moveArm(c.armUp, 10)
+    drive(0, -100)
+    crossBlack(c.LINE_FOLLOWER)
+
     moveClaw(c.clawOpen, 15)
     moveArm(c.armFront, 15)
     driveTimed(100, 100, 400)
+    driveTimed(0, 100, 100)
+    driveTimed(100, 100, 1000)
     moveClaw(c.clawClose, 10)
-    moveArm(c.armUp, 10)
+    moveArm(c.armBlock, 10)
     
 def scoreCube():
     print("scoreCube")
+    driveTimed(100, 75, 750)
+    driveTimed(100, 0, 1250)
+    moveClaw(c.clawOpen, 10)
+    driveTimed(-100, -100, 500)
+    turnUntilBlack(c.LINE_FOLLOWER, 0, 100)
+    '''
     driveTimed(-100, -100, 400)
     driveTimed(70,-70,1000)
     moveArm(c.armFront, 15)
     moveClaw(c.clawOpen, 15)
-    
+    '''
 #Returns to base with pom filled bin
 def returnToBase (port):
     print ("returntobase")
@@ -288,10 +299,13 @@ def returnToBase (port):
     timedLineFollowRight(5000)
     
 def tempInit():
+    c.startTime = seconds()
     tempServos()
-    moveOutrigger(c.outriggerOut, 100)
-    moveArm(c.armBack, 10)
+    moveOutrigger(c.outriggerIn, 100)
+    moveArm(c.armUp, 10)
     msleep(500)
     moveClaw(c.clawMid, 15)
     msleep(500)
     binGrabUp()
+    waitForButton()
+    c.startTime = seconds()

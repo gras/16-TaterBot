@@ -26,15 +26,15 @@ def main():
     act.turnToSouth()
     act.grabMiddlePile()
     act.grabSouthPile()
-    '''
-    act.tempInit()
     act.goToHome() 
     act.deliverBin()
     act.releaseBin()
-    act.goToCube()
-    DEBUG()
+    '''
+    act.tempInit()
+    act.goToCenter()
     act.grabCube()
     act.scoreCube()
+    DEBUG()
     act.returnToBase() 
   
     
