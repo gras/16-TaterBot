@@ -35,6 +35,7 @@ from drive import timedLineFollowRightSmooth
 from drive import binGrabUp
 from drive import lineFollowUntilEndLeft
 from drive import timedLineFollowLeftSmooth
+from drive import driveTimedNoStop
 
 from wallaby import msleep
 from wallaby import seconds 
@@ -82,29 +83,28 @@ def disposeOfDirt():
 def goToWestPile():
     print("goToWestPile")
     drive(95,100)
-    msleep(1000)
+    #msleep(500)
     moveArm(c.armFront, 10)
     moveClaw(c.clawOpen,20)
     msleep(500)
     if c.isPrime:
-        driveTimed(95, 100, 1500)
+        driveTimed(95, 100, 1000)
     else: 
         driveTimed(95, 100, 1000)
 
 # Starts run
 def grabWestPile():
     print("grabWestPile")
-    moveClaw(c.clawMid, 10)
     drive(45, 50)
+    moveClaw(c.clawMid, 10)
     moveClaw(c.clawClose, 5)
-    msleep(500)
     moveArm(c.armMid, 15)
         
 # Go to the bin
 def goToTaterBin():
     print("goToTaterBin")
     if c.isPrime:
-        driveTimed(95, 100, 2500)
+        driveTimed(95, 100, 2900)
     else:
         driveTimed(95, 100, 2300)
     drive(25,30)
@@ -151,26 +151,33 @@ def goToNorthernPile():
         driveTimed(50, 100, 1000)
     else:
         driveTimed(50, 100, 800)
-    driveTimed(100, 0, 250)
-    moveClaw(c.clawOpen, 15)
-    moveArm(c.armFront, 10)
+    #driveTimed(100, 0, 250)
+    #drive(100,0)
+    moveClaw(c.clawOpen, 20)
+    moveArm(c.armFront, 20)
+    driveTimed(-100, 0, 10)
+    stop() 
+    
 
 # Grab the northern pile    
 def grabNorthPile():
     print("grabNorthPile")
-    driveTimed(70, 100, 1000)
+    #driveTimed(70, 100, 1000)
+    drive(70,100)
     moveClaw(c.clawMid, 10)
     drive(45, 50)
     moveClaw(c.clawClose, 5)
     msleep(500)
     stop()
     moveArm(c.armMid, 15)
+    drive(-100, -50)
     deliverPoms()
+    DEBUG()
 
 #turns to south and towards center pile
 def turnToSouth():
     print("turnToSouth")
-    driveTimed(-100, -50, 3000)
+    #driveTimed(-100, -50, 3000)
     driveTimed(100,0,1000)
     #msleep(500)
     moveOutrigger(c.outriggerOut, 100)

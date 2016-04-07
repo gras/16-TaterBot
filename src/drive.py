@@ -85,6 +85,11 @@ def driveTimed(left,right,time):
     msleep(time)
     drive(0, 0)
     
+def driveTimedNoStop(left,right,time):
+    drive(left,right)
+    msleep(time)
+    drive(0, 0)
+    
 def driveMotorTimed(motorport, speed, time):
     motor(motorport, speed)
     msleep(time)

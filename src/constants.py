@@ -41,7 +41,7 @@ armOver = 713 #over the block
 
 clawOpen = 0 # Claw open
 clawMid = 480 # Claw mid
-clawClose = 1100 # Claw closed
+clawClose = 1350 # Claw closed
 
 outriggerIn = 150
 outriggerBack = 450
