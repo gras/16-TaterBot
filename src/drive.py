@@ -36,6 +36,7 @@ def testMotors():
     while not onBlack(c.LINE_FOLLOWER): #wait to see line
         pass
     stop()
+    '''
     msleep(300)
     driveTimed(100, -100, 500)
     drive(-100, 100)
@@ -43,20 +44,17 @@ def testMotors():
         pass
     stop()
     msleep(1000)
-
-    #moveServo(c.OUTRIGGER, c.outriggerFront)
+    '''
     drive(75,0)
     while not onBlack(c.STARBOARD_TOPHAT):
         pass
     stop()
-    msleep(1000)
     drive(-75, 0)
     while not onBlack(c.LINE_FOLLOWER):
         pass
     msleep(100)
     stop()
-    msleep(1000)
-   
+      
     
 def binGrabUp():
     driveMotorTimed(c.BIN, 55, 600)#70,500

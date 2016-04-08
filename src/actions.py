@@ -62,7 +62,7 @@ def init():
     print c.armFront
     testServos()
     testMotors()
-    moveOutrigger(c.outriggerIn, 15)
+    moveOutrigger(c.outriggerIn, 25)
     testET()
     disable_servos()
     waitForButton()
@@ -87,31 +87,36 @@ def goToWestPile():
     moveArm(c.armFront, 10)
     moveClaw(c.clawOpen,20)
     msleep(500)
-    if c.isPrime:
-        driveTimed(95, 100, 1000)
-    else: 
-        driveTimed(95, 100, 1000)
+    driveTimed(95, 100, 500)
 
 # Starts run
 def grabWestPile():
     print("grabWestPile")
-    drive(45, 50)
+    drive(95, 100)
+    '''
+    moveClaw(c.clawClose, 15)
+    moveClaw(c.clawOpen, 25)
+    msleep(300)
+    moveClaw(c.clawClose, 25)
+    '''
     moveClaw(c.clawMid, 10)
     moveClaw(c.clawClose, 5)
+    
     moveArm(c.armMid, 15)
-        
+
 # Go to the bin
 def goToTaterBin():
     print("goToTaterBin")
     if c.isPrime:
-        driveTimed(95, 100, 2900)
+        driveTimed(95, 100, 1500)
     else:
         driveTimed(95, 100, 2300)
     drive(25,30)
     while not atArmLength():
         pass
     stop()
-        
+       
+
 # Places the poms in the potato bin
 def depositWestPile():
     print("depositWestPile")
@@ -124,9 +129,9 @@ def depositWestPile():
 # Backs up from the bin
 def backUpFromBin():
     print("backUpFromBin")
-    driveTimed(-100, -50, 1500)
+    driveTimed(-100, -50, 1800)
     driveTimed(100, 0, 750)
-
+    
 # Grab the Bin
 def grabBin():
     print("grabBin")
@@ -152,10 +157,11 @@ def goToNorthernPile():
     else:
         driveTimed(50, 100, 800)
     #driveTimed(100, 0, 250)
-    #drive(100,0)
-    moveClaw(c.clawOpen, 20)
-    moveArm(c.armFront, 20)
-    driveTimed(-100, 0, 10)
+    drive(100,0)
+    moveClaw(c.clawOpen, 70)#96, open
+    moveArm(c.armFront, 24)
+    #moveClaw(c.clawOpen, 20)
+    #driveTimed(-100, 0, 10)
     stop() 
     
 
@@ -172,7 +178,7 @@ def grabNorthPile():
     moveArm(c.armMid, 15)
     drive(-100, -50)
     deliverPoms()
-    DEBUG()
+    
 
 #turns to south and towards center pile
 def turnToSouth():
@@ -192,16 +198,16 @@ def turnToSouth():
 # Grab the middle pile    
 def grabMiddlePile():
     print("grabMiddlePile")
-    moveClaw(c.clawOpen, 15)
-    moveArm(c.armFront, 10)
+    moveClaw(c.clawOpen, 25)
+    moveArm(c.armFront, 25)
     drive(100, 100)
     timedLineFollowLeft(c.STARBOARD_TOPHAT, 2.5)# was 3
     moveClaw(c.clawMid, 10)
     drive(50, 50)
     moveClaw(c.clawClose, 5)
     msleep(500)
+    moveArm(c.armMid, 25)
     stop()
-    moveArm(c.armMid, 15)
     deliverPoms()
 
 #Grab south pile, raising front of claw in order to pass bump  
