@@ -83,11 +83,9 @@ def disposeOfDirt():
 def goToWestPile():
     print("goToWestPile")
     drive(95,100)
-    #msleep(500)
     moveArm(c.armFront, 10)
     moveClaw(c.clawOpen,20)
-    msleep(500)
-    driveTimed(95, 100, 500)
+    driveTimed(95, 100, 1000)
 
 # Starts run
 def grabWestPile():
@@ -108,7 +106,7 @@ def grabWestPile():
 def goToTaterBin():
     print("goToTaterBin")
     if c.isPrime:
-        driveTimed(95, 100, 1500)
+        driveTimed(95, 100, 1600)
     else:
         driveTimed(95, 100, 2300)
     drive(25,30)
@@ -121,9 +119,8 @@ def goToTaterBin():
 def depositWestPile():
     print("depositWestPile")
     moveArm(c.armMid, 5)
-    #msleep(300)
     moveClaw(c.clawMid, 10)
-    msleep(500)
+    msleep(400) #was 500
     moveClaw(c.clawClose, 15)
         
 # Backs up from the bin
@@ -145,9 +142,9 @@ def grabBin():
         driveTimed(100, 60, 2000) 
         driveTimed(-25, -45, 1200)
         driveTimed(-100, -100, 1000)
-    driveTimed(0, 0, 500)
+    msleep(500)
     binGrabUp()
-    driveTimed(0, 0, 500)
+    #msleep(500)
      
 # Turn to north pile
 def goToNorthernPile():
@@ -156,44 +153,34 @@ def goToNorthernPile():
         driveTimed(50, 100, 1000)
     else:
         driveTimed(50, 100, 800)
-    #driveTimed(100, 0, 250)
     drive(100,0)
     moveClaw(c.clawOpen, 70)#96, open
     moveArm(c.armFront, 24)
-    #moveClaw(c.clawOpen, 20)
-    #driveTimed(-100, 0, 10)
     stop() 
     
 
 # Grab the northern pile    
 def grabNorthPile():
     print("grabNorthPile")
-    #driveTimed(70, 100, 1000)
     drive(70,100)
+    msleep(100) #get closer to the pom pile before closing 
     moveClaw(c.clawMid, 10)
     drive(45, 50)
     moveClaw(c.clawClose, 5)
-    msleep(500)
     stop()
     moveArm(c.armMid, 15)
     drive(-100, -50)
-    deliverPoms()
-    
+    deliverPoms() 
+    msleep(1500)
 
 #turns to south and towards center pile
 def turnToSouth():
     print("turnToSouth")
-    #driveTimed(-100, -50, 3000)
     driveTimed(100,0,1000)
-    #msleep(500)
     moveOutrigger(c.outriggerOut, 100)
-    #msleep(500)
     driveTimed(100, 0, 1000)
-    driveTilLineStarboard(30, 0)
-    #driveTimed(-100, 0, 50)
-    #driveTimed(100, 0, 100) #PRIME DOESN'T USE THIS
+    driveTilLineStarboard(50, 0) #30, 0
     
-
     
 # Grab the middle pile    
 def grabMiddlePile():
@@ -201,11 +188,11 @@ def grabMiddlePile():
     moveClaw(c.clawOpen, 25)
     moveArm(c.armFront, 25)
     drive(100, 100)
-    timedLineFollowLeft(c.STARBOARD_TOPHAT, 2.5)# was 3
+    timedLineFollowLeft(c.STARBOARD_TOPHAT, 3)
     moveClaw(c.clawMid, 10)
-    drive(50, 50)
+    drive(60, 60) #50, 50
     moveClaw(c.clawClose, 5)
-    msleep(500)
+    #msleep(500)
     moveArm(c.armMid, 25)
     stop()
     deliverPoms()
@@ -215,14 +202,9 @@ def grabSouthPile():
     print ("grabSouthPile")
     moveClaw(c.clawOpen, 10)
     moveArm(c.armFront, 15)
-    if c.isPrime:
-        timedLineFollowLeft(c.STARBOARD_TOPHAT, 3)
-        moveArm(c.armShovel, 10)
-        timedLineFollowLeft(c.STARBOARD_TOPHAT, 2)
-    else:
-        timedLineFollowLeft(c.STARBOARD_TOPHAT, 2)
-        moveArm(c.armShovel, 10)
-        timedLineFollowLeft(c.STARBOARD_TOPHAT, 3)
+    timedLineFollowLeft(c.STARBOARD_TOPHAT, 2.5)
+    moveArm(c.armShovel, 10)
+    timedLineFollowLeft(c.STARBOARD_TOPHAT, 3)
     drive(50, 50)#50,41
     moveArm(c.armFront, 50)
     moveClaw(c.clawClose, 5)
@@ -258,6 +240,8 @@ def releaseBin():
     print ("releaseBin")
     moveArm(c.armUp, 15)
     binGrabDown()
+    print "Dropped bin at:"
+    currentTime()
     driveTimed(100, 100, 1000)
     moveOutrigger(c.outriggerIn, 100)
     

@@ -59,10 +59,10 @@ def tempServos():
     enable_servos()
 
 def deliverPoms():  
-    moveArm(c.armBack, 15)
-    msleep(500)
-    moveClaw(c.clawMid, 15)
-    msleep(500)
+    moveArm(c.armBack, 25)
+    #msleep(500) #500
+    moveClaw(c.clawMid, 25)
+    #msleep(500)
 
 def moveOutrigger( endPos, speed=10 ):
     moveServo( c.OUTRIGGER, endPos, speed )
