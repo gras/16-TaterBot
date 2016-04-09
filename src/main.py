@@ -30,8 +30,9 @@ def main():
     act.releaseBin()
     act.goToCenter()
     act.grabCube()
-    act.scoreCube()
+    act.returnToBase()
     DEBUG()
+    act.scoreCube()
     act.returnToBase() 
   
     

@@ -43,6 +43,7 @@ from wallaby import enable_servos
 from wallaby import disable_servos
 
 import constants as c
+from constants import outriggerOut, outriggerBaseReturn
 #from constants import STARBOARD_TOPHAT
 
 
@@ -136,7 +137,7 @@ def grabBin():
         driveTimed(100, 90, 1500)
         driveTimed(100, 70, 2250)
         driveTimed(-35, -100, 750)
-        driveTimed(-100, -100, 700)
+        driveTimed(-100, -100, 800)
     else:
         driveTimed(95, 90, 2000)
         driveTimed(100, 60, 2000) 
@@ -202,7 +203,7 @@ def grabSouthPile():
     print ("grabSouthPile")
     moveClaw(c.clawOpen, 10)
     moveArm(c.armFront, 15)
-    timedLineFollowLeft(c.STARBOARD_TOPHAT, 2.5)
+    timedLineFollowLeft(c.STARBOARD_TOPHAT, 2)
     moveArm(c.armShovel, 10)
     timedLineFollowLeft(c.STARBOARD_TOPHAT, 3)
     drive(50, 50)#50,41
@@ -248,21 +249,28 @@ def releaseBin():
 #line follows to cube    
 def goToCenter():
     print("goToCube")
-    drive(95, 100)
-    while not atArmLength():
+    driveTimed(95, 100, 4000)
+    driveTimed(100, 60, 3000)
+    drive(100, 100)
+    while not onBlack(c.LINE_FOLLOWER):
         pass
-    turnUntilBlack(c.LINE_FOLLOWER, 100, 10)
-    timedLineFollowLeft(c.LINE_FOLLOWER, 5)
+    driveTimed(100, 100, 500)
+    drive(100, 0)
+    while not onBlack(c.LINE_FOLLOWER):
+        pass
+    timedLineFollowLeft(c.LINE_FOLLOWER, 1)
+    drive(100, 100)
+    moveArm(c.armFront, 20)
+    moveClaw(c.clawOpen, 25)
     lineFollowUntilEndLeft(c.LINE_FOLLOWER)
-     
     moveClaw(c.clawOpen, 10)
     moveArm(c.armFront, 10)
     driveTimed(70, 70, 1000)
-    drive(50, 50)
+    drive(100, 100)
     while not onBlack(c.LINE_FOLLOWER):
         pass 
-    drive(0, 0)
-    moveArm(c.armShovel, 10) 
+    stop()
+    moveArm(c.armShovel, 25) 
     drive(50, 50)
     while onBlack(c.LINE_FOLLOWER):
         pass    
@@ -275,13 +283,14 @@ def grabCube():
     moveArm(c.armUp, 10)
     drive(0, -100)
     crossBlack(c.LINE_FOLLOWER)
-
     moveClaw(c.clawOpen, 15)
     moveArm(c.armFront, 15)
-    driveTimed(100, 0, 100)
+    #driveTimed(100, 0, 100)
+    #driveTimed(0, 100, 300)
     driveTimed(100, 100, 1100)
     moveClaw(c.clawClose, 10)
-    moveArm(c.armBlock, 10)
+    #moveArm(c.armBlock, 10)
+    moveArm(c.armBlockBack, 10)
     
 def scoreCube():
     print("scoreCube")
@@ -297,8 +306,21 @@ def scoreCube():
     moveClaw(c.clawOpen, 15)
     '''
 #Returns to base with pom filled bin
-def returnToBase (port):
+def returnToBase():
     print ("returntobase")
+    driveTimed(-100, 0, 1000)
+    driveTimed(-100, -80, 6000)
+    driveTimed(-100, -65, 1000)
+    drive(-100, -100)
+    msleep(4000)
+    #moveArm(c.armBlockBack, 20)
+    msleep(500)
+    moveOutrigger(outriggerBaseReturn, 20)
+    msleep(300);
+    while(onBlack(c.STARBOARD_TOPHAT)):
+        pass
+    stop()
+    '''
     driveTimed(70, 70, 1000)
     driveTimed(50, 0, 1500)
     DEBUG()
@@ -307,6 +329,7 @@ def returnToBase (port):
         pass
     stop()
     timedLineFollowRight(5000)
+    '''
     
 def tempInit():
     c.startTime = seconds()

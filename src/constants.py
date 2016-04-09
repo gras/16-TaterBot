@@ -38,6 +38,7 @@ armUp = 1100 # Arm at 90 degrees up
 armBack = 1600 # Arm backwards
 armBlock = 465 #move the block
 armOver = 713 #over the block
+armBlockBack = 1650 #Arm backwards with block
 
 clawOpen = 0 # Claw open
 clawMid = 480 # Claw mid
@@ -48,6 +49,7 @@ outriggerBack = 450
 outriggerOut  = 1500
 outriggerFront = 1900
 outriggerSpin = 416
+outriggerBaseReturn = 340
 
 
 # PRIME analog sensors values
