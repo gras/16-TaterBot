@@ -36,6 +36,7 @@ from drive import binGrabUp
 from drive import lineFollowUntilEndLeft
 from drive import timedLineFollowLeftSmooth
 from drive import driveTimedNoStop
+from drive import lineFollowUntilEndRight
 
 from wallaby import msleep
 from wallaby import seconds 
@@ -133,23 +134,26 @@ def backUpFromBin():
 # Grab the Bin
 def grabBin():
     print("grabBin")
-    if c.isPrime:
-        driveTimed(100, 90, 1500)
-        driveTimed(100, 70, 2250)
-        driveTimed(-35, -100, 750)
-        driveTimed(-100, -100, 800)
-    else:
-        driveTimed(95, 90, 2000)
-        driveTimed(100, 60, 2000) 
-        driveTimed(-25, -45, 1200)
-        driveTimed(-100, -100, 1000)
-    msleep(500)
+    moveOutrigger(c.outriggerBin, 20)
+    driveTimed(0, -100, 400)
+    drive(-95,-100)
+    while not onBlack(c.STARBOARD_TOPHAT):
+        pass
+    stop()
+    driveTimed(-50, -50, 150)
     binGrabUp()
-    #msleep(500)
      
 # Turn to north pile
 def goToNorthernPile():
     print("goToNorthernPile")
+    moveClaw(c.clawOpen, 30)
+    driveTimed(100, 90, 1500)
+    driveTimed(100, 70, 1500) #2250
+    driveTimed(100,0,500)
+    #moveClaw(c.clawOpen, 70)#, open
+    moveArm(c.armFront, 20) #24
+    stop()
+    '''
     if c.isPrime:
         driveTimed(50, 100, 1000)
     else:
@@ -158,8 +162,8 @@ def goToNorthernPile():
     moveClaw(c.clawOpen, 70)#96, open
     moveArm(c.armFront, 24)
     stop() 
+    '''
     
-
 # Grab the northern pile    
 def grabNorthPile():
     print("grabNorthPile")
@@ -170,18 +174,38 @@ def grabNorthPile():
     moveClaw(c.clawClose, 5)
     stop()
     moveArm(c.armMid, 15)
+    
+    '''
+    drive(70,100)
+    msleep(100) #get closer to the pom pile before closing 
+    moveClaw(c.clawMid, 10)
+    drive(45, 50)
+    moveClaw(c.clawClose, 5)
+    stop()
+    moveArm(c.armMid, 15)
+    
     drive(-100, -50)
     deliverPoms() 
     msleep(1500)
-
+    '''
 #turns to south and towards center pile
 def turnToSouth():
     print("turnToSouth")
-    driveTimed(100,0,1000)
+    
+    deliverPoms()
+    
+    driveTimed(100,50,2000) #1000
+    drive(100, 0)
+    while not onBlack(c.STARBOARD_TOPHAT):
+        pass
+    stop()
+    driveTimed(100, 0, 500)
     moveOutrigger(c.outriggerOut, 100)
+    
+    '''
     driveTimed(100, 0, 1000)
     driveTilLineStarboard(50, 0) #30, 0
-    
+    '''
     
 # Grab the middle pile    
 def grabMiddlePile():
@@ -189,6 +213,7 @@ def grabMiddlePile():
     moveClaw(c.clawOpen, 25)
     moveArm(c.armFront, 25)
     drive(100, 100)
+    msleep(300) 
     timedLineFollowLeft(c.STARBOARD_TOPHAT, 3)
     moveClaw(c.clawMid, 10)
     drive(60, 60) #50, 50
@@ -219,6 +244,8 @@ def goToHome ():
     print("goToHome")
     turnUntilBlack(c.STARBOARD_TOPHAT, 100, 0)
     lineFollowUntilEndLeft(c.STARBOARD_TOPHAT)
+    
+    
     driveTimed(100, 75, 1000)
     drive(0, 100)
     while not onBlack(c.LINE_FOLLOWER):
@@ -254,28 +281,20 @@ def goToCenter():
     drive(100, 100)
     while not onBlack(c.LINE_FOLLOWER):
         pass
-    driveTimed(100, 100, 500)
+    
     drive(100, 0)
-    while not onBlack(c.LINE_FOLLOWER):
-        pass
-    timedLineFollowLeft(c.LINE_FOLLOWER, 1)
-    drive(100, 100)
-    moveArm(c.armFront, 20)
-    moveClaw(c.clawOpen, 25)
-    lineFollowUntilEndLeft(c.LINE_FOLLOWER)
-    moveClaw(c.clawOpen, 10)
-    moveArm(c.armFront, 10)
-    driveTimed(70, 70, 1000)
-    drive(100, 100)
-    while not onBlack(c.LINE_FOLLOWER):
-        pass 
-    stop()
-    moveArm(c.armShovel, 25) 
-    drive(50, 50)
     while onBlack(c.LINE_FOLLOWER):
-        pass    
+        pass
     stop()
-
+    timedLineFollowRight(c.LINE_FOLLOWER, 2)
+    drive(100, 100)
+    moveClaw(c.clawOpen, 25)
+    lineFollowUntilEndRight(c.LINE_FOLLOWER)
+    driveTimed(100, 0, 150)
+    moveArm(c.armShovel, 15)
+    msleep(400)  
+    driveTimed(100, 100, 1500)
+    
     
 #Grabs Cube
 def grabCube():
@@ -284,53 +303,67 @@ def grabCube():
     drive(0, -100)
     crossBlack(c.LINE_FOLLOWER)
     moveClaw(c.clawOpen, 15)
+    msleep(653)
+    stop()
     moveArm(c.armFront, 15)
     #driveTimed(100, 0, 100)
     #driveTimed(0, 100, 300)
     driveTimed(100, 100, 1100)
+
+    binGrabUp()
+    
     moveClaw(c.clawClose, 10)
     #moveArm(c.armBlock, 10)
     moveArm(c.armBlockBack, 10)
     
 def scoreCube():
-    print("scoreCube")
-    driveTimed(100, 75, 500)
-    driveTimed(100, 0, 1250)
-    moveClaw(c.clawOpen, 10)
-    driveTimed(-100, -100, 1000)
-    #turnUntilBlack(c.LINE_FOLLOWER, 0, 100)
-    '''
-    driveTimed(-100, -100, 400)
-    driveTimed(70,-70,1000)
-    moveArm(c.armFront, 15)
-    moveClaw(c.clawOpen, 15)
-    '''
+    drive(50,50)
+    while not onBlack(c.STARBOARD_TOPHAT):
+        pass
+    stop()
+    msleep(500)
+    driveTimed(45, 50, 700)
+    moveClaw(c.clawOpen, 25)
+    driveTimed(30, 30, 1000)
+    driveTimed(100, 100, 1000)
+    
 #Returns to base with pom filled bin
 def returnToBase():
     print ("returntobase")
     driveTimed(-100, 0, 1000)
-    driveTimed(-100, -80, 6000)
-    driveTimed(-100, -65, 1000)
+    driveTimed(-100, -80, 7000)#6000
+    #driveTimed(-100, -65, 1000)
     drive(-100, -100)
     msleep(4000)
     #moveArm(c.armBlockBack, 20)
-    msleep(500)
+    msleep(750)
+    
     moveOutrigger(outriggerBaseReturn, 20)
     msleep(300);
     while(onBlack(c.STARBOARD_TOPHAT)):
         pass
     stop()
-    '''
-    driveTimed(70, 70, 1000)
-    driveTimed(50, 0, 1500)
-    DEBUG()
+
+def goToCenterAgain():
+    print("goToCube")
+    driveTimed(95, 100, 3000)
+    driveTimed(100, 60, 3000)
     drive(100, 100)
-    while not onBlack(port): #wait to see line
+    while not onBlack(c.LINE_FOLLOWER):
+        pass
+    
+    drive(100, 0)
+    while onBlack(c.LINE_FOLLOWER):
         pass
     stop()
-    timedLineFollowRight(5000)
-    '''
-    
+    timedLineFollowRight(c.LINE_FOLLOWER, 2)
+    drive(100, 100)
+    moveClaw(c.clawOpen, 25)
+    lineFollowUntilEndRight(c.LINE_FOLLOWER)
+    driveTimed(100, 0, 150)
+    msleep(400)  
+    driveTimed(100, 100, 1500)
+
 def tempInit():
     c.startTime = seconds()
     tempServos()

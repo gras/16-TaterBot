@@ -46,10 +46,11 @@ clawClose = 1350 # Claw closed
 
 outriggerIn = 150
 outriggerBack = 450
-outriggerOut  = 1500
+outriggerOut  = 1650 #1500
 outriggerFront = 1900
 outriggerSpin = 416
 outriggerBaseReturn = 340
+outriggerBin = 1080 #IF WE MISS THE BIN THEN CHANGE THIS!!! #1080
 
 
 # PRIME analog sensors values

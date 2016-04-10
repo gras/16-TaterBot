@@ -19,9 +19,17 @@ def main():
     act.goToTaterBin() 
     act.depositWestPile() 
     act.backUpFromBin()
+    
+    act.goToNorthernPile()
+    act.grabNorthPile()
+    act.grabBin()
+    
+    '''
     act.grabBin()
     act.goToNorthernPile()
     act.grabNorthPile()
+    '''
+    
     act.turnToSouth()
     act.grabMiddlePile()
     act.grabSouthPile()
@@ -31,9 +39,9 @@ def main():
     act.goToCenter()
     act.grabCube()
     act.returnToBase()
-    DEBUG()
     act.scoreCube()
-    act.returnToBase() 
+    act.goToCenterAgain()
+    DEBUG()
   
     
 if __name__ == '__main__':

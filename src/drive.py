@@ -20,6 +20,7 @@ from wallaby import motor
 from wallaby import msleep
 #from wallaby import ao
 from wallaby import seconds
+from telnetlib import theNULL
 
 #from actions import DEBUG
 
@@ -28,10 +29,6 @@ from wallaby import seconds
 # tests motors
 def testMotors():
     # testing motors
-    binGrabUp()
-    msleep(500)
-    binGrabDown()
-    msleep(500)
     drive(100, 100)
     while not onBlack(c.LINE_FOLLOWER): #wait to see line
         pass
@@ -66,10 +63,18 @@ def binGrabDown():
     
 def testET():
     print("Put your hand in front of ET")
+    i = 0
     while getET() < 2000: 
-        pass
+        if i > 0:
+            binGrabUp()
+            i = 0
+        else:
+            binGrabDown()
+            i = 1
+        msleep(300)
+    binGrabDown()
     driveTimed(-100, -100, 1000)
-    driveTimed(0, 0, 0)
+    stop()
    
   
 # start left & right motors
@@ -154,6 +159,16 @@ def lineFollowUntilEndLeft(port):
             driveTimed(50, 90, 20)
         else:
             i = i + 1
+            driveTimed(90, 50, 20)
+
+def lineFollowUntilEndRight(port):
+    i = 0
+    while (i < 10):
+        if not onBlack(port):
+            driveTimed(50, 90, 20)
+            i = i + 1
+        else:
+            i = 0
             driveTimed(90, 50, 20)
 
 def turnUntilBlack(port, left, right):
