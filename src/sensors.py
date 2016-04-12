@@ -10,7 +10,6 @@ from wallaby import ao
 from wallaby import digital 
 from wallaby import analog 
 from wallaby import seconds
-#from wallaby import msleep
 
 import constants as c
 
@@ -31,7 +30,6 @@ def DEBUG():
 def currentTime():
     print 'Current time: ', seconds() - c.startTime 
 
-    
 def onBlack(port):
     return analog(port) > c.topHatMidValue 
 
@@ -44,12 +42,10 @@ def crossBlack(port):
     while onBlack(port): # wait for white
         pass
     
-
 def waitForButton():
     print("Press the right button to start...")
     while not getRBUTTON():
         pass
-
         
 def atArmLength():
     return analog (c.ET) > c.armLength

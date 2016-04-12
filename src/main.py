@@ -10,26 +10,17 @@ import actions as act
 
 from sensors import DEBUG
 
-
 def main():
     act.init()
     act.disposeOfDirt()
     act.goToWestPile()
     act.grabWestPile()
     act.goToTaterBin() 
-    act.depositWestPile() 
+    act.depositWestPile()
     act.backUpFromBin()
-    
     act.goToNorthernPile()
     act.grabNorthPile()
     act.grabBin()
-    
-    '''
-    act.grabBin()
-    act.goToNorthernPile()
-    act.grabNorthPile()
-    '''
-    
     act.turnToSouth()
     act.grabMiddlePile()
     act.grabSouthPile()
@@ -43,12 +34,9 @@ def main():
     act.goToCenterAgain()
     DEBUG()
   
-    
 if __name__ == '__main__':
     # set print to unbuffered
     import os
     import sys
     sys.stdout = os.fdopen(sys.stdout.fileno(),'w',0)
     main()
-    
-    

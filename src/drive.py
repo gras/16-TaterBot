@@ -10,38 +10,18 @@ import constants as c
 
 from sensors import onBlack 
 from sensors import atArmLength
-#from sensors import getRBUTTON
 from sensors import getET
-#from sensors import onBlackLineFollower
-#from sensors import atCeilingHeight
-
 
 from wallaby import motor
 from wallaby import msleep
-#from wallaby import ao
 from wallaby import seconds
-from telnetlib import theNULL
-
-#from actions import DEBUG
-
-
 
 # tests motors
 def testMotors():
-    # testing motors
     drive(100, 100)
     while not onBlack(c.LINE_FOLLOWER): #wait to see line
         pass
     stop()
-    '''
-    msleep(300)
-    driveTimed(100, -100, 500)
-    drive(-100, 100)
-    while not onBlack(c.LINE_FOLLOWER):
-        pass
-    stop()
-    msleep(1000)
-    '''
     drive(75,0)
     while not onBlack(c.STARBOARD_TOPHAT):
         pass
@@ -52,9 +32,8 @@ def testMotors():
     msleep(100)
     stop()
       
-    
 def binGrabUp():
-    driveMotorTimed(c.BIN, 55, 600)#70,500
+    driveMotorTimed(c.BIN, 55, 600)
     driveMotor(c.BIN, 10)
     
 def binGrabDown():
@@ -76,7 +55,6 @@ def testET():
     driveTimed(-100, -100, 1000)
     stop()
    
-  
 # start left & right motors
 def drive(left, right):
     motor(c.LMOTOR,left)
@@ -134,10 +112,8 @@ def timedLineFollowRightSmooth(port, time):
     while seconds() < sec:
         if not onBlack(port):
             driveTimed(20,40,20)
-    
         else:
             driveTimed(40, 20, 20)
-    
         msleep(10)
         
 def timedLineFollowLeftSmooth(port, time):
@@ -145,10 +121,8 @@ def timedLineFollowLeftSmooth(port, time):
     while seconds() < sec:
         if onBlack(port):
             driveTimed(20,40,20)
-    
         else:
             driveTimed(40, 20, 20)
-    
         msleep(10)
         
 def lineFollowUntilEndLeft(port):

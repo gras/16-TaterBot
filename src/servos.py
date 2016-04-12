@@ -10,23 +10,11 @@ import constants as c
 from wallaby import set_servo_position
 from wallaby import msleep
 from wallaby import enable_servos
-from wallaby import disable_servos
 from wallaby import get_servo_position
 from wallaby import ao
-#from constants import OUTRIGGER
-#from drive import stop
-#from drive import onBlack
-#from drive import driveTimed
-#from drive import drive
 
 # tests servos
 def testServos():
-    '''
-    if c.isPrime:
-        print ("Running Prime")
-    else:
-        print ("Running Clone")
-    '''
     print "Testing servos"
     set_servo_position(c.ARM, c.armUp)
     set_servo_position(c.CLAW, c.clawClose)
@@ -37,11 +25,6 @@ def testServos():
     msleep(500)
     moveClaw(c.clawClose, 25)
     msleep(500)
-    #moveArm(c.armFront, 15)
-    #moveClaw(c.clawMid, 25)
-    #msleep(500)
-    #moveClaw(c.clawClose, 25)
-    #msleep(500)
     moveArm(c.armBack, 15)
     msleep(500)
     moveOutrigger(c.outriggerOut, 15)
@@ -49,7 +32,6 @@ def testServos():
     moveArm(c.armFront, 15)
     moveClaw(c.clawMid, 25)
     msleep(500)
-
 
 # temp
 def tempServos():
@@ -60,9 +42,7 @@ def tempServos():
 
 def deliverPoms():  
     moveArm(c.armBack, 25)
-    #msleep(500) #500
     moveClaw(c.clawMid, 25)
-    #msleep(500)
 
 def moveOutrigger( endPos, speed=10 ):
     moveServo( c.OUTRIGGER, endPos, speed )

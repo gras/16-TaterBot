@@ -35,7 +35,7 @@ armBump = 260 # Arm clears the bump
 armShovel= 0 # Pushes poms forward past bump
 armMid = 590 # 540 #Arm to score at bin
 armUp = 1100 # Arm at 90 degrees up
-armBack = 1600 # Arm backwards
+armBack = 1550 # Arm backwards
 armBlock = 465 #move the block
 armOver = 713 #over the block
 armBlockBack = 1650 #Arm backwards with block
@@ -46,16 +46,16 @@ clawClose = 1350 # Claw closed
 
 outriggerIn = 150
 outriggerBack = 450
-outriggerOut  = 1650 #1500
+outriggerOut  = 1650 
 outriggerFront = 1900
 outriggerSpin = 416
 outriggerBaseReturn = 340
-outriggerBin = 1080 #IF WE MISS THE BIN THEN CHANGE THIS!!! #1080
+outriggerBin = 1080 #IF WE MISS THE BIN THEN CHANGE THIS!!! 
 
 
 # PRIME analog sensors values
 topHatMidValue = 2000 # value between black and white top hat values
-armLength = 1000 # 2550 # 2350 #robot 1 claw length from bin
+armLength = 1000 #robot 1 claw length from bin
 ceilingHeight = 700 #value of ET beneath crater rim
 
 isClone = w.digital(CLONE_SWITCH)
@@ -68,7 +68,7 @@ else:
     armFront = 80
     armMid = 580 #Arm to score at bin
     armUp =  1000 #Arm at 90 degrees up
-    armBack =  1550 #1500 #Arm backwards
+    armBack =  1500 #1550 #Arm backwards
     
     clawOpen = 525 #356 #Claw open 
     clawMid = 800
@@ -77,12 +77,3 @@ else:
     outriggerIn = 350
     outriggerOut  = 1750
     outriggerFront = 2047
-
-    
-#    binGrab = 1200 #Grab bin
-#    binRelease = 700 #Release bin
-
-
-
-    
-    
