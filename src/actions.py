@@ -36,6 +36,8 @@ from wallaby import msleep
 from wallaby import seconds 
 from wallaby import enable_servos
 from wallaby import disable_servos
+from wallaby import wait_for_light
+from wallaby import shut_down_in
 
 import constants as c
 
@@ -54,28 +56,32 @@ def init():
     moveOutrigger(c.outriggerIn, 25)
     testET()
     disable_servos()
+    #print "waiting for a light..."
+    #wait_for_light(c.STARTLIGHT)
     waitForButton()
+    msleep(1000)
+    shut_down_in(119.9)
     c.startTime = seconds()
     enable_servos()
-    msleep(1000)
 
 def disposeOfDirt():
     driveTimed(95, 100, 500)
-    drive(95, 100)
+    #drive(95, 100)
     moveClaw(c.clawClose, 20)
     moveArm(c.armBack, 25)
     moveClaw(c.clawOpen, 10)
     msleep(100)
     moveClaw(c.clawMid, 15)
-
+    
 # goes to the fist pile
 def goToWestPile():
     print("goToWestPile")
     drive(95, 100)
+    msleep(2500)
     moveArm(c.armFront, 10)
     moveClaw(c.clawOpen, 20)
     driveTimed(95, 100, 1000)
-
+    
 # Starts run
 def grabWestPile():
     print("grabWestPile")
@@ -127,7 +133,10 @@ def goToNorthernPile():
     print("goToNorthernPile")
     moveClaw(c.clawOpen, 30)
     driveTimed(100, 90, 1500)
-    driveTimed(100, 70, 1500)
+    if c.isPrime:
+        driveTimed(100, 70, 1500)
+    else:
+        driveTimed(100, 70, 1250)
     driveTimed(100, 0, 500)
     moveArm(c.armFront, 20)
     stop()

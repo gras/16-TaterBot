@@ -43,6 +43,13 @@ def binGrabDown():
 def testET():
     print("Put your hand in front of ET")
     i = 0
+    while getET() >= 2000:
+        print "BLOCKED!"
+        msleep(333)
+    binGrabDown()
+    msleep(300)
+    binGrabUp()
+    msleep(300)
     while getET() < 2000: 
         if i > 0:
             binGrabUp()

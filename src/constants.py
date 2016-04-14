@@ -15,6 +15,7 @@ LMOTOR = 0
 RMOTOR = 3
 BIN = 2
 
+
 # SERVO ports
 ARM = 0
 CLAW = 1
@@ -24,6 +25,7 @@ OUTRIGGER = 3
 LINE_FOLLOWER = 0
 ET = 1
 STARBOARD_TOPHAT = 5
+STARTLIGHT = 2
 
 # DIGITAL ports
 CLONE_SWITCH = 9
@@ -66,7 +68,7 @@ if isPrime:
 else:
     print("running CLONE!")
     armFront = 80
-    armMid = 580 #Arm to score at bin
+    armMid = 500 #Arm to score at bin
     armUp =  1000 #Arm at 90 degrees up
     armBack =  1500 #1550 #Arm backwards
     
@@ -77,3 +79,4 @@ else:
     outriggerIn = 350
     outriggerOut  = 1750
     outriggerFront = 2047
+    outriggerBin = 1330 #IF WE MISS THE BIN THEN CHANGE THIS!!! 
