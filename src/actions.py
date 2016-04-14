@@ -11,6 +11,7 @@ from sensors import DEBUG
 from sensors import atArmLength
 from sensors import onBlack
 from sensors import currentTime
+from sensors import wait4light
 
 from servos import moveClaw
 from servos import moveArm
@@ -36,7 +37,6 @@ from wallaby import msleep
 from wallaby import seconds 
 from wallaby import enable_servos
 from wallaby import disable_servos
-from wallaby import wait_for_light
 from wallaby import shut_down_in
 
 import constants as c
@@ -57,8 +57,8 @@ def init():
     testET()
     disable_servos()
     #print "waiting for a light..."
-    #wait_for_light(c.STARTLIGHT)
-    waitForButton()
+    wait4light()
+    #waitForButton()
     msleep(1000)
     shut_down_in(119.9)
     c.startTime = seconds()
