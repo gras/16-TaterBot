@@ -31,9 +31,9 @@ def main():
     act.grabCube()
     act.returnToBase()
     act.scoreCube()
-    act.goToCenterAgain()
     DEBUG()
-  
+    act.goToCenterAgain()
+    
 if __name__ == '__main__':
     # set print to unbuffered
     import os

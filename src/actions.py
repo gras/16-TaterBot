@@ -59,7 +59,6 @@ def init():
     #print "waiting for a light..."
     wait4light()
     #waitForButton()
-    msleep(1000)
     shut_down_in(119.9)
     c.startTime = seconds()
     enable_servos()
@@ -73,7 +72,7 @@ def disposeOfDirt():
     msleep(100)
     moveClaw(c.clawMid, 15)
     
-# goes to the fist pile
+# goes to the first pile
 def goToWestPile():
     print("goToWestPile")
     drive(95, 100)
@@ -93,7 +92,8 @@ def grabWestPile():
 # Go to the bin
 def goToTaterBin():
     print("goToTaterBin")
-    for x in range(0, 80):
+    drive(95, 100)
+    for _ in range(0, 150):
         if atArmLength():
             break
         msleep(10)
@@ -186,9 +186,8 @@ def grabSouthPile():
     print ("grabSouthPile")
     moveClaw(c.clawOpen, 10)
     moveArm(c.armFront, 15)
-    timedLineFollowLeft(c.STARBOARD_TOPHAT, 2)
     moveArm(c.armShovel, 10)
-    timedLineFollowLeft(c.STARBOARD_TOPHAT, 3)
+    timedLineFollowLeft(c.STARBOARD_TOPHAT, 5)
     drive(50, 50)  
     moveArm(c.armFront, 50)
     moveClaw(c.clawClose, 5)
@@ -228,7 +227,7 @@ def releaseBin():
     
 # line follows to cube    
 def goToCenter():
-    print("goToCube")
+    print("goToCenter")
     driveTimed(95, 100, 4000)
     driveTimed(100, 60, 3000)
     drive(100, 100)

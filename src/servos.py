@@ -42,6 +42,7 @@ def tempServos():
 
 def deliverPoms():  
     moveArm(c.armBack, 25)
+    msleep(500)
     moveClaw(c.clawMid, 25)
 
 def moveOutrigger( endPos, speed=10 ):
