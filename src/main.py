@@ -31,10 +31,9 @@ def main():
     act.grabCube()
     #act.pushBot()
     act.returnToBase()
-    DEBUG()
     act.scoreCube()
-    DEBUG()
     act.goToCenterAgain()
+    DEBUG()
     
 if __name__ == '__main__':
     # set print to unbuffered

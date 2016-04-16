@@ -41,6 +41,7 @@ from wallaby import disable_servos
 from wallaby import shut_down_in
 
 import constants as c
+from constants import outriggerApproach
 
 #Four piles are called Western, Northern, Southern, and Center
 
@@ -91,10 +92,9 @@ def grabWestPile():
 def goToTaterBin():
     print("goToTaterBin")
     drive(95, 100)
-    for _ in range(0, 200):
-        if atArmLength():
-            break
-        msleep(10)
+    moveOutrigger(outriggerApproach, 20)
+    while not onBlack(c.STARBOARD_TOPHAT):
+        pass
     drive(25, 30)
     while not atArmLength():
         pass
@@ -111,20 +111,22 @@ def depositWestPile():
 # Backs up from the bin
 def backUpFromBin():
     print("backUpFromBin")
-    driveTimed(-100, -50, 1800)
-    driveTimed(100, 0, 750)
+    driveTimed(-100, -50, 2100)
+    driveTimed(100, 20, 750)
      
 # Turn to north pile
 def goToNorthernPile():
     print("goToNorthernPile")
     moveClaw(c.clawOpen, 30)
     if c.isPrime:
-        driveTimed(100, 90, 1500)
-        driveTimed(100, 70, 1500)
+        drive(100, 90)
+        while not onBlack(c.STARBOARD_TOPHAT):
+            pass
+        driveTimed(100, 70, 1650)
+        driveTimed(0, -100, 125)
     else:
         driveTimed(100, 100, 1500)
         driveTimed(90, 70, 1250) #was 1250 
-    driveTimed(100, 0, 500)
     moveArm(c.armFront, 20)
     stop()
     
@@ -150,14 +152,12 @@ def grabBin():
     stop()
     driveTimed(-50, -50, 150)
     binGrabUp()
-    DEBUG()
     
 # turns to south and towards center pile
 def turnToSouth():
     print("turnToSouth")
     
     deliverPoms()
-    
     driveTimed(100, 50, 2000) 
     drive(100, 0)
     while not onBlack(c.STARBOARD_TOPHAT):
@@ -204,7 +204,7 @@ def goToHome ():
     
     driveTimed(100, 90, 1000) #was 500
     moveOutrigger(c.outriggerSpin, 100)
-    timedLineFollowRight(c.LINE_FOLLOWER, 3.25) #was 3.75
+    timedLineFollowRight(c.LINE_FOLLOWER, 3) #was 3.75
 
 # Delivers bin    
 def deliverBin():
@@ -222,7 +222,7 @@ def releaseBin():
     binGrabDown()
     print "Dropped bin at:"
     currentTime()
-    driveTimed(100, 100, 1000)
+    driveTimed(100, 80, 1000)
     moveOutrigger(c.outriggerIn, 100)
     
 # line follows to cube    
@@ -270,19 +270,7 @@ def pushBot():
     timedLineFollowRight(c.LINE_FOLLOWER, 3)
     moveArm(c.armBlockBack, 10)
     timedLineFollowRightBack(c.STARBOARD_TOPHAT, 5)
-    
-def scoreCube():
-    print "scoreCube"
-    drive(50, 50)
-    while not onBlack(c.STARBOARD_TOPHAT):
-        pass
-    stop()
-    msleep(500)
-    driveTimed(45, 50, 700)
-    moveClaw(c.clawOpen, 25)
-    driveTimed(30, 30, 1000)
-    driveTimed(100, 100, 1000)
-    
+
 # Returns to base with pom filled bin
 def returnToBase():
     print ("returntobase")
@@ -297,6 +285,18 @@ def returnToBase():
     while(onBlack(c.STARBOARD_TOPHAT)):
         pass
     stop()
+   
+def scoreCube():
+    print "scoreCube"
+    drive(50, 50)
+    while not onBlack(c.STARBOARD_TOPHAT):
+        pass
+    stop()
+    msleep(500)
+    driveTimed(45, 50, 700)
+    moveClaw(c.clawOpen, 25)
+    driveTimed(30, 30, 1000)
+    driveTimed(100, 100, 1000)
 
 def goToCenterAgain():
     print("goToCube")
