@@ -127,8 +127,10 @@ def goToNorthernPile():
         driveTimed(100, 70, 1650)
         driveTimed(0, -100, 125)
     else:
-        driveTimed(100, 100, 1500)
-        driveTimed(90, 70, 1250) #was 1250 
+        drive(100, 90)
+        while not onBlack(c.STARBOARD_TOPHAT):
+            pass
+        driveTimed(100, 0, 1000)
     moveArm(c.armFront, 20)
     stop()
     
@@ -137,6 +139,8 @@ def grabNorthPile():
     print("grabNorthPile")
     drive(70, 100)
     msleep(100)  # get closer to the pom pile before closing 
+    if c.isClone:
+        msleep(500)
     moveClaw(c.clawMid, 10)
     drive(45, 50)
     moveClaw(c.clawClose, 4)
@@ -165,7 +169,10 @@ def turnToSouth():
     while not onBlack(c.STARBOARD_TOPHAT):
         pass
     stop()
-    driveTimed(100, 0, 500)
+    if c.isPrime:
+        driveTimed(100, 0, 500)
+    else:
+        driveTimed(100, 0, 250)
     moveOutrigger(c.outriggerOut, 100)
     
 # Grab the middle pile    
@@ -243,7 +250,8 @@ def goToCenter():
     drive(100, 100)
     moveClaw(c.clawOpen, 25)
     lineFollowUntilEndRight(c.LINE_FOLLOWER)
-    driveTimed(100, 0, 150)
+    if c.isPrime:
+        driveTimed(100, 0, 150)
     moveArm(c.armShovel, 15)
     msleep(400)  
     driveTimed(100, 100, 1500)

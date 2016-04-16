@@ -31,6 +31,7 @@ def main():
     act.grabCube()
     #act.pushBot()
     act.returnToBase()
+    DEBUG()
     act.scoreCube()
     act.goToCenterAgain()
     DEBUG()
