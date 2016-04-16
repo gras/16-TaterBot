@@ -56,16 +56,13 @@ def init():
     moveOutrigger(c.outriggerIn, 25)
     testET()
     disable_servos()
-    #print "waiting for a light..."
     wait4light()
-    #waitForButton()
     shut_down_in(119.9)
     c.startTime = seconds()
     enable_servos()
 
 def disposeOfDirt():
     driveTimed(95, 100, 500)
-    #drive(95, 100)
     moveClaw(c.clawClose, 20)
     moveArm(c.armBack, 25)
     moveClaw(c.clawOpen, 10)
@@ -115,28 +112,17 @@ def backUpFromBin():
     print("backUpFromBin")
     driveTimed(-100, -50, 1800)
     driveTimed(100, 0, 750)
-    
-# Grab the Bin
-def grabBin():
-    print("grabBin")
-    moveOutrigger(c.outriggerBin, 20)
-    driveTimed(0, -100, 400)
-    drive(-95, -100)
-    while not onBlack(c.STARBOARD_TOPHAT):
-        pass
-    stop()
-    driveTimed(-50, -50, 150)
-    binGrabUp()
      
 # Turn to north pile
 def goToNorthernPile():
     print("goToNorthernPile")
     moveClaw(c.clawOpen, 30)
-    driveTimed(100, 90, 1500)
     if c.isPrime:
+        driveTimed(100, 90, 1500)
         driveTimed(100, 70, 1500)
     else:
-        driveTimed(100, 70, 1250)
+        driveTimed(100, 100, 1500)
+        driveTimed(90, 70, 1250) #was 1250 
     driveTimed(100, 0, 500)
     moveArm(c.armFront, 20)
     stop()
@@ -151,6 +137,19 @@ def grabNorthPile():
     moveClaw(c.clawClose, 4)
     stop()
     moveArm(c.armMid, 15)
+    
+# Grab the Bin
+def grabBin():
+    print("grabBin")
+    moveOutrigger(c.outriggerBin, 20)
+    driveTimed(0, -100, 400)
+    drive(-95, -100)
+    while not onBlack(c.STARBOARD_TOPHAT):
+        pass
+    stop()
+    driveTimed(-50, -50, 150)
+    binGrabUp()
+    DEBUG()
     
 # turns to south and towards center pile
 def turnToSouth():
@@ -260,17 +259,7 @@ def grabCube():
     binGrabUp()
     moveClaw(c.clawClose, 10)
     moveArm(c.armBlockBack, 10)
-    
-def scoreCube():
-    drive(50, 50)
-    while not onBlack(c.STARBOARD_TOPHAT):
-        pass
-    stop()
-    msleep(500)
-    driveTimed(45, 50, 700)
-    moveClaw(c.clawOpen, 25)
-    driveTimed(30, 30, 1000)
-    driveTimed(100, 100, 1000)
+
     
 # Returns to base with pom filled bin
 def returnToBase():
@@ -285,6 +274,17 @@ def returnToBase():
     while(onBlack(c.STARBOARD_TOPHAT)):
         pass
     stop()
+    
+def scoreCube():
+    drive(50, 50)
+    while not onBlack(c.STARBOARD_TOPHAT):
+        pass
+    stop()
+    msleep(500)
+    driveTimed(45, 50, 700)
+    moveClaw(c.clawOpen, 25)
+    driveTimed(30, 30, 1000)
+    driveTimed(100, 100, 1000)
 
 def goToCenterAgain():
     print("goToCube")
