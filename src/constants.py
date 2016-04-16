@@ -45,9 +45,9 @@ armBlock = 465 #move the block
 armOver = 713 #over the block
 armBlockBack = 1650 #Arm backwards with block
 
-clawOpen = 0 # Claw open
-clawMid = 480 # Claw mid
-clawClose = 1350 # Claw closed
+clawOpen = 1000 # Claw open
+clawMid = 1230 # Claw mid
+clawClose = 2040 # Claw closed
 
 outriggerIn = 150
 outriggerBack = 450

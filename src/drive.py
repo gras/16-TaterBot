@@ -104,6 +104,16 @@ def timedLineFollowRight(port, time):
             driveTimed(90, 20, 20)
         msleep(10)
     
+#Follows black line on right for specified amount of time BACKWARDS....
+def timedLineFollowRightBack(port, time):
+    sec = seconds() + time
+    while seconds() < sec:
+        if not onBlack(port):
+            driveTimed(-20,-90,20)
+        else:
+            driveTimed(-90, -20, 20)
+        msleep(10)
+        
 #Follows black line on left for specified amount of time
 def timedLineFollowLeft(port, time):
     sec = seconds() + time

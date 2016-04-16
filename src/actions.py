@@ -26,6 +26,7 @@ from drive import binGrabDown
 from drive import driveTimed
 from drive import drive
 from drive import timedLineFollowRight
+from drive import timedLineFollowRightBack
 from drive import stop
 from drive import testET
 from drive import timedLineFollowLeft
@@ -90,7 +91,7 @@ def grabWestPile():
 def goToTaterBin():
     print("goToTaterBin")
     drive(95, 100)
-    for _ in range(0, 150):
+    for _ in range(0, 200):
         if atArmLength():
             break
         msleep(10)
@@ -258,12 +259,34 @@ def grabCube():
     driveTimed(100, 100, 1100)
     binGrabUp()
     moveClaw(c.clawClose, 10)
+    
+def pushBot():
+    drive(90, 90)
+    while not onBlack(c.LINE_FOLLOWER):
+        pass
+    stop()
+    timedLineFollowRight(c.LINE_FOLLOWER, 3)
+    moveArm(c.armMid, 10)
+    timedLineFollowRight(c.LINE_FOLLOWER, 3)
     moveArm(c.armBlockBack, 10)
-
+    timedLineFollowRightBack(c.STARBOARD_TOPHAT, 5)
+    
+def scoreCube():
+    print "scoreCube"
+    drive(50, 50)
+    while not onBlack(c.STARBOARD_TOPHAT):
+        pass
+    stop()
+    msleep(500)
+    driveTimed(45, 50, 700)
+    moveClaw(c.clawOpen, 25)
+    driveTimed(30, 30, 1000)
+    driveTimed(100, 100, 1000)
     
 # Returns to base with pom filled bin
 def returnToBase():
     print ("returntobase")
+    moveArm(c.armBlockBack, 10)
     driveTimed(-100, 0, 1000)
     driveTimed(-100, -80, 7000) 
     drive(-100, -100)
@@ -274,17 +297,6 @@ def returnToBase():
     while(onBlack(c.STARBOARD_TOPHAT)):
         pass
     stop()
-    
-def scoreCube():
-    drive(50, 50)
-    while not onBlack(c.STARBOARD_TOPHAT):
-        pass
-    stop()
-    msleep(500)
-    driveTimed(45, 50, 700)
-    moveClaw(c.clawOpen, 25)
-    driveTimed(30, 30, 1000)
-    driveTimed(100, 100, 1000)
 
 def goToCenterAgain():
     print("goToCube")
