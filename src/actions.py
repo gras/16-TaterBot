@@ -203,9 +203,9 @@ def goToHome ():
     turnUntilBlack(c.STARBOARD_TOPHAT, 100, 0)
     lineFollowUntilEndLeft(c.STARBOARD_TOPHAT)
     
-    driveTimed(100, 90, 500)
+    driveTimed(100, 90, 1000) #was 500
     moveOutrigger(c.outriggerSpin, 100)
-    timedLineFollowRight(c.LINE_FOLLOWER, 3.75)
+    timedLineFollowRight(c.LINE_FOLLOWER, 3.25) #was 3.75
 
 # Delivers bin    
 def deliverBin():
