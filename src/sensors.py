@@ -94,4 +94,13 @@ def wait4(port):
     print "waiting for light!! " 
     while analog(port) > c.startLightThresh:
         pass
-    
+
+def testSensors():
+    if onBlack(c.STARBOARD_TOPHAT):
+        print "Problem with outrigger tophat."
+        print "Check for unplugged tophat or bad robot setup"
+        DEBUG()
+    if onBlack(c.LINE_FOLLOWER):
+        print "Problem with center tophat."
+        print "Check for unplugged tophat or bad robot setup"
+        DEBUG()

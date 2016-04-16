@@ -12,6 +12,7 @@ from sensors import atArmLength
 from sensors import onBlack
 from sensors import currentTime
 from sensors import wait4light
+from sensors import testSensors
 
 from servos import moveClaw
 from servos import moveArm
@@ -53,6 +54,7 @@ def init():
     else:
         print "Running Tater - Clone"
     print c.armFront
+    testSensors()
     testServos()
     testMotors()
     moveOutrigger(c.outriggerIn, 25)
