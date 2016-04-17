@@ -27,7 +27,6 @@ from drive import binGrabDown
 from drive import driveTimed
 from drive import drive
 from drive import timedLineFollowRight
-from drive import timedLineFollowRightBack
 from drive import stop
 from drive import testET
 from drive import timedLineFollowLeft
@@ -124,8 +123,11 @@ def goToNorthernPile():
         drive(100, 90)
         while not onBlack(c.STARBOARD_TOPHAT):
             pass
-        driveTimed(100, 70, 1650)
-        driveTimed(0, -100, 125)
+        driveTimed(100, 100, 150)
+        moveOutrigger(c.outriggerTurn, 20)
+        drive(100, -20)
+        while not onBlack(c.STARBOARD_TOPHAT):
+            pass
     else:
         drive(100, 90)
         while not onBlack(c.STARBOARD_TOPHAT):
@@ -137,10 +139,8 @@ def goToNorthernPile():
 # Grab the northern pile    
 def grabNorthPile():
     print("grabNorthPile")
-    drive(70, 100)
-    msleep(100)  # get closer to the pom pile before closing 
-    if c.isClone:
-        msleep(500)
+    drive(90, 100)
+    msleep(1000)
     moveClaw(c.clawMid, 10)
     drive(45, 50)
     moveClaw(c.clawClose, 4)
@@ -251,7 +251,7 @@ def goToCenter():
     moveClaw(c.clawOpen, 25)
     lineFollowUntilEndRight(c.LINE_FOLLOWER)
     if c.isPrime:
-        driveTimed(100, 0, 150)
+        driveTimed(90, 50, 200)
     moveArm(c.armShovel, 15)
     msleep(400)  
     driveTimed(100, 100, 1500)
@@ -270,17 +270,6 @@ def grabCube():
     binGrabUp()
     moveClaw(c.clawClose, 10)
     
-def pushBot():
-    drive(90, 90)
-    while not onBlack(c.LINE_FOLLOWER):
-        pass
-    stop()
-    timedLineFollowRight(c.LINE_FOLLOWER, 3)
-    moveArm(c.armMid, 10)
-    timedLineFollowRight(c.LINE_FOLLOWER, 3)
-    moveArm(c.armBlockBack, 10)
-    timedLineFollowRightBack(c.STARBOARD_TOPHAT, 5)
-
 # Returns to base with pom filled bin
 def returnToBase():
     print ("returntobase")
@@ -305,11 +294,22 @@ def scoreCube():
     msleep(500)
     driveTimed(45, 50, 700)
     moveClaw(c.clawOpen, 25)
-    driveTimed(30, 30, 1000)
-    driveTimed(100, 100, 1000)
+    msleep(300)
+    moveArm(c.armUp, 10)
+    driveTimed(100, 100, 1100)
+
+def lineUpWithRamp():
+    print("lineUpWithRamp")
+    driveTimed(100, 20, 2000)
+    driveTimed (0, 100, 1000)
+    driveTimed(-100, -80, 4000)
+    drive(-100, -20)
+    moveOutrigger(c.outriggerBin, 25)
+    msleep(1750)
+    driveTimed(-100, -100, 3000)
 
 def goToCenterAgain():
-    print("goToCube")
+    print("goCenterAgain")
     driveTimed(95, 100, 3000)
     
     DEBUG() #debug here

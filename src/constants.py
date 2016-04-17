@@ -51,6 +51,7 @@ clawClose = 2040 # Claw closed
 
 outriggerIn = 150
 outriggerBack = 450
+outriggerTurn = 450
 outriggerOut  = 1650 
 outriggerFront = 1900
 outriggerSpin = 416

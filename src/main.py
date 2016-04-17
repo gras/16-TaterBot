@@ -9,6 +9,7 @@ Created on Mar 13, 2016
 import actions as act
 
 from sensors import DEBUG
+from actions import lineUpWithRamp
 
 def main():
     act.init()
@@ -29,11 +30,10 @@ def main():
     act.releaseBin()
     act.goToCenter()
     act.grabCube()
-    #act.pushBot()
     act.returnToBase()
-    DEBUG()
     act.scoreCube()
-    act.goToCenterAgain()
+    #act.goToCenterAgain()
+    #lineUpWithRamp()
     DEBUG()
     
 if __name__ == '__main__':
