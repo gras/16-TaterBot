@@ -123,6 +123,15 @@ def timedLineFollowLeft(port, time):
         else:
             driveTimed(50, 90, 20)
         msleep(10)
+        
+def timedLineFollowBack(port, time):
+    sec = seconds() + time
+    while seconds() < sec:
+        if onBlack(port):
+            driveTimed(-90,-20,20)
+        else:
+            driveTimed(-20, -90, 20)
+        msleep(10)
 
 def timedLineFollowRightSmooth(port, time):
     sec = seconds() + time
@@ -145,6 +154,16 @@ def timedLineFollowLeftSmooth(port, time):
 def lineFollowUntilEndLeft(port):
     i = 0
     while (i < 10):
+        if onBlack(port):
+            i = 0
+            driveTimed(50, 90, 20)
+        else:
+            i = i + 1
+            driveTimed(90, 50, 20)
+            
+def lineFollowUntilEndLeft2(port):
+    i = 0
+    while (i < 20):
         if onBlack(port):
             i = 0
             driveTimed(50, 90, 20)

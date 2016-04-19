@@ -55,6 +55,7 @@ outriggerTurn = 450
 outriggerOut  = 1650 
 outriggerFront = 1900
 outriggerSpin = 416
+outriggerFindLine = 1200
 outriggerBaseReturn = 340
 outriggerBin = 1080 #IF WE MISS THE BIN THEN CHANGE THIS!!! 
 outriggerApproach = 1500

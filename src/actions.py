@@ -30,8 +30,9 @@ from drive import timedLineFollowRight
 from drive import stop
 from drive import testET
 from drive import timedLineFollowLeft
+from drive import timedLineFollowBack
 from drive import binGrabUp
-from drive import lineFollowUntilEndLeft
+from drive import lineFollowUntilEndLeft2
 from drive import lineFollowUntilEndRight
 
 from wallaby import msleep
@@ -140,7 +141,7 @@ def goToNorthernPile():
 def grabNorthPile():
     print("grabNorthPile")
     drive(90, 100)
-    msleep(1000)
+    msleep(1500) #1000
     moveClaw(c.clawMid, 10)
     drive(45, 50)
     moveClaw(c.clawClose, 4)
@@ -204,16 +205,16 @@ def grabSouthPile():
     stop()
     moveArm(c.armMid, 15)
     deliverPoms()
+    moveOutrigger(c.outriggerFindLine, 25)
 
 # line follows to home    
 def goToHome ():
     print("goToHome")
     turnUntilBlack(c.STARBOARD_TOPHAT, 100, 0)
-    lineFollowUntilEndLeft(c.STARBOARD_TOPHAT)
-    
-    driveTimed(100, 90, 1000) #was 500
+    lineFollowUntilEndLeft2(c.STARBOARD_TOPHAT)
+    driveTimed(1000, 100, 250) #was 1000 and @ 100 90
     moveOutrigger(c.outriggerSpin, 100)
-    timedLineFollowRight(c.LINE_FOLLOWER, 3) #was 3.75
+    timedLineFollowRight(c.LINE_FOLLOWER, 2.5) #was 3.75
 
 # Delivers bin    
 def deliverBin():
@@ -246,7 +247,7 @@ def goToCenter():
     while onBlack(c.LINE_FOLLOWER):
         pass
     stop()
-    timedLineFollowRight(c.LINE_FOLLOWER, 2)
+    timedLineFollowRight(c.LINE_FOLLOWER, 1) #2
     drive(100, 100)
     moveClaw(c.clawOpen, 25)
     lineFollowUntilEndRight(c.LINE_FOLLOWER)
@@ -275,12 +276,28 @@ def returnToBase():
     print ("returntobase")
     moveArm(c.armBlockBack, 10)
     driveTimed(-100, 0, 1000)
+    drive(-100, -85)
+    while not onBlack(c.STARBOARD_TOPHAT):
+        pass
+    driveTimed(-100, 0, 300)
+    timedLineFollowBack(c.STARBOARD_TOPHAT, 2)
+    driveTimed(-80, -100, 1000)
+    '''
     driveTimed(-100, -80, 7000) 
     drive(-100, -100)
     msleep(4000)
     msleep(750)
+    '''
+    drive(-90, -100)
+    msleep(3500);
     moveOutrigger(c.outriggerBaseReturn, 20)
-    msleep(300);
+    msleep(1000)
+    while(onBlack(c.STARBOARD_TOPHAT)):
+        pass
+    msleep(10)
+    while(onBlack(c.STARBOARD_TOPHAT)):
+        pass
+    msleep(10)
     while(onBlack(c.STARBOARD_TOPHAT)):
         pass
     stop()
