@@ -120,21 +120,17 @@ def backUpFromBin():
 def goToNorthernPile():
     print("goToNorthernPile")
     moveClaw(c.clawOpen, 30)
-    if c.isPrime:
-        drive(100, 90)
-        while not onBlack(c.STARBOARD_TOPHAT):
-            pass
-        driveTimed(100, 100, 150)
-        moveOutrigger(c.outriggerTurn, 20)
-        drive(100, -20)
-        while not onBlack(c.STARBOARD_TOPHAT):
-            pass
-    else:
-        drive(100, 90)
-        while not onBlack(c.STARBOARD_TOPHAT):
-            pass
-        driveTimed(100, 0, 1000)
+    drive(100, 90)
+    while not onBlack(c.STARBOARD_TOPHAT):
+        pass
+    driveTimed(100, 100, 150)
+    moveOutrigger(c.outriggerTurn, 20)
+    drive(100, -20)
+    while not onBlack(c.STARBOARD_TOPHAT):
+        pass
     moveArm(c.armFront, 20)
+    if c.isClone:
+        driveTimed(0, 100, 175)
     stop()
     
 # Grab the northern pile    
@@ -214,8 +210,10 @@ def goToHome ():
     lineFollowUntilEndLeft2(c.STARBOARD_TOPHAT)
     driveTimed(1000, 100, 250) #was 1000 and @ 100 90
     moveOutrigger(c.outriggerSpin, 100)
-    timedLineFollowRight(c.LINE_FOLLOWER, 2.5) #was 3.75
-
+    if c.isPrime:
+        timedLineFollowRight(c.LINE_FOLLOWER, 2.5) #was 3.75
+    else:
+        timedLineFollowRight(c.LINE_FOLLOWER, 2.7)
 # Delivers bin    
 def deliverBin():
     print("deliverBin")
@@ -238,8 +236,12 @@ def releaseBin():
 # line follows to cube    
 def goToCenter():
     print("goToCenter")
-    driveTimed(95, 100, 4000)
-    driveTimed(100, 60, 3000)
+    if c.isPrime:
+        driveTimed(95, 100, 4000)
+        driveTimed(100, 60, 3000)
+    else:
+        driveTimed(90, 100, 4000)
+        driveTimed(100, 60, 3000)
     drive(100, 100)
     while not onBlack(c.LINE_FOLLOWER):
         pass
@@ -251,8 +253,7 @@ def goToCenter():
     drive(100, 100)
     moveClaw(c.clawOpen, 25)
     lineFollowUntilEndRight(c.LINE_FOLLOWER)
-    if c.isPrime:
-        driveTimed(90, 50, 200)
+    driveTimed(90, 50, 200)
     moveArm(c.armShovel, 15)
     msleep(400)  
     driveTimed(100, 100, 1500)
@@ -264,7 +265,7 @@ def grabCube():
     drive(0, -100)
     crossBlack(c.LINE_FOLLOWER)
     moveClaw(c.clawOpen, 15)
-    msleep(653)
+    msleep(500)#was 353
     stop()
     moveArm(c.armFront, 15)
     driveTimed(100, 100, 1100)

@@ -83,7 +83,9 @@ else:
     clawClose = 1525 #1450 #Claw closed
     
     outriggerIn = 350
-    outriggerSpin = 700
-    outriggerOut  = 1750
+    outriggerSpin = 665
+    outriggerTurn = 700
+    outriggerApproach = 1700
+    outriggerOut  = 1900 #was 1750
     outriggerFront = 2047
-    outriggerBin = 1330 #IF WE MISS THE BIN THEN CHANGE THIS!!! 
+    outriggerBin = 1280 #IF WE MISS THE BIN THEN CHANGE THIS!!! was 1230
