@@ -45,34 +45,34 @@ def deliverPoms():
     msleep(500)
     moveClaw(c.clawMid, 25)
 
-def moveOutrigger( endPos, speed=10 ):
-    moveServo( c.OUTRIGGER, endPos, speed )
+def moveOutrigger(endPos, speed=10):
+    moveServo(c.OUTRIGGER, endPos, speed)
     
-def moveArm( endPos, speed=10 ):
-    moveServo( c.ARM, endPos, speed )
+def moveArm(endPos, speed=10):
+    moveServo(c.ARM, endPos, speed)
 
-def moveClaw( endPos, speed=10 ):
-    moveServo( c.CLAW, endPos, speed )
+def moveClaw(endPos, speed=10):
+    moveServo(c.CLAW, endPos, speed)
 
 
-def moveServo( servo, endPos, speed=10 ):
+def moveServo(servo, endPos, speed=10):
     # speed of 1 is slow
     # speed of 2000 is fast
     # speed of 10 is the default
-    now = get_servo_position( servo )
+    now = get_servo_position(servo)
     if now > 2048 :
         PROGRAMMER_ERROR ("Servo setting too large")
     if now < 0 :
         PROGRAMMER_ERROR ("Servo setting too small")
     if now > endPos:
         speed = -speed
-    for i in range (now, endPos, speed ):
-        set_servo_position( servo, i)
+    for i in range (now, endPos, speed):
+        set_servo_position(servo, i)
         msleep(10)
-    set_servo_position( servo, endPos )
+    set_servo_position(servo, endPos)
     msleep(10)  
     
-def PROGRAMMER_ERROR( msg ) :
+def PROGRAMMER_ERROR(msg) :
     ao()
     print msg
     exit()  

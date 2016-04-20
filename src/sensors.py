@@ -39,9 +39,9 @@ def onBlackLineFollower():
     return analog(c.STARBOARD_TOPHAT) > c.topHatMidValue
 
 def crossBlack(port):
-    while not onBlack(port): # wait for black
+    while not onBlack(port):  # wait for black
         pass
-    while onBlack(port): # wait for white
+    while onBlack(port):  # wait for white
         pass
     
 def waitForButton():
@@ -57,7 +57,7 @@ def atCeilingHeight():
 
 def testET():
     x = analog(c.ET)
-    print("ET = ",x)
+    print("ET = ", x)
     
 def wait4light():
     while not calibrate(c.STARTLIGHT):
@@ -88,7 +88,7 @@ def calibrate(port):
     if (lightOff - lightOn) < 2000:
         print "Bad calibration"
         return False
-    c.startLightThresh = (lightOff - lightOn)/2
+    c.startLightThresh = (lightOff - lightOn) / 2
     print "Good calibration! ", c.startLightThresh 
     return True
 

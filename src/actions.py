@@ -42,7 +42,6 @@ from wallaby import disable_servos
 from wallaby import shut_down_in
 
 import constants as c
-from constants import outriggerApproach
 
 #Four piles are called Western, Northern, Southern, and Center
 
@@ -94,7 +93,7 @@ def grabWestPile():
 def goToTaterBin():
     print("goToTaterBin")
     drive(95, 100)
-    moveOutrigger(outriggerApproach, 20)
+    moveOutrigger(c.outriggerApproach, 20)
     while not onBlack(c.STARBOARD_TOPHAT):
         pass
     drive(25, 30)
@@ -137,7 +136,7 @@ def goToNorthernPile():
 def grabNorthPile():
     print("grabNorthPile")
     drive(90, 100)
-    msleep(1500) #1000
+    msleep(1500) 
     moveClaw(c.clawMid, 10)
     drive(45, 50)
     moveClaw(c.clawClose, 4)
@@ -208,10 +207,10 @@ def goToHome ():
     print("goToHome")
     turnUntilBlack(c.STARBOARD_TOPHAT, 100, 0)
     lineFollowUntilEndLeft2(c.STARBOARD_TOPHAT)
-    driveTimed(1000, 100, 250) #was 1000 and @ 100 90
+    driveTimed(1000, 100, 250) 
     moveOutrigger(c.outriggerSpin, 100)
     if c.isPrime:
-        timedLineFollowRight(c.LINE_FOLLOWER, 2.5) #was 3.75
+        timedLineFollowRight(c.LINE_FOLLOWER, 2.5) 
     else:
         timedLineFollowRight(c.LINE_FOLLOWER, 2.7)
 # Delivers bin    
@@ -249,7 +248,7 @@ def goToCenter():
     while onBlack(c.LINE_FOLLOWER):
         pass
     stop()
-    timedLineFollowRight(c.LINE_FOLLOWER, 1) #2
+    timedLineFollowRight(c.LINE_FOLLOWER, 1) 
     drive(100, 100)
     moveClaw(c.clawOpen, 25)
     lineFollowUntilEndRight(c.LINE_FOLLOWER)
@@ -265,7 +264,7 @@ def grabCube():
     drive(0, -100)
     crossBlack(c.LINE_FOLLOWER)
     moveClaw(c.clawOpen, 15)
-    msleep(500)#was 353
+    msleep(500)
     stop()
     moveArm(c.armFront, 15)
     driveTimed(100, 100, 1100)
@@ -283,12 +282,6 @@ def returnToBase():
     driveTimed(-100, 0, 300)
     timedLineFollowBack(c.STARBOARD_TOPHAT, 2)
     driveTimed(-80, -100, 1000)
-    '''
-    driveTimed(-100, -80, 7000) 
-    drive(-100, -100)
-    msleep(4000)
-    msleep(750)
-    '''
     drive(-90, -100)
     msleep(3500);
     moveOutrigger(c.outriggerBaseReturn, 20)
@@ -330,7 +323,7 @@ def goToCenterAgain():
     print("goCenterAgain")
     driveTimed(95, 100, 3000)
     
-    DEBUG() #debug here
+    DEBUG() 
     
     driveTimed(100, 60, 3000)
     drive(100, 100)
