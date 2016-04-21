@@ -89,3 +89,4 @@ else:
     outriggerOut = 1900
     outriggerFront = 2047
     outriggerBin = 1280
+    outriggerFindLine = 1450
