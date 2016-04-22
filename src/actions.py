@@ -237,7 +237,7 @@ def goToCenter():
     print("goToCenter")
     if c.isPrime:
         driveTimed(95, 100, 4000)
-        driveTimed(100, 60, 2000) #3000
+        driveTimed(100, 60, 3000) #3000
     else:
         driveTimed(90, 100, 4000)
         driveTimed(100, 60, 3000)
