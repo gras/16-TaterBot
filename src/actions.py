@@ -193,7 +193,10 @@ def grabSouthPile():
     moveArm(c.armFront, 15)
     moveArm(c.armShovel, 10)
     timedLineFollowLeft(c.STARBOARD_TOPHAT, 5)
-    drive(50, 50)  
+    if c.isPrime:
+        drive(50, 50)
+    else:
+        drive(55, 50)  
     moveArm(c.armFront, 50)
     moveClaw(c.clawClose, 5)
     msleep(500)
