@@ -165,10 +165,7 @@ def turnToSouth():
     while not onBlack(c.STARBOARD_TOPHAT):
         pass
     stop()
-    if c.isPrime:
-        driveTimed(100, 0, 500)
-    else:
-        driveTimed(100, 0, 250)
+    driveTimed(100, 0, 500)
     moveOutrigger(c.outriggerOut, 100)
     
 # Grab the middle pile    
@@ -193,10 +190,7 @@ def grabSouthPile():
     moveArm(c.armFront, 15)
     moveArm(c.armShovel, 10)
     timedLineFollowLeft(c.STARBOARD_TOPHAT, 5)
-    if c.isPrime:
-        drive(50, 50)
-    else:
-        drive(55, 50)  
+    drive(50, 50) #now same on both
     moveArm(c.armFront, 50)
     moveClaw(c.clawClose, 5)
     msleep(500)
@@ -215,7 +209,7 @@ def goToHome ():
     if c.isPrime:
         timedLineFollowRight(c.LINE_FOLLOWER, 2.5) 
     else:
-        timedLineFollowRight(c.LINE_FOLLOWER, 2.7)
+        timedLineFollowRight(c.LINE_FOLLOWER, 3)
 # Delivers bin    
 def deliverBin():
     print("deliverBin")
@@ -279,7 +273,7 @@ def returnToBase():
     print ("returntobase")
     moveArm(c.armBlockBack, 10)
     driveTimed(-100, 0, 1000)
-    drive(-100, -85)
+    drive(-100, -87) #-85
     while not onBlack(c.STARBOARD_TOPHAT):
         pass
     driveTimed(-100, 0, 300)
