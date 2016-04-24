@@ -112,8 +112,16 @@ def depositWestPile():
 # Backs up from the bin
 def backUpFromBin():
     print("backUpFromBin")
+    if c.isPrime: #added at practice
+        driveTimed(-100, -100, 250)
+    else:
+        pass
     driveTimed(-100, -50, 2100)
     driveTimed(100, 20, 750)
+    if c.isPrime:
+        driveTimed(100, 100, 250) # added at practice
+    else:
+        pass
      
 # Turn to north pile
 def goToNorthernPile():
@@ -129,7 +137,7 @@ def goToNorthernPile():
         pass
     moveArm(c.armFront, 20)
     if c.isClone:
-        driveTimed(0, 100, 175)
+        driveTimed(0, 100, 275) #175
     stop()
     
 # Grab the northern pile    
@@ -277,7 +285,7 @@ def returnToBase():
     while not onBlack(c.STARBOARD_TOPHAT):
         pass
     driveTimed(-100, 0, 300)
-    timedLineFollowBack(c.STARBOARD_TOPHAT, 2)
+    timedLineFollowBack(c.STARBOARD_TOPHAT, 3)#2
     driveTimed(-80, -100, 1000)
     drive(-90, -100)
     msleep(3500);
