@@ -6,7 +6,7 @@ Created on Mar 13, 2016
 @author: Dead Robot Society
 '''
 
-from sensors import waitForButton, crossBlack
+from sensors import waitForButton, crossBlack, atTest
 from sensors import DEBUG
 from sensors import atArmLength
 from sensors import onBlack
@@ -40,6 +40,7 @@ from wallaby import seconds
 from wallaby import enable_servos
 from wallaby import disable_servos
 from wallaby import shut_down_in
+from wallaby import analog 
 
 import constants as c
 
@@ -59,7 +60,8 @@ def init():
     moveOutrigger(c.outriggerIn, 25)
     testET()
     disable_servos()
-    wait4light()
+    #wait4light()
+    waitForButton()
     shut_down_in(119.9)
     c.startTime = seconds()
     enable_servos()
@@ -357,3 +359,29 @@ def tempInit():
     binGrabUp()
     waitForButton()
     c.startTime = seconds()
+
+def attempt():
+    enable_servos()
+    for x in range (0, 60):
+        if analog (4) > 100:
+            print "i see something"
+        else:
+            print "i don't see anything"
+        msleep(1000)
+    
+    
+#     moveClaw(c.clawOpen, 20)
+#     moveArm(c.armFront, 20)
+#     msleep(500)
+#     driveTimed(100, 100, 1000)
+#     msleep(1000)
+#     moveClaw(c.clawClose, 20)
+#     msleep(500)
+#     driveTimed(-100, -100, 250)
+#     if (atTest):
+#         print "I SEE SOMETHING!"
+#         moveClaw(c.clawMid, 20)
+#         msleep(500)
+#         driveTimed(100, 100, 500)
+#         moveClaw(c.clawClose, 20)
+#         msleep(500)
