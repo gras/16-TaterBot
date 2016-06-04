@@ -43,6 +43,7 @@ from wallaby import shut_down_in
 from wallaby import analog 
 
 import constants as c
+from constants import isPrime, isClone
 
 #Four piles are called Western, Northern, Southern, and Center
 
@@ -134,7 +135,7 @@ def goToNorthernPile():
         pass
     driveTimed(100, 100, 150)
     moveOutrigger(c.outriggerTurn, 20)
-    drive(100, -20)
+    drive(70, -10)
     while not onBlack(c.STARBOARD_TOPHAT):
         pass
     moveArm(c.armFront, 20)
@@ -208,6 +209,18 @@ def grabSouthPile():
     moveArm(c.armMid, 15)
     deliverPoms()
     moveOutrigger(c.outriggerFindLine, 25)
+    
+def dropOffBin():
+    if(isClone):
+        driveTimed(-100, 0, 2555)
+    if(isPrime):
+            driveTimed(-100, 0, 2750)
+    
+    moveOutrigger(c.outriggerIn, 10)
+    driveTimed(-90, -100, 5800)
+    binGrabDown()
+    driveTimed(100, 0, 1500)
+    
 
 # line follows to home    
 def goToHome ():
