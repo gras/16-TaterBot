@@ -57,6 +57,7 @@ def init():
     print c.armFront
     testSensors()
     testServos()
+    runGrasTest()
     testMotors()
     moveOutrigger(c.outriggerIn, 25)
     testET()
@@ -66,6 +67,12 @@ def init():
     shut_down_in(119.9)
     c.startTime = seconds()
     enable_servos()
+
+
+def runGrasTest():
+    moveClaw(810)
+    driveTimed(80, 80, 4000)
+    DEBUG()
 
 def disposeOfDirt():
     driveTimed(95, 100, 500)
@@ -140,7 +147,7 @@ def goToNorthernPile():
         pass
     moveArm(c.armFront, 20)
     if c.isClone:
-        driveTimed(0, 100, 275) #175
+        driveTimed(100, 0, 250) #175
     stop()
     
 # Grab the northern pile    
@@ -209,7 +216,7 @@ def grabSouthPile():
     moveArm(c.armMid, 15)
     deliverPoms()
     moveOutrigger(c.outriggerFindLine, 25)
-    
+#Backs into the hab and drops off the  bin    
 def dropOffBin():
     if(isClone):
         driveTimed(-100, 0, 2555)
@@ -219,8 +226,14 @@ def dropOffBin():
     moveOutrigger(c.outriggerIn, 10)
     driveTimed(-90, -100, 5800)
     binGrabDown()
-    driveTimed(100, 0, 1500)
+    driveTimed(100, 30, 700)
+    driveTimed(100, -100, 1200)
     
+def grabComposter():
+    drive(80,80)
+    moveArm(c.armFront, 10)
+    msleep(24)
+        
 
 # line follows to home    
 def goToHome ():
