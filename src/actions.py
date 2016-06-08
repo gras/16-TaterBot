@@ -57,7 +57,7 @@ def init():
     print c.armFront
     testSensors()
     testServos()
-    runGrasTest()
+    #runGrasTest()
     testMotors()
     moveOutrigger(c.outriggerIn, 25)
     testET()
@@ -70,6 +70,7 @@ def init():
 
 
 def runGrasTest():
+    print("Running Gras Test")
     moveClaw(810)
     driveTimed(80, 80, 4000)
     DEBUG()
@@ -216,6 +217,30 @@ def grabSouthPile():
     moveArm(c.armMid, 15)
     deliverPoms()
     moveOutrigger(c.outriggerFindLine, 25)
+
+# Grabs the single red pom that was left at habitat to get 7th red pom    
+def grabRedPom():
+    print("grabRedPom")
+    driveTimed(0, -50, 1150)
+    msleep(500)
+    moveArm(c.armFront, 15)
+    driveTimed(100, 100, 500)
+    moveClaw(c.clawClose, 15)
+    moveArm(c.armMid, 15)
+    deliverPoms()
+
+# Grabs composter after getting last red pom
+def grabComposter2():
+    print("grabComposter2")
+    moveOutrigger(c.outriggerIn, 15)
+    driveTimed(100, 0, 500)
+    msleep(500)
+    driveTimed(100, 100, 2000)
+    msleep(500)
+    driveTimed(-100, 0, 500)
+    msleep(500)
+    driveTimed(100, 100, 500)
+    
 #Backs into the hab and drops off the  bin    
 def dropOffBin():
     if(isClone):

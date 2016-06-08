@@ -22,12 +22,12 @@ def main():
     act.grabNorthPile()
     act.grabBin()
     act.turnToSouth()
-    '''
     act.grabMiddlePile()
     act.grabSouthPile()
-    act.dropOffBin()
-    act.grabComposter()
-    '''
+    act.grabRedPom()
+    act.grabComposter2()
+    '''act.dropOffBin()
+    act.grabComposter()'''
     DEBUG()
     
 if __name__ == '__main__':
