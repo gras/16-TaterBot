@@ -52,6 +52,9 @@ def waitForButton():
 def atArmLength():
     return analog (c.ET) > c.armLength
 
+def atTest():
+    return analog (4) > 1800
+
 def atCeilingHeight():
     return analog (c.ET) > c.ceilingHeight
 

@@ -86,6 +86,7 @@ else:
     outriggerSpin = 665
     outriggerTurn = 700
     outriggerApproach = 1700
+    outriggerBaseReturn = 560
     outriggerOut = 1900
     outriggerFront = 2047
     outriggerBin = 1280

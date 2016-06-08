@@ -6,7 +6,7 @@ Created on Mar 13, 2016
 @author: Dead Robot Society
 '''
 
-from sensors import waitForButton, crossBlack
+from sensors import waitForButton, crossBlack, atTest
 from sensors import DEBUG
 from sensors import atArmLength
 from sensors import onBlack
@@ -40,6 +40,7 @@ from wallaby import seconds
 from wallaby import enable_servos
 from wallaby import disable_servos
 from wallaby import shut_down_in
+from wallaby import analog 
 
 import constants as c
 
@@ -59,7 +60,8 @@ def init():
     moveOutrigger(c.outriggerIn, 25)
     testET()
     disable_servos()
-    wait4light()
+    #wait4light()
+    waitForButton()
     shut_down_in(119.9)
     c.startTime = seconds()
     enable_servos()
@@ -112,8 +114,16 @@ def depositWestPile():
 # Backs up from the bin
 def backUpFromBin():
     print("backUpFromBin")
+    if c.isPrime: #added at practice
+        driveTimed(-100, -100, 250)
+    else:
+        pass
     driveTimed(-100, -50, 2100)
     driveTimed(100, 20, 750)
+    if c.isPrime:
+        driveTimed(100, 100, 250) # added at practice
+    else:
+        pass
      
 # Turn to north pile
 def goToNorthernPile():
@@ -129,7 +139,7 @@ def goToNorthernPile():
         pass
     moveArm(c.armFront, 20)
     if c.isClone:
-        driveTimed(0, 100, 175)
+        driveTimed(0, 100, 275) #175
     stop()
     
 # Grab the northern pile    
@@ -165,10 +175,7 @@ def turnToSouth():
     while not onBlack(c.STARBOARD_TOPHAT):
         pass
     stop()
-    if c.isPrime:
-        driveTimed(100, 0, 500)
-    else:
-        driveTimed(100, 0, 250)
+    driveTimed(100, 0, 500)
     moveOutrigger(c.outriggerOut, 100)
     
 # Grab the middle pile    
@@ -193,7 +200,7 @@ def grabSouthPile():
     moveArm(c.armFront, 15)
     moveArm(c.armShovel, 10)
     timedLineFollowLeft(c.STARBOARD_TOPHAT, 5)
-    drive(50, 50)  
+    drive(50, 50) #now same on both
     moveArm(c.armFront, 50)
     moveClaw(c.clawClose, 5)
     msleep(500)
@@ -212,7 +219,7 @@ def goToHome ():
     if c.isPrime:
         timedLineFollowRight(c.LINE_FOLLOWER, 2.5) 
     else:
-        timedLineFollowRight(c.LINE_FOLLOWER, 2.7)
+        timedLineFollowRight(c.LINE_FOLLOWER, 3)
 # Delivers bin    
 def deliverBin():
     print("deliverBin")
@@ -237,7 +244,7 @@ def goToCenter():
     print("goToCenter")
     if c.isPrime:
         driveTimed(95, 100, 4000)
-        driveTimed(100, 60, 3000)
+        driveTimed(100, 60, 3000) #3000
     else:
         driveTimed(90, 100, 4000)
         driveTimed(100, 60, 3000)
@@ -276,11 +283,11 @@ def returnToBase():
     print ("returntobase")
     moveArm(c.armBlockBack, 10)
     driveTimed(-100, 0, 1000)
-    drive(-100, -85)
+    drive(-100, -87) #-85
     while not onBlack(c.STARBOARD_TOPHAT):
         pass
     driveTimed(-100, 0, 300)
-    timedLineFollowBack(c.STARBOARD_TOPHAT, 2)
+    timedLineFollowBack(c.STARBOARD_TOPHAT, 3)#2
     driveTimed(-80, -100, 1000)
     drive(-90, -100)
     msleep(3500);
@@ -352,3 +359,29 @@ def tempInit():
     binGrabUp()
     waitForButton()
     c.startTime = seconds()
+
+def attempt():
+    enable_servos()
+    for x in range (0, 60):
+        if analog (4) > 100:
+            print "i see something"
+        else:
+            print "i don't see anything"
+        msleep(1000)
+    
+    
+#     moveClaw(c.clawOpen, 20)
+#     moveArm(c.armFront, 20)
+#     msleep(500)
+#     driveTimed(100, 100, 1000)
+#     msleep(1000)
+#     moveClaw(c.clawClose, 20)
+#     msleep(500)
+#     driveTimed(-100, -100, 250)
+#     if (atTest):
+#         print "I SEE SOMETHING!"
+#         moveClaw(c.clawMid, 20)
+#         msleep(500)
+#         driveTimed(100, 100, 500)
+#         moveClaw(c.clawClose, 20)
+#         msleep(500)
