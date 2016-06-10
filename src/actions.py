@@ -77,19 +77,26 @@ def disposeOfDirt():
 # goes to the first pile
 def goToWestPile():
     print("goToWestPile")
+    moveClaw(c.clawClose, 20)
+    msleep(300)
     drive(95, 100)
-    msleep(2500)
-    moveArm(c.armFront, 10)
+    msleep(1500)
+    moveArm(c.armBump, 20)
+    msleep(500)
+    print("armBump")
+    driveTimed(95,100, 1250)
+    moveArm(c.armFront,10)
     moveClaw(c.clawOpen, 20)
-    driveTimed(95, 100, 1000)
+    driveTimed(95, 100, 3000)
     
 # Starts run
 def grabWestPile():
     print("grabWestPile")
-    drive(95, 100)
+    #drive(95, 100)
     moveClaw(c.clawMid, 10)
-    moveClaw(c.clawClose, 4)
-    moveArm(c.armMid, 15)
+    moveClaw(c.clawClose, 15)
+    #moveArm(c.armMid, 15)
+    msleep(500)
 
 # Go to the bin
 def goToTaterBin():
@@ -369,7 +376,18 @@ def attempt():
             print "i don't see anything"
         msleep(1000)
     
-    
+def wiggle():
+    print("wiggle")
+    moveClaw(c.clawWiggle, 15)
+    driveTimed(100, 0, 150)
+    driveTimed(0, 100, 150)
+    driveTimed(100, 0, 150)
+    driveTimed(0, 100, 150)
+    #driveTimed(100, 0, 100)
+    #driveTimed(0, 100, 100)
+    #driveTimed(0, 100, 100)
+    moveClaw(c.clawClose, 5)
+        
 #     moveClaw(c.clawOpen, 20)
 #     moveArm(c.armFront, 20)
 #     msleep(500)

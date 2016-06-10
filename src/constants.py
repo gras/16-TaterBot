@@ -46,8 +46,9 @@ armOver = 713  # over the block
 armBlockBack = 1650  # Arm backwards with block
 
 clawOpen = 1000  # Claw open
-clawMid = 1230  # Claw mid
+clawMid = 1234  # Claw mid
 clawClose = 2040  # Claw closed
+clawWiggle = 1400
 
 outriggerIn = 150
 outriggerBack = 450
@@ -77,10 +78,11 @@ else:
     armMid = 500  # Arm to score at bin
     armUp = 1000  # Arm at 90 degrees up
     armBack = 1500# Arm backwards
+    armBump = 400
     
-    clawOpen = 525  #Claw open 
-    clawMid = 800
-    clawClose = 1525 #Claw closed
+    clawOpen = 850  #Claw open (525) 
+    clawMid = 900
+    clawClose = 1750 #Claw closed (1525)
     
     outriggerIn = 350
     outriggerSpin = 665

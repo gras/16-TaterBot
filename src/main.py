@@ -7,19 +7,25 @@ Created on Mar 13, 2016
 '''
 
 import actions as act
+import constants as c
 
 from sensors import DEBUG
+from servos import moveClaw
 
 def main():
     act.init()
-    act.disposeOfDirt()
+    #act.disposeOfDirt()
     act.goToWestPile()
     act.grabWestPile()
-    act.goToTaterBin() 
+    act.wiggle()
+    act.wiggle()
+    act.wiggle()
+    moveClaw(c.clawClose, 10)
+    '''act.goToTaterBin() 
     act.depositWestPile()
     act.backUpFromBin()
     act.goToNorthernPile()
-    '''act.grabNorthPile()
+    act.grabNorthPile()
     act.grabBin()
     act.turnToSouth()
     act.grabMiddlePile()
