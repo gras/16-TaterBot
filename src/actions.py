@@ -77,16 +77,19 @@ def disposeOfDirt():
 # goes to the first pile
 def goToWestPile():
     print("goToWestPile")
-    moveClaw(c.clawClose, 20)
+    moveClaw(c.clawOpen, 20)
+    msleep(300)
+    driveTimed(95, 100, 500)
+    moveClaw(c.clawClose, 15)
     msleep(300)
     drive(95, 100)
-    msleep(1500)
+    msleep(1000)
     moveArm(c.armBump, 20)
     msleep(500)
     print("armBump")
     driveTimed(95,100, 1250)
     moveArm(c.armFront,10)
-    moveClaw(c.clawOpen, 20)
+    moveClaw(c.clawWiggle, 20) #clawOpen
     driveTimed(95, 100, 3000)
     
 # Starts run
@@ -101,6 +104,7 @@ def grabWestPile():
 # Go to the bin
 def goToTaterBin():
     print("goToTaterBin")
+    moveArm(c.armMid, 10)
     drive(95, 100)
     moveOutrigger(c.outriggerApproach, 20)
     while not onBlack(c.STARBOARD_TOPHAT):
@@ -380,9 +384,9 @@ def wiggle():
     print("wiggle")
     moveClaw(c.clawWiggle, 15)
     driveTimed(100, 0, 150)
-    driveTimed(0, 100, 150)
+    driveTimed(0, 100, 250)
     driveTimed(100, 0, 150)
-    driveTimed(0, 100, 150)
+    driveTimed(0, 100, 250)
     #driveTimed(100, 0, 100)
     #driveTimed(0, 100, 100)
     #driveTimed(0, 100, 100)

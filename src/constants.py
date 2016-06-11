@@ -82,6 +82,7 @@ else:
     
     clawOpen = 850  #Claw open (525) 
     clawMid = 900
+    clawWiggle = 1400
     clawClose = 1750 #Claw closed (1525)
     
     outriggerIn = 350
