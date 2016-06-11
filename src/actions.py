@@ -97,7 +97,7 @@ def grabWestPile():
     print("grabWestPile")
     #drive(95, 100)
     moveClaw(c.clawMid, 10)
-    moveClaw(c.clawClose, 4)
+    moveClaw(c.clawClose, 15)
     #moveArm(c.armMid, 15)
     msleep(500)
     
