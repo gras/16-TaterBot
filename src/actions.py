@@ -69,8 +69,8 @@ def init():
 def disposeOfDirt():
     driveTimed(95, 100, 500)
     moveClaw(c.clawClose, 20)
-    moveArm(c.armBack, 25)
-    moveClaw(c.clawOpen, 10)
+    #moveArm(c.armBack, 25)
+    #moveClaw(c.clawOpen, 10)
     msleep(100)
     moveClaw(c.clawMid, 15)
     
@@ -96,10 +96,10 @@ def goToWestPile():
 def grabWestPile():
     print("grabWestPile")
     #drive(95, 100)
-    moveClaw(c.clawMid, 10)
-    moveClaw(c.clawClose, 15)
+    moveClaw(c.clawMid, 15)
+    moveClaw(c.clawClose, 20)
     #moveArm(c.armMid, 15)
-    msleep(500)
+    msleep(400)
     
 # Go to the bin
 def goToTaterBin():
@@ -383,10 +383,10 @@ def attempt():
 def wiggle ():
     print("wiggle")
     moveClaw(c.clawWiggle, 15)
-    driveTimed(100, 0, 150)
-    driveTimed(0, 100, 250)
-    driveTimed(100, 0, 150)
-    driveTimed(0, 100, 250)
+    driveTimed(100, 0, 100)
+    driveTimed(0, 100, 200)
+    driveTimed(100, 0, 100)
+    driveTimed(0, 100, 200)
     #driveTimed(100, 0, 100)
     #driveTimed(0, 100, 100)
     #driveTimed(0, 100, 100)
