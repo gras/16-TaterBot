@@ -19,6 +19,7 @@ def main():
     act.depositWestPile()
     act.backUpFromBin()
     act.goToNorthernPile()
+    '''
     act.grabNorthPile()
     act.grabBin()
     act.turnToSouth()
@@ -26,7 +27,7 @@ def main():
     act.grabSouthPile()
     act.grabRedPom()
     act.grabComposter2()
-    '''act.dropOffBin()
+    act.dropOffBin()
     act.grabComposter()'''
     DEBUG()
     

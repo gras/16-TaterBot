@@ -43,7 +43,6 @@ from wallaby import shut_down_in
 from wallaby import analog 
 
 import constants as c
-from constants import isPrime, isClone
 
 #Four piles are called Western, Northern, Southern, and Center
 
@@ -57,7 +56,6 @@ def init():
     print c.armFront
     testSensors()
     testServos()
-    #runGrasTest()
     testMotors()
     moveOutrigger(c.outriggerIn, 25)
     testET()
@@ -67,13 +65,6 @@ def init():
     shut_down_in(119.9)
     c.startTime = seconds()
     enable_servos()
-
-
-def runGrasTest():
-    print("Running Gras Test")
-    moveClaw(810)
-    driveTimed(80, 80, 4000)
-    DEBUG()
 
 def disposeOfDirt():
     driveTimed(95, 100, 500)
@@ -86,23 +77,34 @@ def disposeOfDirt():
 # goes to the first pile
 def goToWestPile():
     print("goToWestPile")
-    drive(95, 100)
-    msleep(2500)
-    moveArm(c.armFront, 10)
     moveClaw(c.clawOpen, 20)
-    driveTimed(95, 100, 1000)
+    msleep(300)
+    driveTimed(95, 100, 500)
+    moveClaw(c.clawClose, 15)
+    msleep(300)
+    drive(95, 100)
+    msleep(1000)
+    moveArm(c.armBump, 20)
+    msleep(500)
+    print("armBump")
+    driveTimed(95, 100, 1250)
+    moveArm(c.armFront, 10)
+    moveClaw(c.clawWiggle, 20) #clawOpen
+    driveTimed(95, 100, 3000)
     
 # Starts run
 def grabWestPile():
     print("grabWestPile")
-    drive(95, 100)
+    #drive(95, 100)
     moveClaw(c.clawMid, 10)
     moveClaw(c.clawClose, 4)
-    moveArm(c.armMid, 15)
-
+    #moveArm(c.armMid, 15)
+    msleep(500)
+    
 # Go to the bin
 def goToTaterBin():
     print("goToTaterBin")
+    moveArm(c.armMid, 10)
     drive(95, 100)
     moveOutrigger(c.outriggerApproach, 20)
     while not onBlack(c.STARBOARD_TOPHAT):
@@ -143,12 +145,12 @@ def goToNorthernPile():
         pass
     driveTimed(100, 100, 150)
     moveOutrigger(c.outriggerTurn, 20)
-    drive(70, -10)
+    drive(100, -20)
     while not onBlack(c.STARBOARD_TOPHAT):
         pass
     moveArm(c.armFront, 20)
     if c.isClone:
-        driveTimed(100, 0, 250) #175
+        driveTimed(0, 100, 275) #175
     stop()
     
 # Grab the northern pile    
@@ -217,48 +219,6 @@ def grabSouthPile():
     moveArm(c.armMid, 15)
     deliverPoms()
     moveOutrigger(c.outriggerFindLine, 25)
-
-# Grabs the single red pom that was left at habitat to get 7th red pom    
-def grabRedPom():
-    print("grabRedPom")
-    driveTimed(0, -50, 1150)
-    msleep(500)
-    moveArm(c.armFront, 15)
-    driveTimed(100, 100, 500)
-    moveClaw(c.clawClose, 15)
-    moveArm(c.armMid, 15)
-    deliverPoms()
-
-# Grabs composter after getting last red pom
-def grabComposter2():
-    print("grabComposter2")
-    moveOutrigger(c.outriggerIn, 15)
-    driveTimed(100, 0, 500)
-    msleep(500)
-    driveTimed(100, 100, 2000)
-    msleep(500)
-    driveTimed(-100, 0, 500)
-    msleep(500)
-    driveTimed(100, 100, 500)
-    
-#Backs into the hab and drops off the  bin    
-def dropOffBin():
-    if(isClone):
-        driveTimed(-100, 0, 2555)
-    if(isPrime):
-            driveTimed(-100, 0, 2750)
-    
-    moveOutrigger(c.outriggerIn, 10)
-    driveTimed(-90, -100, 5800)
-    binGrabDown()
-    driveTimed(100, 30, 700)
-    driveTimed(100, -100, 1200)
-    
-def grabComposter():
-    drive(80,80)
-    moveArm(c.armFront, 10)
-    msleep(24)
-        
 
 # line follows to home    
 def goToHome ():
@@ -420,7 +380,18 @@ def attempt():
             print "i don't see anything"
         msleep(1000)
     
-    
+def wiggle ():
+    print("wiggle")
+    moveClaw(c.clawWiggle, 15)
+    driveTimed(100, 0, 150)
+    driveTimed(0, 100, 250)
+    driveTimed(100, 0, 150)
+    driveTimed(0, 100, 250)
+    #driveTimed(100, 0, 100)
+    #driveTimed(0, 100, 100)
+    #driveTimed(0, 100, 100)
+    moveClaw(c.clawClose, 5)
+        
 #     moveClaw(c.clawOpen, 20)
 #     moveArm(c.armFront, 20)
 #     msleep(500)

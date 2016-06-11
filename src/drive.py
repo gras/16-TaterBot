@@ -8,13 +8,14 @@ Created on Mar 13, 2016
 
 import constants as c
 
-from sensors import onBlack 
+from sensors import onBlack , waitForButton
 from sensors import atArmLength
 from sensors import getET
 
 from wallaby import motor
 from wallaby import msleep
 from wallaby import seconds
+from constants import RBUTTON
 
 # tests motors
 def testMotors():
@@ -39,6 +40,16 @@ def binGrabUp():
 def binGrabDown():
     driveMotorTimed(c.BIN, -100, 500)
     driveMotor(c.BIN, -10)
+    
+def testBackGrabber():
+    i = 0
+    while not RBUTTON: 
+        if i > 0:
+            binGrabUp()
+            i = 0
+        else:
+            binGrabDown()
+            i = 1
     
 def testET():
     print("Put your hand in front of ET")
