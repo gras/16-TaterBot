@@ -48,7 +48,7 @@ armBlockBack = 1650  # Arm backwards with block
 clawOpen = 1000  # Claw open
 clawMid = 1234  # Claw mid
 clawClose = 2040  # Claw closed
-clawWiggle = 1400
+clawWiggle = 1350 #was 1400
 
 outriggerIn = 150
 outriggerBack = 450

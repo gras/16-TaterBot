@@ -139,30 +139,43 @@ def backUpFromBin():
 # Turn to north pile
 def goToNorthernPile():
     print("goToNorthernPile")
-    moveClaw(c.clawClose, 30)
+    moveClaw(c.clawOpen, 30)
+    moveArm(c.armMid, 20)
     drive(100, 90)
     while not onBlack(c.STARBOARD_TOPHAT):
         pass
     driveTimed(100, 100, 150)
     moveOutrigger(c.outriggerTurn, 20)
-    drive(100, -20)
+    drive(100, -20) #was drive(100, -20)
     while not onBlack(c.STARBOARD_TOPHAT):
         pass
     moveArm(c.armFront, 10)
     if c.isClone:
-        driveTimed(0, 100, 200) #175
+        driveTimed(0, 100, 200) #300
     stop()
+    driveTimed(0, 100, 300)
     
 # Grab the northern pile    
 def grabNorthPile():
     print("grabNorthPile")
-    moveClaw(c.clawMid, 10)
     drive(90, 100)
-    msleep(1500) 
+    moveClaw(c.clawMid, 10)
+    msleep(1000)
     drive(45, 50)
     moveClaw(c.clawClose, 4)
+    msleep(500)
     stop()
-    moveArm(c.armMid, 15)
+    #moveArm(c.armMid, 15)
+    #msleep(500)
+    moveClaw(c.clawOpen, 10)
+    msleep(500)
+    moveClaw(c.clawClose, 10)
+    '''driveTimed(-50, -50, 1000)
+    msleep(300)
+    moveArm(c.armFront, 10)
+    moveClaw(c.clawWiggle, 5)
+    driveTimed(90, 100, 1500)
+    moveClaw(c.clawClose, 10)'''
     
 # Grab the Bin
 def grabBin():
@@ -179,9 +192,8 @@ def grabBin():
 # turns to south and towards center pile
 def turnToSouth():
     print("turnToSouth")
-    
-    deliverPoms()
     driveTimed(100, 50, 2000) 
+    deliverPoms()
     drive(100, 0)
     while not onBlack(c.STARBOARD_TOPHAT):
         pass
