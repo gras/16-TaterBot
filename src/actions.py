@@ -177,11 +177,18 @@ def grabNorthPile():
     driveTimed(90, 100, 1500)
     moveClaw(c.clawClose, 10)'''
     
+def recollectNorthPile():
+    driveTimed(-90, -100, 500) 
+    msleep(300)
+    moveClaw(c.clawWiggle, 10)
+    driveTimed(90, 100, 700)
+    moveClaw(c.clawClose, 10)
+    
 # Grab the Bin
 def grabBin():
     print("grabBin")
     moveOutrigger(c.outriggerBin, 20)
-    driveTimed(0, -100, 400)
+    driveTimed(0, -100, 500)
     drive(-95, -100)
     while not onBlack(c.STARBOARD_TOPHAT):
         pass
@@ -192,7 +199,7 @@ def grabBin():
 # turns to south and towards center pile
 def turnToSouth():
     print("turnToSouth")
-    driveTimed(100, 50, 2000) 
+    driveTimed(90, 100, 1000) 
     deliverPoms()
     drive(100, 0)
     while not onBlack(c.STARBOARD_TOPHAT):
