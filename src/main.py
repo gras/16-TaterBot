@@ -28,6 +28,7 @@ def main():
     act.grabNorthPile()
     act.recollectNorthPile()
     act.grabBin()
+    DEBUG()
     act.turnToSouth()
     act.grabMiddlePile()
     act.grabSouthPile()

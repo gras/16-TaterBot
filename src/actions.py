@@ -158,10 +158,10 @@ def goToNorthernPile():
 # Grab the northern pile    
 def grabNorthPile():
     print("grabNorthPile")
-    drive(90, 100)
+    drive(93, 100)#90
     moveClaw(c.clawMid, 10)
     msleep(1000)
-    drive(45, 50)
+    drive(54, 50)#45,50
     moveClaw(c.clawClose, 4)
     msleep(500)
     stop()
