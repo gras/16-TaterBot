@@ -16,6 +16,7 @@ def main():
     act.disposeOfDirt()
     act.goToWestPile()
     act.grabWestPile()
+    DEBUG()
     act.goToTaterBin() 
     act.depositWestPile()
     act.backUpFromBin()

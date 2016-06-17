@@ -19,10 +19,6 @@ import constants as c
 def getRBUTTON():
     return digital (c.RBUTTON)
 
-# reads the ET sensor
-def getET():
-    return analog(c.ET) 
-
 # stop program for testing
 def DEBUG():
     ao()
@@ -48,16 +44,6 @@ def waitForButton():
     print("Press the right button to start...")
     while not getRBUTTON():
         pass
-        
-def atArmLength():
-    return analog (c.ET) > c.armLength
-
-def atCeilingHeight():
-    return analog (c.ET) > c.ceilingHeight
-
-def testET():
-    x = analog(c.ET)
-    print("ET = ", x)
     
 def wait4light():
     while not calibrate(c.STARTLIGHT):

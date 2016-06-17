@@ -8,7 +8,6 @@ Created on Mar 13, 2016
 
 from sensors import waitForButton, crossBlack
 from sensors import DEBUG
-from sensors import atArmLength
 from sensors import onBlack
 from sensors import currentTime
 from sensors import wait4light
@@ -28,7 +27,6 @@ from drive import driveTimed
 from drive import drive
 from drive import timedLineFollowRight
 from drive import stop
-from drive import testET
 from drive import timedLineFollowLeft
 from drive import timedLineFollowBack
 from drive import binGrabUp
@@ -57,9 +55,8 @@ def init():
     testServos()
     testMotors()
     moveOutrigger(c.outriggerIn, 25)
-    testET()
     disable_servos()
-    wait4light()
+    waitForButton()
     shut_down_in(119.9)
     c.startTime = seconds()
     enable_servos()
@@ -67,16 +64,18 @@ def init():
 def disposeOfDirt():
     driveTimed(95, 100, 500)
     moveClaw(c.clawClose, 20)
-    moveArm(c.armBack, 25)
-    moveClaw(c.clawOpen, 10)
+    moveArm(c.armMid, 25)
     msleep(100)
-    moveClaw(c.clawMid, 15)
+    #moveArm(c.armBack, 25)
+    #moveClaw(c.clawOpen, 10)
+    #msleep(100)
+    #moveClaw(c.clawMid, 15)
     
 # goes to the first pile
 def goToWestPile():
     print("goToWestPile")
     drive(95, 100)
-    msleep(2500)
+    msleep(3200)#2500
     moveArm(c.armFront, 10)
     moveClaw(c.clawOpen, 20)
     driveTimed(95, 100, 1000)
@@ -96,9 +95,10 @@ def goToTaterBin():
     moveOutrigger(c.outriggerApproach, 20)
     while not onBlack(c.STARBOARD_TOPHAT):
         pass
-    drive(25, 30)
-    while not atArmLength():
-        pass
+    if c.isPrime:             #ET is not being used anymore
+        driveTimed(25, 30,500)#Neither Prime nor Clone has this working
+    else:
+        driveTimed(25, 30,500)
     stop()
        
 # Places the poms in the potato bin

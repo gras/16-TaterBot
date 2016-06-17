@@ -9,8 +9,6 @@ Created on Mar 13, 2016
 import constants as c
 
 from sensors import onBlack 
-from sensors import atArmLength
-from sensors import getET
 
 from wallaby import motor
 from wallaby import msleep
@@ -40,28 +38,6 @@ def binGrabDown():
     driveMotorTimed(c.BIN, -100, 500)
     driveMotor(c.BIN, -10)
     
-def testET():
-    print("Put your hand in front of ET")
-    i = 0
-    while getET() >= 2000:
-        print "BLOCKED!"
-        msleep(333)
-    binGrabDown()
-    msleep(300)
-    binGrabUp()
-    msleep(300)
-    while getET() < 2000: 
-        if i > 0:
-            binGrabUp()
-            i = 0
-        else:
-            binGrabDown()
-            i = 1
-        msleep(300)
-    binGrabDown()
-    driveTimed(-100, -100, 1000)
-    stop()
-   
 # start left & right motors
 def drive(left, right):
     motor(c.LMOTOR, left)
@@ -187,15 +163,6 @@ def turnUntilBlack(port, left, right):
         pass
     stop()
 
-# Follows black line on right until under or not under ceiling
-# if findCeiling is true, will go until ET finds ceiling
-def ETLineFollowRight(port, findCeiling): 
-    while atArmLength() ^ findCeiling :
-        if not onBlack(port):
-            driveTimed(50, 100, 20)
-        else:
-            driveTimed(100, 50, 20)
-        msleep(10)
 
 # stop all motors
 def stop():

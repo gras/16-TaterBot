@@ -26,7 +26,6 @@ OUTRIGGER = 3
 
 # ANALOG ports
 LINE_FOLLOWER = 0
-ET = 1
 STARBOARD_TOPHAT = 5
 STARTLIGHT = 2
 
@@ -80,7 +79,7 @@ else:
     
     clawOpen = 525  #Claw open 
     clawMid = 800
-    clawClose = 1525 #Claw closed
+    clawClose = 1625 #Claw closed
     
     outriggerIn = 350
     outriggerSpin = 665
