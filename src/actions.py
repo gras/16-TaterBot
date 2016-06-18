@@ -20,7 +20,7 @@ from servos import deliverPoms
 from servos import testServos
 from servos import tempServos
 
-from drive import testMotors 
+from drive import testMotors , driveTimed
 from drive import turnUntilBlack
 from drive import binGrabDown
 from drive import driveTimed
@@ -32,6 +32,7 @@ from drive import timedLineFollowBack
 from drive import binGrabUp
 from drive import lineFollowUntilEndLeft2
 from drive import lineFollowUntilEndRight
+from drive import testBinGrab
 
 from wallaby import msleep
 from wallaby import seconds 
@@ -56,6 +57,10 @@ def init():
     testMotors()
     moveOutrigger(c.outriggerIn, 25)
     disable_servos()
+    testBinGrab()
+    binGrabDown()
+    msleep(500)
+    print "plz press button again cuz u picky"
     waitForButton()
     shut_down_in(119.9)
     c.startTime = seconds()
@@ -93,12 +98,7 @@ def goToTaterBin():
     print("goToTaterBin")
     drive(95, 100)
     moveOutrigger(c.outriggerApproach, 20)
-    while not onBlack(c.STARBOARD_TOPHAT):
-        pass
-    if c.isPrime:             #ET is not being used anymore
-        driveTimed(25, 30,500)#Neither Prime nor Clone has this working
-    else:
-        driveTimed(25, 30,500)
+    crossBlack(c.STARBOARD_TOPHAT)
     stop()
        
 # Places the poms in the potato bin
@@ -116,8 +116,8 @@ def backUpFromBin():
         driveTimed(-100, -100, 250)
     else:
         pass
-    driveTimed(-100, -50, 2100)
-    driveTimed(100, 20, 750)
+    driveTimed(-100, -50, 2500)#2100
+    driveTimed(100, 20, 1100)
     if c.isPrime:
         driveTimed(100, 100, 250) # added at practice
     else:
@@ -200,17 +200,32 @@ def grabSouthPile():
     timedLineFollowLeft(c.STARBOARD_TOPHAT, 5)
     drive(50, 50) #now same on both
     moveArm(c.armFront, 50)
-    moveClaw(c.clawClose, 5)
+    moveClaw(c.clawClose, 20)#5
     msleep(500)
     stop()
     moveArm(c.armMid, 15)
     deliverPoms()
     moveOutrigger(c.outriggerFindLine, 25)
 
+def aroundBlock():
+    print("aroundBlock")
+    msleep(20)
+    moveOutrigger(c.outriggerIn, 25)
+    driveTimed(-60, 60, 1950)
+    driveTimed(-90,-80,5500)
+    driveTimed(-85,-90,2300)
+    binGrabDown()
+    
+def grabComposter():
+    print("grabComposter")
+    driveTimed(100, 0, 2500)
+    driveTimed(0, -60, 600)
+    
 # line follows to home    
 def goToHome ():
     print("goToHome")
     turnUntilBlack(c.STARBOARD_TOPHAT, 100, 0)
+    DEBUG()
     lineFollowUntilEndLeft2(c.STARBOARD_TOPHAT)
     driveTimed(1000, 100, 250) 
     moveOutrigger(c.outriggerSpin, 100)

@@ -8,7 +8,7 @@ Created on Mar 13, 2016
 
 import constants as c
 
-from sensors import onBlack 
+from sensors import onBlack , getRBUTTON
 
 from wallaby import motor
 from wallaby import msleep
@@ -29,6 +29,17 @@ def testMotors():
         pass
     msleep(100)
     stop()
+
+def testBinGrab():
+    print "push the button if you did not already figure that out"
+    binGrabDown()
+    binGrabUp()
+    binGrabDown()
+    while not getRBUTTON():
+        binGrabUp()
+        if getRBUTTON():
+            break
+        binGrabDown()
       
 def binGrabUp():
     driveMotorTimed(c.BIN, 55, 600)
