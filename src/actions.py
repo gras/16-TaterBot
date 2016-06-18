@@ -60,8 +60,9 @@ def init():
     testBinGrab()
     binGrabDown()
     msleep(500)
-    print "plz press button again cuz u picky"
-    waitForButton()
+    print "Press and hold button."
+    msleep(2000)
+    waitForButton() # wait for light()
     shut_down_in(119.9)
     c.startTime = seconds()
     enable_servos()
@@ -116,25 +117,40 @@ def backUpFromBin():
         driveTimed(-100, -100, 250)
     else:
         pass
-    driveTimed(-100, -50, 2500)#2100
-    driveTimed(100, 20, 1100)
+    driveTimed(-100, -50, 2100)
+#     waitForButton()
+    driveTimed(100, 20, 950) #750
+#     waitForButton()
     if c.isPrime:
         driveTimed(100, 100, 250) # added at practice
     else:
         pass
+#     waitForButton()
      
 # Turn to north pile
 def goToNorthernPile():
     print("goToNorthernPile")
     moveClaw(c.clawOpen, 30)
+#     waitForButton()
     drive(100, 90)
     while not onBlack(c.STARBOARD_TOPHAT):
         pass
-    driveTimed(100, 100, 150)
-    moveOutrigger(c.outriggerTurn, 20)
+    
+#     stop()
+#     waitForButton()
+    
+    driveTimed(100,100,150)
+#     waitForButton()
+    moveOutrigger(c.outriggerTurn, 200)
+    msleep(200)
+#     waitForButton()
     drive(100, -20)
     while not onBlack(c.STARBOARD_TOPHAT):
         pass
+    
+#     stop()
+#     waitForButton()
+    
     moveArm(c.armFront, 20)
     if c.isClone:
         driveTimed(0, 100, 275) #175
@@ -211,22 +227,34 @@ def aroundBlock():
     print("aroundBlock")
     msleep(20)
     moveOutrigger(c.outriggerIn, 25)
-    driveTimed(-60, 60, 1950)
-    driveTimed(-90,-80,5500)
-    driveTimed(-85,-90,2300)
-    binGrabDown()
+    driveTimed(60, 60, 1050)
+    driveTimed(60, -60, 1050)
+    driveTimed(80,90,4500)
+    driveTimed(65,95,4300)
     
 def grabComposter():
     print("grabComposter")
     driveTimed(100, 0, 2500)
+    moveClaw(c.clawOpen, 20)
+    msleep(300)
     driveTimed(0, -60, 600)
+    driveTimed(40, 40, 800)
+    moveArm(c.armComposter, 8)
+    moveClaw(c.clawClose, 10)
+    moveArm(c.armUp, 10)
+    msleep(300)
     
 # line follows to home    
 def goToHome ():
     print("goToHome")
-    turnUntilBlack(c.STARBOARD_TOPHAT, 100, 0)
-    DEBUG()
+    moveOutrigger(c.outriggerIn, 10)
+    msleep(300)
+    driveTimed(100, 0, 900)
+    drive(100, 100)
+    crossBlack(c.LINE_FOLLOWER)
+    timedLineFollowRight(c.LINE_FOLLOWER, .3)
     lineFollowUntilEndLeft2(c.STARBOARD_TOPHAT)
+    DEBUG()
     driveTimed(1000, 100, 250) 
     moveOutrigger(c.outriggerSpin, 100)
     if c.isPrime:

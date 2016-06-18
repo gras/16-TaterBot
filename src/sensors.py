@@ -41,8 +41,10 @@ def crossBlack(port):
         pass
     
 def waitForButton():
-    print("Press the right button to start...")
+    print("Press the right button...")
     while not getRBUTTON():
+        pass
+    while getRBUTTON():
         pass
     
 def wait4light():

@@ -43,6 +43,7 @@ armBack = 1550  # Arm backwards
 armBlock = 465  # move the block
 armOver = 713  # over the block
 armBlockBack = 1650  # Arm backwards with block
+armComposter = 500  # Arm to grab Composter
 
 clawOpen = 1000  # Claw open
 clawMid = 1230  # Claw mid
