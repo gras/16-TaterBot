@@ -12,6 +12,7 @@ from wallaby import analog
 from wallaby import seconds
 from wallaby import a_button_clicked
 from wallaby import b_button_clicked
+from wallaby import msleep
 
 import constants as c
 
@@ -34,9 +35,10 @@ def onBlack(port):
 def onBlackLineFollower():
     return analog(c.STARBOARD_TOPHAT) > c.topHatMidValue
 
-def crossBlack(port):
+def crossBlack(port, time = 0):
     while not onBlack(port):  # wait for black
         pass
+    msleep(time)
     while onBlack(port):  # wait for white
         pass
     

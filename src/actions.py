@@ -32,6 +32,7 @@ from drive import timedLineFollowBack
 from drive import binGrabUp
 from drive import lineFollowUntilEndLeft2
 from drive import lineFollowUntilEndRight
+from drive import lineFollowUntilEndRight2
 from drive import testBinGrab
 
 from wallaby import msleep
@@ -99,7 +100,7 @@ def goToTaterBin():
     print("goToTaterBin")
     drive(95, 100)
     moveOutrigger(c.outriggerApproach, 20)
-    crossBlack(c.STARBOARD_TOPHAT)
+    crossBlack(c.STARBOARD_TOPHAT, 100)
     stop()
        
 # Places the poms in the potato bin
@@ -119,7 +120,7 @@ def backUpFromBin():
         pass
     driveTimed(-100, -50, 2100)
 #     waitForButton()
-    driveTimed(100, 20, 950) #750
+    driveTimed(100, 20, 1100) #750 950
 #     waitForButton()
     if c.isPrime:
         driveTimed(100, 100, 250) # added at practice
@@ -148,7 +149,7 @@ def goToNorthernPile():
     while not onBlack(c.STARBOARD_TOPHAT):
         pass
     
-#     stop()
+    stop()
 #     waitForButton()
     
     moveArm(c.armFront, 20)
@@ -213,15 +214,38 @@ def grabSouthPile():
     moveClaw(c.clawOpen, 10)
     moveArm(c.armFront, 15)
     moveArm(c.armShovel, 10)
-    timedLineFollowLeft(c.STARBOARD_TOPHAT, 5)
-    drive(50, 50) #now same on both
+    driveTimed(100, 100, 500)
+#     timedLineFollowLeft(c.STARBOARD_TOPHAT, 5)
+    
+    drive(100, 80)
+    msleep(2300)
+    moveOutrigger(c.outriggerIn, 100)
     moveArm(c.armFront, 50)
-    moveClaw(c.clawClose, 20)#5
+    moveClaw(c.clawClose, 20)
     msleep(500)
-    stop()
-    moveArm(c.armMid, 15)
-    deliverPoms()
-    moveOutrigger(c.outriggerFindLine, 25)
+    moveArm(c.armMid, 20)
+        
+#     drive(50, 50) #now same on both
+#     moveArm(c.armFront, 50)
+#     moveClaw(c.clawClose, 20)#5
+#     msleep(500)
+#     stop()
+#     moveArm(c.armMid, 15)
+#     deliverPoms()
+#     moveOutrigger(c.outriggerFindLine, 25)
+
+def goToBlackLine():
+    while True:
+        drive(100, 60)
+        while not onBlack(c.LINE_FOLLOWER):
+            pass
+        print "black!"
+        drive(50, 30)
+        msleep(300)
+        if onBlack(c.LINE_FOLLOWER):
+            print "still black!"
+            break
+        print "white!"
 
 def aroundBlock():
     print("aroundBlock")
@@ -234,33 +258,62 @@ def aroundBlock():
     
 def grabComposter():
     print("grabComposter")
-    driveTimed(100, 0, 2500)
-    moveClaw(c.clawOpen, 20)
-    msleep(300)
-    driveTimed(0, -60, 600)
-    driveTimed(40, 40, 800)
-    moveArm(c.armComposter, 8)
-    moveClaw(c.clawClose, 10)
+    driveTimed(100, 55, 1250)
+    driveTimed(50, 100, 3300)
+    moveClaw(c.clawOpen, 10)
+    msleep(200)
+    moveArm(c.armComposter, 10)
+    msleep(200)
+    moveClaw(c.clawClose, 50)
+    msleep(200)
+    deliverPoms()
     moveArm(c.armUp, 10)
-    msleep(300)
+    driveTimed(-100, 100, 1400)
+    binGrabDown()
+#     driveTimed(100, 0, 2500)
+#     moveClaw(c.clawOpen, 20)
+#     msleep(300)
+#     driveTimed(0, -60, 600)
+#     driveTimed(40, 40, 800)
+#     moveArm(c.armComposter, 8)
+#     moveClaw(c.clawClose, 10)
+#     moveArm(c.armUp, 10)
+#     msleep(300)
     
 # line follows to home    
 def goToHome ():
     print("goToHome")
-    moveOutrigger(c.outriggerIn, 10)
-    msleep(300)
-    driveTimed(100, 0, 900)
-    drive(100, 100)
-    crossBlack(c.LINE_FOLLOWER)
-    timedLineFollowRight(c.LINE_FOLLOWER, .3)
-    lineFollowUntilEndLeft2(c.STARBOARD_TOPHAT)
-    DEBUG()
-    driveTimed(1000, 100, 250) 
-    moveOutrigger(c.outriggerSpin, 100)
-    if c.isPrime:
-        timedLineFollowRight(c.LINE_FOLLOWER, 2.5) 
-    else:
-        timedLineFollowRight(c.LINE_FOLLOWER, 3)
+    drive(30, 30)
+    while onBlack(c.LINE_FOLLOWER):
+        pass
+    
+    drive(0, 30)
+    while not onBlack(c.LINE_FOLLOWER):
+        pass
+
+
+#     timedLineFollowRight(c.LINE_FOLLOWER, .5)
+    msleep(1000)
+    lineFollowUntilEndRight2(c.LINE_FOLLOWER)
+    driveTimed(90, 30, 400)
+    deliverPoms()
+    
+#     moveOutrigger(c.outriggerIn, 10)
+#     msleep(300)
+#     driveTimed(100, 0, 900)
+#     drive(100, 100)
+#     crossBlack(c.LINE_FOLLOWER)
+#     timedLineFollowRight(c.LINE_FOLLOWER, .3)
+#     lineFollowUntilEndLeft2(c.STARBOARD_TOPHAT)
+#     DEBUG()
+#     driveTimed(1000, 100, 250) 
+#     moveOutrigger(c.outriggerSpin, 100)
+#     if c.isPrime:
+#         timedLineFollowRight(c.LINE_FOLLOWER, 2.5) 
+#     else:
+#         timedLineFollowRight(c.LINE_FOLLOWER, 3)
+
+
 # Delivers bin    
 def deliverBin():
     print("deliverBin")
