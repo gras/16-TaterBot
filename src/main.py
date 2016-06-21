@@ -28,6 +28,7 @@ def main():
     act.goToBlackLine()
     act.goToHome() 
     act.grabComposter()
+    act.depositComposter()
     DEBUG()
     act.deliverBin()
     act.releaseBin()
