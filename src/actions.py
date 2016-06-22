@@ -130,16 +130,19 @@ def goToNorthernPile():
     drive(100, 90)
     while not onBlack(c.STARBOARD_TOPHAT):
         pass
-    driveTimed(100,100,150)
-    moveOutrigger(c.outriggerTurn, 200)
+    if c.isPrime:
+        driveTimed(100,100,150)
+    else: 
+        driveTimed(100, 70, 300)
+    moveOutrigger(c.outriggerBack, 200)
     msleep(200)
     drive(100, -20)
     while not onBlack(c.STARBOARD_TOPHAT):
         pass
     stop()
     moveArm(c.armFront, 20)
-    if c.isClone:
-        driveTimed(0, 100, 275)
+    #if c.isClone:
+    #    driveTimed(50, 70, 275)
     stop()
     
 # Grab the northern pile    
@@ -239,7 +242,7 @@ def goToHome ():
 def grabComposter():
     print("grabComposter")
     driveTimed(100, 55, 1250) #1250
-    driveTimed(50, 100, 3200) #3300
+    driveTimed(50, 100, 3100) #3300
     moveClaw(c.clawOpen, 40)
     msleep(200)
     moveArm(c.armComposter, 10)

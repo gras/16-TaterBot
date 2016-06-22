@@ -16,7 +16,7 @@ def main():
     act.disposeOfDirt()
     act.goToWestPile()
     act.grabWestPile()
-    act.goToTaterBin() 
+    act.goToTaterBin()
     act.depositWestPile()
     act.backUpFromBin()
     act.goToNorthernPile()
@@ -29,14 +29,10 @@ def main():
     act.goToHome() 
     act.grabComposter()
     act.depositComposter()
-    DEBUG()
-    act.deliverBin()
-    act.releaseBin()
     act.goToCenter()
     act.grabCube()
     act.returnToBase()
     act.scoreCube()
-    DEBUG()
     
 if __name__ == '__main__':
     # set print to unbuffered
