@@ -30,6 +30,7 @@ def main():
     act.grabComposter()
     act.depositComposter()
     act.goToCenter()
+    DEBUG()
     act.grabCube()
     act.returnToBase()
     act.scoreCube()

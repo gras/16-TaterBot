@@ -160,7 +160,7 @@ def lineFollowUntilEndLeft2(port):
 
 def lineFollowUntilEndRight(port):
     i = 0
-    while (i < 10):
+    while (i < 20):
         if not onBlack(port):
             driveTimed(50, 90, 20)
             i = i + 1

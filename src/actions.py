@@ -253,7 +253,6 @@ def grabComposter():
     moveArm(c.armUp, 10)
     driveTimed(-100, 100, 1300)
     msleep(500)
-    binGrabDown()
     
 #puts composter in bin
 def depositComposter():
@@ -262,10 +261,8 @@ def depositComposter():
     msleep(600)
     moveClaw(c.clawOpen,40)
     msleep(200)
+    binGrabDown()
     
-
-    
-
 # Delivers bin    
 def deliverBin():
     print("deliverBin")
@@ -284,37 +281,49 @@ def releaseBin():
     print "Dropped bin at:"
     currentTime()
     driveTimed(100, 80, 1000)
-    moveOutrigger(c.outriggerIn, 100)
+    moveOutrigger(c.outriggerBaseReturn, 100) #outriggerIn
     
 # line follows to cube    
 def goToCenter():
     print("goToCenter")
     if c.isPrime:
-        driveTimed(95, 100, 4000)
-        driveTimed(100, 60, 3000) #3000
+        driveTimed(95, 100, 6000)#4000
+        driveTimed(100, 60, 3000) 
     else:
         driveTimed(90, 100, 4000)
         driveTimed(100, 60, 3000)
+    driveTimed(100,100, 500)
     drive(100, 100)
+    crossBlack(c.LINE_FOLLOWER)
+    drive(80,-80)
     while not onBlack(c.LINE_FOLLOWER):
         pass
+    '''while onBlack(c.LINE_FOLLOWER):
+        pass
+    stop()
+    DEBUG()
+    moveOutrigger(c.outriggerIn, 100)
+    drive(100, 100)
+    while not onBlack(c.LINE_FOLLOWER):
+        pass'''
     drive(100, 0)
     while onBlack(c.LINE_FOLLOWER):
         pass
     stop()
+    DEBUG()
     timedLineFollowRight(c.LINE_FOLLOWER, 1) 
     drive(100, 100)
     moveClaw(c.clawOpen, 25)
     lineFollowUntilEndRight(c.LINE_FOLLOWER)
-    driveTimed(90, 50, 200)
-    moveArm(c.armShovel, 15)
-    msleep(400)  
+    driveTimed(90, 50, 400)
+    '''moveArm(c.armShovel, 15)
+    msleep(400)'''
     driveTimed(100, 100, 1500)
     
 # Grabs Cube
 def grabCube():
     print("grabCube")
-    moveArm(c.armUp, 10)
+    #moveArm(c.armUp, 10)
     drive(0, -100)
     crossBlack(c.LINE_FOLLOWER)
     moveClaw(c.clawOpen, 15)
@@ -335,10 +344,11 @@ def returnToBase():
         pass
     driveTimed(-100, 0, 300)
     timedLineFollowBack(c.STARBOARD_TOPHAT, 3)#2
+    moveOutrigger(c.outriggerBaseReturn, 20)
     driveTimed(-80, -100, 1000)
     drive(-90, -100)
     msleep(3500);
-    moveOutrigger(c.outriggerBaseReturn, 20)
+    #moveOutrigger(c.outriggerBaseReturn, 20)
     msleep(1000)
     while(onBlack(c.STARBOARD_TOPHAT)):
         pass
