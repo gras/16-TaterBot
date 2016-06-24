@@ -77,15 +77,16 @@ else:
     armUp = 1000  # Arm at 90 degrees up
     armBack = 1500# Arm backwards
     
-    clawOpen = 525  #Claw open 
-    clawMid = 800
-    clawClose = 1625 #Claw closed
+    clawOpen = 800  #Claw open 
+    clawMid = 1030
+    clawClose = 1840 #Claw closed
     
-    outriggerIn = 350
-    outriggerBaseReturn = 560
-    outriggerSpin = 665
-    outriggerBack = 700
-    outriggerBin = 1280
-    outriggerApproach = 2000
-    outriggerOut = 2100
-    outriggerFront = 2047
+    outriggerIn = 100
+    outriggerBaseReturn = 230 
+    outriggerSpin = 315 
+    outriggerBack = 335 
+    outriggerBin = 950 
+    outriggerFindLine = 1100
+    outriggerApproach = 1400 
+    outriggerOut = 1500 
+    outriggerFront = 1770 

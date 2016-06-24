@@ -115,14 +115,17 @@ def backUpFromBin():
     if c.isPrime: #added at practice
         driveTimed(-100, -100, 250)
     else:
-        pass
+        driveTimed(-100, -100, 250)#**********************
     driveTimed(-100, -50, 2100)
-    driveTimed(100, 20, 1100)
+    if c.isPrime:
+        driveTimed(100, 20, 1100)
+    else: 
+        driveTimed(100, 40, 900)
     if c.isPrime:
         driveTimed(100, 100, 250) # added at practice
     else:
         pass
-     
+        
 # Turn to north pile
 def goToNorthernPile():
     print("goToNorthernPile")
@@ -141,14 +144,15 @@ def goToNorthernPile():
         pass
     stop()
     moveArm(c.armFront, 20)
-    #if c.isClone:
-    #    driveTimed(50, 70, 275)
     stop()
     
 # Grab the northern pile    
 def grabNorthPile():
     print("grabNorthPile")
-    drive(90, 100)
+    if c.isPrime:
+        drive(90, 100)
+    else:
+        drive(100, 65)
     msleep(1500) 
     moveClaw(c.clawMid, 10)
     drive(45, 50)

@@ -21,6 +21,7 @@ def main():
     act.backUpFromBin()
     act.goToNorthernPile()
     act.grabNorthPile()
+    DEBUG()
     act.grabBin()
     act.turnToSouth()
     act.grabMiddlePile()
