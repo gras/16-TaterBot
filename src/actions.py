@@ -120,7 +120,8 @@ def backUpFromBin():
     if c.isPrime:
         driveTimed(100, 20, 1100)
     else: 
-        driveTimed(100, 40, 900)
+        driveTimed(100, 40, 1100)
+    #msleep(1000)
     if c.isPrime:
         driveTimed(100, 100, 250) # added at practice
     else:
@@ -130,19 +131,29 @@ def backUpFromBin():
 def goToNorthernPile():
     print("goToNorthernPile")
     moveClaw(c.clawOpen, 30)
-    drive(100, 90)
-    while not onBlack(c.STARBOARD_TOPHAT):
-        pass
+    if c.isPrime:
+        drive(100, 90)
+        while not onBlack(c.STARBOARD_TOPHAT):
+            pass
+    else:
+        drive(100, 90)
+        while not onBlack(c.STARBOARD_TOPHAT):
+            pass
+    #msleep(1000)
     if c.isPrime:
         driveTimed(100,100,150)
     else: 
-        driveTimed(100, 70, 300)
+        driveTimed(100, 100, 150)
+    #msleep(1000)
     moveOutrigger(c.outriggerBack, 200)
     msleep(200)
     drive(100, -20)
     while not onBlack(c.STARBOARD_TOPHAT):
         pass
+    if c.isClone:
+        msleep(100)
     stop()
+#     DEBUG()
     moveArm(c.armFront, 20)
     stop()
     
@@ -152,7 +163,7 @@ def grabNorthPile():
     if c.isPrime:
         drive(90, 100)
     else:
-        drive(100, 65)
+        drive(90, 100)#100, 85
     msleep(1500) 
     moveClaw(c.clawMid, 10)
     drive(45, 50)
@@ -206,8 +217,14 @@ def grabSouthPile():
     moveArm(c.armFront, 15)
     moveArm(c.armShovel, 10)
     driveTimed(100, 100, 500)
-    drive(100, 80)
-    msleep(2300)
+    if c.isPrime:
+        drive(100, 80)
+    else:
+        drive(100,85)
+    if c.isPrime:
+        msleep(2300)
+    else:
+        msleep(850)#2300
     moveOutrigger(c.outriggerIn, 100)
     moveArm(c.armFront, 50)
     moveClaw(c.clawClose, 20)
@@ -216,6 +233,7 @@ def grabSouthPile():
 
 #
 def goToBlackLine():
+    print "goToBlackLine"
     while True:
         drive(100, 60)
         while not onBlack(c.LINE_FOLLOWER):
@@ -230,7 +248,7 @@ def goToBlackLine():
         
 # line follows to home    
 def goToHome ():
-    print("goToHome")
+    print "goToHome"
     drive(30, 30)
     while onBlack(c.LINE_FOLLOWER):
         pass

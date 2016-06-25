@@ -77,7 +77,7 @@ else:
     armUp = 1000  # Arm at 90 degrees up
     armBack = 1500# Arm backwards
     
-    clawOpen = 800  #Claw open 
+    clawOpen = 700  #Claw open 800 
     clawMid = 1030
     clawClose = 1840 #Claw closed
     
