@@ -25,16 +25,15 @@ def main():
     act.turnToSouth()
     act.grabMiddlePile()
     act.grabSouthPile()
-    DEBUG()
     act.goToBlackLine()
     act.goToHome() 
     act.grabComposter()
     act.depositComposter()
     act.goToCenter()
-    DEBUG()
     act.grabCube()
     act.returnToBase()
     act.scoreCube()
+    DEBUG()
     
 if __name__ == '__main__':
     # set print to unbuffered

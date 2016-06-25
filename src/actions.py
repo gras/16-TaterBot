@@ -118,7 +118,7 @@ def backUpFromBin():
         driveTimed(-100, -100, 250)#**********************
     driveTimed(-100, -50, 2100)
     if c.isPrime:
-        driveTimed(100, 20, 1100)
+        driveTimed(100, 20, 1400)
     else: 
         driveTimed(100, 40, 1100)
     #msleep(1000)
@@ -269,7 +269,6 @@ def grabComposter():
     msleep(200)
     moveArm(c.armComposter, 10)
     msleep(200)
-    #DEBUG()
     moveClaw(c.clawClose, 50)
     msleep(200)
     moveArm(c.armUp, 10)
@@ -332,7 +331,6 @@ def goToCenter():
     while onBlack(c.LINE_FOLLOWER):
         pass
     stop()
-    DEBUG()
     timedLineFollowRight(c.LINE_FOLLOWER, 1) 
     drive(100, 100)
     moveClaw(c.clawOpen, 25)
@@ -340,20 +338,31 @@ def goToCenter():
     driveTimed(90, 50, 400)
     '''moveArm(c.armShovel, 15)
     msleep(400)'''
-    driveTimed(100, 100, 1500)
+    moveOutrigger(c.outriggerValley, 100)
+    drive(100, 100)
+    while not onBlack(c.STARBOARD_TOPHAT):
+        pass
+    stop()
+    moveOutrigger(c.outriggerIn, 100)
+    drive(0, -100)
+    while not onBlack(c.LINE_FOLLOWER):
+        pass
+    while onBlack(c.LINE_FOLLOWER):
+        pass
+    stop()
+#     driveTimed(100, 100, 1500)
     
 # Grabs Cube
 def grabCube():
     print("grabCube")
-    #moveArm(c.armUp, 10)
-    drive(0, -100)
-    crossBlack(c.LINE_FOLLOWER)
+#     #moveArm(c.armUp, 10)
+#     drive(0, -100)
+#     crossBlack(c.LINE_FOLLOWER)
+#     driveTimed(100, 100, 1100)
+#     binGrabUp()
     moveClaw(c.clawOpen, 15)
-    msleep(500)
-    stop()
     moveArm(c.armFront, 15)
-    driveTimed(100, 100, 1100)
-    binGrabUp()
+    timedLineFollowRight(c.LINE_FOLLOWER, 3.5)
     moveClaw(c.clawClose, 10)
     
 # Returns to base with pom filled bin
@@ -361,11 +370,21 @@ def returnToBase():
     print ("returntobase")
     moveArm(c.armBlockBack, 10)
     driveTimed(-100, 0, 1000)
-    drive(-100, -87) #-85
+    
+    
+#     drive(-100, -81) #-87
+#     while not onBlack(c.STARBOARD_TOPHAT):
+#         pass
+#     driveTimed(-100, 0, 800)
+    driveTimed(-100, -73, 5000)
+#     DEBUG()
+    
+    
+#     driveTimed(-100, -100, 1500)
+    drive(-100, -100)
     while not onBlack(c.STARBOARD_TOPHAT):
         pass
-    driveTimed(-100, 0, 300)
-    timedLineFollowBack(c.STARBOARD_TOPHAT, 3)#2
+    timedLineFollowBack(c.STARBOARD_TOPHAT, 5)#2
     moveOutrigger(c.outriggerBaseReturn, 20)
     driveTimed(-80, -100, 1000)
     drive(-90, -100)

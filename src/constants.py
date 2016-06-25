@@ -58,7 +58,7 @@ outriggerFindLine = 1200
 outriggerApproach = 1500
 outriggerOut = 1650 
 outriggerFront = 1900
-
+outriggerValley = 540
 
 # PRIME analog sensors values
 ceilingHeight = 700  # value of ET beneath crater rim
