@@ -39,17 +39,17 @@ armFront = 120  # Arm forward on ground
 armBump = 260  # Arm clears the bump
 armBlock = 465  # move the block
 armComposter = 500  # Arm to grab Composter
-armMid = 590  #Arm to score at bin
+armMid = 630  #Arm to score at bin
 armOver = 713  # over the block
 armUp = 1100  # Arm at 90 degrees up
 armBack = 1550  # Arm backwards
 armBlockBack = 1650  # Arm backwards with block
 
-clawOpen = 1000  # Claw open
-clawMid = 1230  # Claw mid
-clawClose = 2040  # Claw closed
+clawOpen = 0  # Claw open
+clawMid = 230  # Claw mid
+clawClose = 1000  # Claw closed
 
-outriggerIn = 150
+outriggerIn = 250
 outriggerBaseReturn = 340
 outriggerSpin = 416
 outriggerBack = 450

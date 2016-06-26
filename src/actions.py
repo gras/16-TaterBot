@@ -118,32 +118,25 @@ def backUpFromBin():
         driveTimed(-100, -100, 250)#**********************
     driveTimed(-100, -50, 2100)
     if c.isPrime:
-        driveTimed(100, 20, 1400)
+        driveTimed(100, 20, 1000) #### important for turn (may need changing)
     else: 
-        driveTimed(100, 40, 1100)
+        driveTimed(100, 40, 1100) #### important for turn
     #msleep(1000)
     if c.isPrime:
         driveTimed(100, 100, 250) # added at practice
     else:
         pass
+#     DEBUG()
         
 # Turn to north pile
 def goToNorthernPile():
     print("goToNorthernPile")
     moveClaw(c.clawOpen, 30)
-    if c.isPrime:
-        drive(100, 90)
-        while not onBlack(c.STARBOARD_TOPHAT):
-            pass
-    else:
-        drive(100, 90)
-        while not onBlack(c.STARBOARD_TOPHAT):
-            pass
-    #msleep(1000)
-    if c.isPrime:
-        driveTimed(100,100,150)
-    else: 
-        driveTimed(100, 100, 150)
+    drive(100, 90)
+    while not onBlack(c.STARBOARD_TOPHAT):
+        pass
+#     msleep(1000)
+    driveTimed(100, 100, 150)
     #msleep(1000)
     moveOutrigger(c.outriggerBack, 200)
     msleep(200)
@@ -152,6 +145,8 @@ def goToNorthernPile():
         pass
     if c.isClone:
         msleep(100)
+    else:
+        msleep(40)
     stop()
 #     DEBUG()
     moveArm(c.armFront, 20)
@@ -170,6 +165,7 @@ def grabNorthPile():
     moveClaw(c.clawClose, 4)
     stop()
     moveArm(c.armMid, 15)
+#     DEBUG()
     
 # Grab the Bin
 def grabBin():
@@ -230,6 +226,8 @@ def grabSouthPile():
     moveClaw(c.clawClose, 20)
     msleep(500)
     moveArm(c.armMid, 20)
+    stop()
+    deliverPoms()
 
 #
 def goToBlackLine():
@@ -240,7 +238,7 @@ def goToBlackLine():
             pass
         print "black!"
         drive(50, 30)
-        msleep(300)
+        msleep(150)
         if onBlack(c.LINE_FOLLOWER):
             print "still black!"
             break
@@ -258,13 +256,16 @@ def goToHome ():
     msleep(1000)
     lineFollowUntilEndRight2(c.LINE_FOLLOWER)
     driveTimed(90, 30, 400)
-    deliverPoms()
     
 #turns in start box to grab composter
 def grabComposter():
     print("grabComposter")
-    driveTimed(100, 55, 1250) #1250
-    driveTimed(50, 100, 3100) #3300
+    driveTimed(100, 53, 1400) #1250
+    drive(42, 100)
+    while not onBlack(c.LINE_FOLLOWER):
+        pass
+    stop()
+#     driveTimed(50, 100, 3100) #3300
     moveClaw(c.clawOpen, 40)
     msleep(200)
     moveArm(c.armComposter, 10)
@@ -362,7 +363,8 @@ def grabCube():
 #     binGrabUp()
     moveClaw(c.clawOpen, 15)
     moveArm(c.armFront, 15)
-    timedLineFollowRight(c.LINE_FOLLOWER, 3.5)
+#     timedLineFollowRight(c.LINE_FOLLOWER, 3.5)
+    driveTimed(80, 80, 2000)
     moveClaw(c.clawClose, 10)
     
 # Returns to base with pom filled bin
@@ -387,9 +389,11 @@ def returnToBase():
     while onBlack(c.STARBOARD_TOPHAT):
         pass
     drive(-80, 0)
-    #finish here
+    while not onBlack(c.LINE_FOLLOWER):
+        pass
+    stop()
     
-    timedLineFollowBack(c.STARBOARD_TOPHAT, 5)#2
+#     timedLineFollowBack(c.STARBOARD_TOPHAT, 5)#2
     moveOutrigger(c.outriggerBaseReturn, 20)
     driveTimed(-80, -100, 1000)
     drive(-90, -100)
