@@ -384,6 +384,11 @@ def returnToBase():
     drive(-100, -100)
     while not onBlack(c.STARBOARD_TOPHAT):
         pass
+    while onBlack(c.STARBOARD_TOPHAT):
+        pass
+    drive(-80, 0)
+    #finish here
+    
     timedLineFollowBack(c.STARBOARD_TOPHAT, 5)#2
     moveOutrigger(c.outriggerBaseReturn, 20)
     driveTimed(-80, -100, 1000)
