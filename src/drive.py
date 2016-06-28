@@ -13,6 +13,7 @@ from sensors import onBlack , getRBUTTON
 from wallaby import motor
 from wallaby import msleep
 from wallaby import seconds
+from wallaby import freeze
 
 # tests motors
 def testMotors():
@@ -29,6 +30,10 @@ def testMotors():
         pass
     msleep(100)
     stop()
+
+def freezeMotors():
+    freeze(c.LMOTOR)
+    freeze(c.RMOTOR)
 
 def testBinGrab():
     print "push the button if you did not already figure that out"

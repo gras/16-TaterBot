@@ -9,6 +9,7 @@ import wallaby as w
 
 # Start light threshold
 startLightThresh = 2000
+etObject = 2000
 
 # TIME
 startTime = -1
@@ -26,6 +27,7 @@ OUTRIGGER = 3
 
 # ANALOG ports
 LINE_FOLLOWER = 0
+ET = 1
 STARBOARD_TOPHAT = 5
 STARTLIGHT = 2
 

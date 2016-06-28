@@ -11,7 +11,7 @@ import actions as act
 from sensors import DEBUG
 
 def main():
-    # This code is our revamped TaterBot strategy, starting from Regionals code
+    # This code is our revamped TaterBot strategy, starting from Regionals code  
     act.init()
     act.disposeOfDirt()
     act.goToWestPile()

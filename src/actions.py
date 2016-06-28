@@ -12,6 +12,7 @@ from sensors import onBlack
 from sensors import currentTime
 from sensors import wait4light
 from sensors import testSensors
+from sensors import seeObject
 
 from servos import moveClaw
 from servos import moveArm
@@ -34,13 +35,14 @@ from drive import lineFollowUntilEndLeft2
 from drive import lineFollowUntilEndRight
 from drive import lineFollowUntilEndRight2
 from drive import testBinGrab
+from drive import freezeMotors
 
 from wallaby import msleep
 from wallaby import seconds 
 from wallaby import enable_servos
 from wallaby import disable_servos
 from wallaby import shut_down_in
-
+from wallaby import freeze
 import constants as c
 
 #Four piles are called Western, Northern, Southern, and Center
@@ -260,11 +262,18 @@ def goToHome ():
 #turns in start box to grab composter
 def grabComposter():
     print("grabComposter")
-    driveTimed(100, 53, 1400) #1250
-    drive(42, 100)
+    driveTimed(100, 53, 1750) #1250
+    freezeMotors()
+    driveTimed(42, 100, 2200)
+    freezeMotors()
+    findComposter()
+    driveTimed(-50, 50, 100)
+    freezeMotors()
+    drive(100, 100)
     while not onBlack(c.LINE_FOLLOWER):
         pass
     stop()
+    freezeMotors()
 #     driveTimed(50, 100, 3100) #3300
     moveClaw(c.clawOpen, 40)
     msleep(200)
@@ -388,14 +397,18 @@ def returnToBase():
         pass
     while onBlack(c.STARBOARD_TOPHAT):
         pass
+    freeze(c.LMOTOR)
+    freeze(c.RMOTOR)
     drive(-80, 0)
     while not onBlack(c.LINE_FOLLOWER):
         pass
+    #msleep(200) # change this value
+    
     stop()
     
 #     timedLineFollowBack(c.STARBOARD_TOPHAT, 5)#2
     moveOutrigger(c.outriggerBaseReturn, 20)
-    driveTimed(-80, -100, 1000)
+    driveTimed(-90, -100, 1000)
     drive(-90, -100)
     msleep(3500);
     #moveOutrigger(c.outriggerBaseReturn, 20)
@@ -466,3 +479,24 @@ def tempInit():
     binGrabUp()
     waitForButton()
     c.startTime = seconds()
+
+def findComposter():
+    drive(50, -50)
+    while seeObject():
+        pass
+    freezeMotors()
+    drive(-50, 50)
+    while not seeObject():
+        pass
+    freezeMotors()
+    time = seconds()
+    drive(-50, 50)
+    while not seeObject():
+        pass
+    drive(-50, 50)
+    while seeObject():
+        pass
+    freezeMotors()
+    time = ((seconds() - time) / 2) * 1000
+    driveTimed(50, -50, int(time))
+    

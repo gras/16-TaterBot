@@ -32,6 +32,9 @@ def currentTime():
 def onBlack(port):
     return analog(port) > c.topHatMidValue 
 
+def seeObject():
+    return analog(c.ET) > c.etObject
+
 def onBlackLineFollower():
     return analog(c.STARBOARD_TOPHAT) > c.topHatMidValue
 
