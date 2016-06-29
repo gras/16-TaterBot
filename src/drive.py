@@ -22,7 +22,7 @@ def testMotors():
         pass
     stop()
     drive(75, 0)
-    while not onBlack(c.STARBOARD_TOPHAT):
+    while not onBlack(c.OUTRIGGER_TOPHAT):
         pass
     stop()
     drive(-75, 0)
@@ -78,7 +78,7 @@ def driveMotor(motorport, speed):
     motor(motorport, speed)
 
 def driveTilLineStarboard(left, right):
-    driveTilLine(c.STARBOARD_TOPHAT, left, right)
+    driveTilLine(c.OUTRIGGER_TOPHAT, left, right)
 
 def driveTilLine(port, left, right):
     drive(left, right)

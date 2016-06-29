@@ -27,6 +27,7 @@ def main():
     act.grabSouthPile()
     act.goToBlackLine()
     act.goToHome() 
+    DEBUG()
     act.grabComposter()
     act.depositComposter()
     act.goToCenter()

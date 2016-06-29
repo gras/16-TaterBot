@@ -36,7 +36,7 @@ def seeObject():
     return analog(c.ET) > c.etObject
 
 def onBlackLineFollower():
-    return analog(c.STARBOARD_TOPHAT) > c.topHatMidValue
+    return analog(c.OUTRIGGER_TOPHAT) > c.topHatMidValue
 
 def crossBlack(port, time = 0):
     while not onBlack(port):  # wait for black
@@ -91,7 +91,7 @@ def wait4(port):
         pass
 
 def testSensors():
-    if onBlack(c.STARBOARD_TOPHAT):
+    if onBlack(c.OUTRIGGER_TOPHAT):
         print "Problem with outrigger tophat."
         print "Check for unplugged tophat or bad robot setup"
         DEBUG()

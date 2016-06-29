@@ -65,7 +65,7 @@ def init():
     msleep(500)
     print "Press and hold button."
     msleep(2000)
-    waitForButton() # wait for light()
+    waitForButton()#waitforlight()
     shut_down_in(119.9)
     c.startTime = seconds()
     enable_servos()
@@ -100,7 +100,7 @@ def goToTaterBin():
     print("goToTaterBin")
     drive(95, 100)
     moveOutrigger(c.outriggerApproach, 20)
-    crossBlack(c.STARBOARD_TOPHAT, 100)
+    crossBlack(c.OUTRIGGER_TOPHAT, 100)
     stop()
        
 # Places the poms in the potato bin
@@ -135,7 +135,7 @@ def goToNorthernPile():
     print("goToNorthernPile")
     moveClaw(c.clawOpen, 30)
     drive(100, 90)
-    while not onBlack(c.STARBOARD_TOPHAT):
+    while not onBlack(c.OUTRIGGER_TOPHAT):
         pass
 #     msleep(1000)
     driveTimed(100, 100, 150)
@@ -143,7 +143,7 @@ def goToNorthernPile():
     moveOutrigger(c.outriggerBack, 200)
     msleep(200)
     drive(100, -20)
-    while not onBlack(c.STARBOARD_TOPHAT):
+    while not onBlack(c.OUTRIGGER_TOPHAT):
         pass
     if c.isClone:
         msleep(100)
@@ -175,7 +175,7 @@ def grabBin():
     moveOutrigger(c.outriggerBin, 20)
     driveTimed(0, -100, 400)
     drive(-95, -100)
-    while not onBlack(c.STARBOARD_TOPHAT):
+    while not onBlack(c.OUTRIGGER_TOPHAT):
         pass
     stop()
     driveTimed(-50, -50, 150)
@@ -187,10 +187,13 @@ def turnToSouth():
     deliverPoms()
     driveTimed(100, 50, 2000) 
     drive(100, 0)
-    while not onBlack(c.STARBOARD_TOPHAT):
+    while not onBlack(c.OUTRIGGER_TOPHAT):
         pass
     stop()
-    driveTimed(100, 0, 500)
+    if c.isPrime:
+        driveTimed(100, 0, 500)#100,0,500
+    else:
+        driveTimed(80, 0, 500)
     moveOutrigger(c.outriggerOut, 100)
     
 # Grab the middle pile    
@@ -200,9 +203,12 @@ def grabMiddlePile():
     moveArm(c.armFront, 25)
     drive(100, 100)
     msleep(300) 
-    timedLineFollowLeft(c.STARBOARD_TOPHAT, 3)
+    timedLineFollowLeft(c.OUTRIGGER_TOPHAT, 3)
     moveClaw(c.clawMid, 10)
-    drive(60, 60) 
+    if c.isPrime:
+        drive(60, 60)
+    else:
+        drive(40,40) 
     moveClaw(c.clawClose, 5)
     moveArm(c.armMid, 25)
     stop()
@@ -230,8 +236,8 @@ def grabSouthPile():
     moveArm(c.armMid, 20)
     stop()
     deliverPoms()
-
-#
+    
+# goes to the black line
 def goToBlackLine():
     print "goToBlackLine"
     while True:
@@ -245,9 +251,10 @@ def goToBlackLine():
             print "still black!"
             break
         print "white!"
+    freezeMotors()
         
 # line follows to home    
-def goToHome ():
+def goToHome (): # goes home
     print "goToHome"
     drive(30, 30)
     while onBlack(c.LINE_FOLLOWER):
@@ -260,13 +267,14 @@ def goToHome ():
     driveTimed(90, 30, 400)
     
 #turns in start box to grab composter
-def grabComposter():
+def grabComposter(): # grabs the composter
     print("grabComposter")
     driveTimed(100, 53, 1750) #1250
     freezeMotors()
     driveTimed(42, 100, 2200)
     freezeMotors()
-    findComposter()
+    findComposter() # finds the composter 
+    driveTimed(45, 50, 600)
     driveTimed(-50, 50, 100)
     freezeMotors()
     drive(100, 100)
@@ -274,7 +282,8 @@ def grabComposter():
         pass
     stop()
     freezeMotors()
-#     driveTimed(50, 100, 3100) #3300
+#   driveTimed(50, 100, 3100) #3300
+    DEBUG()
     moveClaw(c.clawOpen, 40)
     msleep(200)
     moveArm(c.armComposter, 10)
@@ -298,7 +307,7 @@ def depositComposter():
 def deliverBin():
     print("deliverBin")
     drive(-100, 0)
-    while not onBlack(c.STARBOARD_TOPHAT):
+    while not onBlack(c.OUTRIGGER_TOPHAT):
         pass
     stop()
     driveTimed(100, 100, 500)
@@ -350,7 +359,7 @@ def goToCenter():
     msleep(400)'''
     moveOutrigger(c.outriggerValley, 100)
     drive(100, 100)
-    while not onBlack(c.STARBOARD_TOPHAT):
+    while not onBlack(c.OUTRIGGER_TOPHAT):
         pass
     stop()
     moveOutrigger(c.outriggerIn, 100)
@@ -384,7 +393,7 @@ def returnToBase():
     
     
 #     drive(-100, -81) #-87
-#     while not onBlack(c.STARBOARD_TOPHAT):
+#     while not onBlack(c.OUTRIGGER_TOPHAT):
 #         pass
 #     driveTimed(-100, 0, 800)
     driveTimed(-100, -73, 5000)
@@ -393,9 +402,9 @@ def returnToBase():
     
 #     driveTimed(-100, -100, 1500)
     drive(-100, -100)
-    while not onBlack(c.STARBOARD_TOPHAT):
+    while not onBlack(c.OUTRIGGER_TOPHAT):
         pass
-    while onBlack(c.STARBOARD_TOPHAT):
+    while onBlack(c.OUTRIGGER_TOPHAT):
         pass
     freeze(c.LMOTOR)
     freeze(c.RMOTOR)
@@ -406,31 +415,35 @@ def returnToBase():
     
     stop()
     
-#     timedLineFollowBack(c.STARBOARD_TOPHAT, 5)#2
+#     timedLineFollowBack(c.OUTRIGGER_TOPHAT, 5)#2
     moveOutrigger(c.outriggerBaseReturn, 20)
     driveTimed(-90, -100, 1000)
     drive(-90, -100)
     msleep(3500);
     #moveOutrigger(c.outriggerBaseReturn, 20)
     msleep(1000)
-    while(onBlack(c.STARBOARD_TOPHAT)):
+    while(onBlack(c.OUTRIGGER_TOPHAT)):
         pass
     msleep(10)
-    while(onBlack(c.STARBOARD_TOPHAT)):
+    while(onBlack(c.OUTRIGGER_TOPHAT)):
         pass
     msleep(10)
-    while(onBlack(c.STARBOARD_TOPHAT)):
+    while(onBlack(c.OUTRIGGER_TOPHAT)):
         pass
     stop()
    
 def scoreCube():
     print "scoreCube"
     drive(50, 50)
-    while not onBlack(c.STARBOARD_TOPHAT):
+    while not onBlack(c.OUTRIGGER_TOPHAT):
         pass
     stop()
     msleep(500)
-    driveTimed(45, 50, 700)
+    if c.isPrime:
+        driveTimed(45, 50, 600)
+    else:
+        driveTimed(45, 50, 800)#600
+    freezeMotors()
     moveClaw(c.clawOpen, 25)
     msleep(300)
     moveArm(c.armUp, 10)
