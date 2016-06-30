@@ -36,7 +36,7 @@ CLONE_SWITCH = 9
 RBUTTON = 13
 
 # PRIME servo positions
-armShovel = 0  # Pushes poms forward past bump
+armShovel = 02  # Pushes poms forward past bump
 armFront = 120  # Arm forward on ground 
 armBump = 260  # Arm clears the bump
 armBlock = 465  # move the block

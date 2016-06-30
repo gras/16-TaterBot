@@ -13,6 +13,7 @@ from sensors import currentTime
 from sensors import wait4light
 from sensors import testSensors
 from sensors import seeObject
+from sensors import testET
 
 from servos import moveClaw
 from servos import moveArm
@@ -55,9 +56,12 @@ def init():
     else:
         print "Running Tater - Clone"
     print c.armFront
+    moveArm(c.armMid, 10)
     testSensors()
     testServos()
     testMotors()
+    testET()
+    moveArm(c.armFront, 10)
     moveOutrigger(c.outriggerIn, 25)
     disable_servos()
     testBinGrab()
@@ -70,6 +74,13 @@ def init():
     c.startTime = seconds()
     enable_servos()
 
+
+def getRidOfDirt():
+    moveClaw(c.clawClose, 10)
+    moveArm(c.armBack, 10)
+    moveClaw(c.clawMid, 10)
+    moveArm(c.armFront, 10)
+    
 #collects red pom
 def disposeOfDirt():
     driveTimed(95, 100, 500)
@@ -217,10 +228,14 @@ def grabMiddlePile():
 # Grab south pile, raising front of claw in order to pass bump  
 def grabSouthPile():
     print ("grabSouthPile")
+    
     moveClaw(c.clawOpen, 10)
     moveArm(c.armFront, 15)
     moveArm(c.armShovel, 10)
-    driveTimed(100, 100, 500)
+    if c.isPrime:
+        driveTimed(100, 100, 500)
+    else:
+        driveTimed(85, 100, 900)
     if c.isPrime:
         drive(100, 80)
     else:
@@ -228,7 +243,7 @@ def grabSouthPile():
     if c.isPrime:
         msleep(2300)
     else:
-        msleep(850)#2300
+        msleep(700)#850
     moveOutrigger(c.outriggerIn, 100)
     moveArm(c.armFront, 50)
     moveClaw(c.clawClose, 20)
@@ -236,6 +251,7 @@ def grabSouthPile():
     moveArm(c.armMid, 20)
     stop()
     deliverPoms()
+   
     
 # goes to the black line
 def goToBlackLine():
@@ -283,15 +299,14 @@ def grabComposter(): # grabs the composter
     stop()
     freezeMotors()
 #   driveTimed(50, 100, 3100) #3300
-    DEBUG()
     moveClaw(c.clawOpen, 40)
     msleep(200)
-    moveArm(c.armComposter, 10)
+    moveArm(c.armComposter+100, 10)
     msleep(200)
-    moveClaw(c.clawClose, 50)
+    moveClaw(c.clawClose, 50)#50
     msleep(200)
     moveArm(c.armUp, 10)
-    driveTimed(-100, 100, 1300)
+    driveTimed(-100, 100, 1000)
     msleep(500)
     
 #puts composter in bin
@@ -330,7 +345,7 @@ def goToCenter():
         driveTimed(95, 100, 6000)#4000
         driveTimed(100, 60, 3000) 
     else:
-        driveTimed(90, 100, 4000)
+        driveTimed(95, 100, 6000)#4000
         driveTimed(100, 60, 3000)
     driveTimed(100,100, 500)
     drive(100, 100)

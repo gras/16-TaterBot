@@ -29,7 +29,7 @@ def testServos():
     msleep(500)
     moveOutrigger(c.outriggerOut, 15)
     msleep(500)
-    moveArm(c.armFront, 15)
+   # moveArm(c.armFront, 15)
     moveClaw(c.clawMid, 25)
     msleep(500)
 

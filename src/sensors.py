@@ -99,3 +99,8 @@ def testSensors():
         print "Problem with center tophat."
         print "Check for unplugged tophat or bad robot setup"
         DEBUG()
+   
+def testET():
+    while analog(c.ET)> 400:
+        pass
+    
