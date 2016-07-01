@@ -38,6 +38,7 @@ RBUTTON = 13
 # PRIME servo positions
 armShovel = 02  # Pushes poms forward past bump
 armFront = 120  # Arm forward on ground 
+armFinalGrab = 190
 armBump = 260  # Arm clears the bump
 armBlock = 465  # move the block
 armComposter = 500  # Arm to grab Composter
@@ -46,6 +47,7 @@ armOver = 713  # over the block
 armUp = 1100  # Arm at 90 degrees up
 armBack = 1550  # Arm backwards
 armBlockBack = 1650  # Arm backwards with block
+armFinalBlock = 320 #The grab
 
 clawOpen = 0  # Claw open
 clawMid = 230  # Claw mid
@@ -74,7 +76,7 @@ if isPrime:
     print("running PRIME")
 else:
     print("running CLONE!")
-    armFront = 80
+    armFront = 190
     armMid = 500  # Arm to score at bin
     armUp = 1000  # Arm at 90 degrees up
     armBack = 1500# Arm backwards

@@ -45,6 +45,7 @@ from wallaby import disable_servos
 from wallaby import shut_down_in
 from wallaby import freeze
 import constants as c
+from constants import isPrime
 
 #Four piles are called Western, Northern, Southern, and Center
 
@@ -76,10 +77,10 @@ def init():
 
 
 def getRidOfDirt():
-    moveClaw(c.clawClose, 10)
-    moveArm(c.armBack, 10)
-    moveClaw(c.clawMid, 10)
-    moveArm(c.armFront, 10)
+    moveClaw(c.clawClose, 30)
+    moveArm(c.armBack, 30)
+    moveClaw(c.clawMid, 30)
+    moveArm(c.armFront, 15)
     
 #collects red pom
 def disposeOfDirt():
@@ -227,8 +228,7 @@ def grabMiddlePile():
 
 # Grab south pile, raising front of claw in order to pass bump  
 def grabSouthPile():
-    print ("grabSouthPile")
-    
+    print ("grabSouthPile")  
     moveClaw(c.clawOpen, 10)
     moveArm(c.armFront, 15)
     moveArm(c.armShovel, 10)
@@ -285,12 +285,18 @@ def goToHome (): # goes home
 #turns in start box to grab composter
 def grabComposter(): # grabs the composter
     print("grabComposter")
-    driveTimed(100, 53, 1750) #1250
+    if isPrime:
+        driveTimed(100, 53, 1750) #1250
+    else: 
+        driveTimed(90, 63, 2000)
     freezeMotors()
     driveTimed(42, 100, 2200)
     freezeMotors()
     findComposter() # finds the composter 
-    driveTimed(45, 50, 600)
+    if isPrime:
+        driveTimed(45, 50, 600)
+    else:
+        driveTimed(45,50,500)
     driveTimed(-50, 50, 100)
     freezeMotors()
     drive(100, 100)
@@ -301,7 +307,11 @@ def grabComposter(): # grabs the composter
 #   driveTimed(50, 100, 3100) #3300
     moveClaw(c.clawOpen, 40)
     msleep(200)
-    moveArm(c.armComposter+100, 10)
+    if isPrime:
+        moveArm(c.armComposter, 10)
+    else:
+        moveArm(c.armComposter-100, 10)
+    
     msleep(200)
     moveClaw(c.clawClose, 50)#50
     msleep(200)
@@ -395,7 +405,7 @@ def grabCube():
 #     driveTimed(100, 100, 1100)
 #     binGrabUp()
     moveClaw(c.clawOpen, 15)
-    moveArm(c.armFront, 15)
+    moveArm(c.armFinalBlock, 15)
 #     timedLineFollowRight(c.LINE_FOLLOWER, 3.5)
     driveTimed(80, 80, 2000)
     moveClaw(c.clawClose, 10)

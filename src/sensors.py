@@ -103,4 +103,5 @@ def testSensors():
 def testET():
     while analog(c.ET)> 400:
         pass
+    print "The ET has been tested."
     
