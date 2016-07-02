@@ -69,9 +69,10 @@ def init():
     testBinGrab()
     binGrabDown()
     msleep(500)
-    print "Press and hold button."
-    msleep(2000)
-    waitForButton()#waitforlight()
+    wait4light()
+#     print "Press and hold button."
+#     msleep(2000)
+#     waitForButton()
     shut_down_in(119.9)
     c.startTime = seconds()
     enable_servos()
@@ -79,7 +80,7 @@ def init():
 
 def getRidOfDirt():
     moveClaw(c.clawClose, 30)
-    moveArm(c.armBack, 30)
+    moveArm(c.armBack, 20)
     moveClaw(c.clawMid, 30)
     moveArm(c.armFront, 15)
     
@@ -89,7 +90,6 @@ def disposeOfDirt():
     moveClaw(c.clawClose, 20)
     moveArm(c.armMid, 25)
     msleep(100)
-
     
 # goes to the first pile
 def goToWestPile():
@@ -242,7 +242,7 @@ def grabSouthPile():
     else:
         drive(100,85)
     if c.isPrime:
-        msleep(2300)
+        msleep(1500)
     else:
         msleep(700)#850
     moveOutrigger(c.outriggerIn, 100)
@@ -252,7 +252,9 @@ def grabSouthPile():
     moveArm(c.armMid, 20)
     stop()
     deliverPoms()
-   
+    if onBlack(c.LINE_FOLLOWER):
+        print "on black early"
+        DEBUGwithWait()
     
 # goes to the black line
 def goToBlackLine():
@@ -276,10 +278,12 @@ def goToHome (): # goes home
     drive(30, 30)
     while onBlack(c.LINE_FOLLOWER):
         pass
+    print "280"
     drive(0, 30)
     while not onBlack(c.LINE_FOLLOWER):
         pass
     msleep(1000)
+    print "linefollow"
     lineFollowUntilEndRight2(c.LINE_FOLLOWER)
     driveTimed(90, 30, 400)
     
