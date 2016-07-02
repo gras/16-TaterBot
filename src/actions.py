@@ -45,7 +45,7 @@ from wallaby import disable_servos
 from wallaby import shut_down_in
 from wallaby import freeze
 import constants as c
-from constants import isPrime
+from constants import isPrime, outriggerFindLine
 
 #Four piles are called Western, Northern, Southern, and Center
 
@@ -69,10 +69,10 @@ def init():
     testBinGrab()
     binGrabDown()
     msleep(500)
-    wait4light()
-#     print "Press and hold button."
-#     msleep(2000)
-#     waitForButton()
+#     wait4light()
+    print "Press and hold button."
+    msleep(2000)
+    waitForButton()
     shut_down_in(119.9)
     c.startTime = seconds()
     enable_servos()
@@ -132,10 +132,15 @@ def backUpFromBin():
     else:
         driveTimed(-100, -100, 250)#**********************
     driveTimed(-100, -50, 2100)
-    if c.isPrime:
-        driveTimed(100, 20, 1000) #### important for turn (may need changing)
-    else: 
-        driveTimed(100, 40, 1100) #### important for turn
+    moveOutrigger(c.outriggerNorthTurn, 40)
+    drive(100, 20)
+    while not onBlack(c.OUTRIGGER_TOPHAT):
+        pass
+    freezeMotors()
+#     if c.isPrime:
+#         driveTimed(100, 20, 1000) #### important for turn (may need changing)
+#     else: 
+#         driveTimed(100, 40, 1100) #### important for turn
     #msleep(1000)
     if c.isPrime:
         driveTimed(100, 100, 250) # added at practice
@@ -146,6 +151,7 @@ def backUpFromBin():
 # Turn to north pile
 def goToNorthernPile():
     print("goToNorthernPile")
+    moveOutrigger(c.outriggerApproach, 100)
     moveClaw(c.clawOpen, 30)
     drive(100, 90)
     while not onBlack(c.OUTRIGGER_TOPHAT):
@@ -160,8 +166,6 @@ def goToNorthernPile():
         pass
     if c.isClone:
         msleep(100)
-    else:
-        msleep(40)
     stop()
 #     DEBUG()
     moveArm(c.armFront, 20)
@@ -275,17 +279,47 @@ def goToBlackLine():
 # line follows to home    
 def goToHome (): # goes home
     print "goToHome"
-    drive(30, 30)
-    while onBlack(c.LINE_FOLLOWER):
-        pass
-    print "280"
-    drive(0, 30)
-    while not onBlack(c.LINE_FOLLOWER):
-        pass
-    msleep(1000)
-    print "linefollow"
-    lineFollowUntilEndRight2(c.LINE_FOLLOWER)
-    driveTimed(90, 30, 400)
+    driveTimed(100, 100, 500)
+    driveTimed(-80, 80, 2222)
+    driveTimed(-100, -100, 2000)
+    driveTimed(-100, -80, 4000)
+    binGrabDown()
+    msleep(200)
+    driveTimed(100, 100, 800)
+    driveTimed(-100, 0, 1300)
+    driveTimed(-100, -100, 500)
+    moveClaw(c.clawOpenWide, 20)
+    msleep(200)
+    moveArm(c.armWayBack, 20)
+    moveClaw(c.clawClose, 20)
+    msleep(100)
+    moveArm(c.armUp, 10)
+    driveTimed(100, 0, 1000)
+    freezeMotors()
+    driveTimed(0, -100, 300)
+    freezeMotors()
+#     driveTimed(-50, -50, 200)
+    freezeMotors()
+    deliverPoms()
+    
+    driveTimed(70, 100, 1000)
+    driveTimed(90, 100, 500)    
+    
+    
+    
+    
+#     
+#     drive(30, 30)
+#     while onBlack(c.LINE_FOLLOWER):
+#         pass
+#     print "280"
+#     drive(0, 30)
+#     while not onBlack(c.LINE_FOLLOWER):
+#         pass
+#     msleep(1000)
+#     print "linefollow"
+#     lineFollowUntilEndRight2(c.LINE_FOLLOWER)
+#     driveTimed(90, 30, 400)
     
 #turns in start box to grab composter
 def grabComposter(): # grabs the composter
@@ -413,7 +447,7 @@ def grabCube():
     moveClaw(c.clawOpen, 15)
     moveArm(c.armFinalBlock, 15)
 #     timedLineFollowRight(c.LINE_FOLLOWER, 3.5)
-    findComposter()
+#     findComposter()
     driveTimed(80, 80, 2000)
     moveClaw(c.clawClose, 10)
     

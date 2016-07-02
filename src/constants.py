@@ -48,6 +48,7 @@ armUp = 1100  # Arm at 90 degrees up
 armBack = 1550  # Arm backwards
 armBlockBack = 1650  # Arm backwards with block
 armFinalBlock = 320 #The grab
+armWayBack = 1750
 
 clawOpenWide = 0 #Claw at 90 degrees 
 clawOpen = 0  # Claw open
@@ -57,13 +58,14 @@ clawClose = 1000  # Claw closed
 outriggerIn = 250
 outriggerBaseReturn = 340
 outriggerSpin = 416
-outriggerBack = 450
+outriggerBack = 455 #450
 outriggerBin = 1080   
 outriggerFindLine = 1200
 outriggerApproach = 1500
 outriggerOut = 1650 
 outriggerFront = 1900
 outriggerValley = 540
+outriggerNorthTurn = 450
 
 # PRIME analog sensors values
 ceilingHeight = 700  # value of ET beneath crater rim
