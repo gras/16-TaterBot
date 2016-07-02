@@ -55,17 +55,18 @@ clawOpen = 0  # Claw open
 clawMid = 230  # Claw mid
 clawClose = 1000  # Claw closed
 
-outriggerIn = 250
-outriggerBaseReturn = 340
-outriggerSpin = 416
-outriggerBack = 455 #450
-outriggerBin = 1080   
-outriggerFindLine = 1200
-outriggerApproach = 1500
-outriggerOut = 1650 
-outriggerFront = 1900
-outriggerValley = 540
-outriggerNorthTurn = 450
+outriggerIn = 97 #250
+outriggerBaseReturn = 187#340
+outriggerSpin = 263 #416
+outriggerBack = 302 #455 #450
+outriggerBin = 927 #1080   
+outriggerFindLine = 1047 #1200
+outriggerApproach = 1347 #1500
+outriggerOut = 1497 #1650 
+outriggerFront = 1747 #1900
+outriggerValley = 387 #540
+outriggerNorthTurn = 297 #450
+outriggerApproachTurn = 1347 #1500
 
 # PRIME analog sensors values
 ceilingHeight = 700  # value of ET beneath crater rim
@@ -85,16 +86,18 @@ else:
     armBack = 1500# Arm backwards
     
     clawOpenWide = 400 #Claw at 90 degrees
-    clawOpen = 700  #Claw open 800 
-    clawMid = 1030
+    clawOpen = 1000  #Claw open 800 
+    clawMid = 930
     clawClose = 1840 #Claw closed
     
     outriggerIn = 100
     outriggerBaseReturn = 230 
     outriggerSpin = 315 
-    outriggerBack = 335 
+    outriggerBack = 310 #335 
     outriggerBin = 950 
     outriggerFindLine = 1100
-    outriggerApproach = 1400 
+    outriggerApproach = 1400 #was 1400
     outriggerOut = 1500 
     outriggerFront = 1770 
+    outriggerNorthTurn = 342
+    outriggerApproachTurn = 1550

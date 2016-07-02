@@ -129,9 +129,10 @@ def backUpFromBin():
     print("backUpFromBin")
     if c.isPrime: #added at practice
         driveTimed(-100, -100, 250)
+        driveTimed(-100, -50, 2100)
     else:
         driveTimed(-100, -100, 250)#**********************
-    driveTimed(-100, -50, 2100)
+        driveTimed(-100, -50, 1800)
     moveOutrigger(c.outriggerNorthTurn, 40)
     drive(100, 20)
     while not onBlack(c.OUTRIGGER_TOPHAT):
@@ -151,7 +152,7 @@ def backUpFromBin():
 # Turn to north pile
 def goToNorthernPile():
     print("goToNorthernPile")
-    moveOutrigger(c.outriggerApproach, 100)
+    moveOutrigger(c.outriggerApproachTurn, 100)
     moveClaw(c.clawOpen, 30)
     drive(100, 90)
     while not onBlack(c.OUTRIGGER_TOPHAT):
@@ -164,8 +165,6 @@ def goToNorthernPile():
     drive(100, -20)
     while not onBlack(c.OUTRIGGER_TOPHAT):
         pass
-    if c.isClone:
-        msleep(100)
     stop()
 #     DEBUG()
     moveArm(c.armFront, 20)
@@ -280,13 +279,28 @@ def goToBlackLine():
 def goToHome (): # goes home
     print "goToHome"
     driveTimed(100, 100, 500)
-    driveTimed(-80, 80, 2222)
+    driveTimed(-80, 80, 2000)
     driveTimed(-100, -100, 2000)
-    driveTimed(-100, -80, 4000)
+    drive(-90, -100)
+    while not onBlack(c.OUTRIGGER_TOPHAT):
+        pass
+    freezeMotors()
+    DEBUGwithWait()
+    if c.isPrime:
+        driveTimed(-100, -80, 4000)
+    else: 
+        driveTimed(-100, -80, 3500)
+    DEBUGwithWait()
     binGrabDown()
+    moveArm(c.armUp, 20)
     msleep(200)
-    driveTimed(100, 100, 800)
-    driveTimed(-100, 0, 1300)
+    if c.isPrime:
+        driveTimed(100, 100, 800)
+        driveTimed(-100, 0, 1300)
+    else:
+        driveTimed(100, 100, 800)
+        driveTimed(-100, 0, 1000)
+    
     driveTimed(-100, -100, 500)
     moveClaw(c.clawOpenWide, 20)
     msleep(200)
@@ -294,9 +308,14 @@ def goToHome (): # goes home
     moveClaw(c.clawClose, 20)
     msleep(100)
     moveArm(c.armUp, 10)
-    driveTimed(100, 0, 1000)
-    freezeMotors()
-    driveTimed(0, -100, 300)
+    if c.isPrime:
+        driveTimed(100, 0, 1000)
+        freezeMotors()
+        driveTimed(0, -100, 300)
+    else:
+        driveTimed(100, 0, 1000)
+        freezeMotors()
+        driveTimed(0, -100, 100)
     freezeMotors()
 #     driveTimed(-50, -50, 200)
     freezeMotors()
