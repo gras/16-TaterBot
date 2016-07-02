@@ -13,6 +13,7 @@ from wallaby import seconds
 from wallaby import a_button_clicked
 from wallaby import b_button_clicked
 from wallaby import msleep
+from wallaby import freeze
 
 import constants as c
 
@@ -24,6 +25,14 @@ def getRBUTTON():
 def DEBUG():
     ao()
     print 'Program stop for DEBUG\nSeconds: ', seconds() - c.startTime 
+    exit(0)
+    
+def DEBUGwithWait():
+    freeze(c.LMOTOR)
+    freeze(c.RMOTOR)
+    ao()
+    print 'Program stop for DEBUG\nSeconds: ', seconds() - c.startTime
+    msleep(5000)
     exit(0)
 
 def currentTime():

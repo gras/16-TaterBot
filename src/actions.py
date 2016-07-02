@@ -6,7 +6,7 @@ Created on Mar 13, 2016
 @author: Dead Robot Society
 '''
 
-from sensors import waitForButton, crossBlack
+from sensors import waitForButton, crossBlack, DEBUGwithWait
 from sensors import DEBUG
 from sensors import onBlack
 from sensors import currentTime
@@ -61,6 +61,7 @@ def init():
     testSensors()
     testServos()
     testMotors()
+    print "testET"
     testET()
     moveArm(c.armFront, 10)
     moveOutrigger(c.outriggerIn, 25)
@@ -288,16 +289,18 @@ def grabComposter(): # grabs the composter
     if isPrime:
         driveTimed(100, 53, 1750) #1250
     else: 
-        driveTimed(90, 63, 2000)
+        driveTimed(100, 63,1750) #2000
     freezeMotors()
     driveTimed(42, 100, 2200)
     freezeMotors()
     findComposter() # finds the composter 
     if isPrime:
         driveTimed(45, 50, 600)
+        driveTimed(-50, 50, 100)
     else:
-        driveTimed(45,50,500)
-    driveTimed(-50, 50, 100)
+        driveTimed(45,50,200)
+        driveTimed(-50, 50, 100)
+        driveTimed(-50, -50, 300)
     freezeMotors()
     drive(100, 100)
     while not onBlack(c.LINE_FOLLOWER):
@@ -305,13 +308,12 @@ def grabComposter(): # grabs the composter
     stop()
     freezeMotors()
 #   driveTimed(50, 100, 3100) #3300
-    moveClaw(c.clawOpen, 40)
+    moveClaw(c.clawOpenWide, 40)
     msleep(200)
     if isPrime:
         moveArm(c.armComposter, 10)
     else:
-        moveArm(c.armComposter-100, 10)
-    
+        moveArm(c.armComposter, 10)
     msleep(200)
     moveClaw(c.clawClose, 50)#50
     msleep(200)
@@ -379,7 +381,7 @@ def goToCenter():
     drive(100, 100)
     moveClaw(c.clawOpen, 25)
     lineFollowUntilEndRight(c.LINE_FOLLOWER)
-    driveTimed(90, 50, 400)
+    driveTimed(90, 50, 350)#400######################################################################
     '''moveArm(c.armShovel, 15)
     msleep(400)'''
     moveOutrigger(c.outriggerValley, 100)
@@ -407,6 +409,7 @@ def grabCube():
     moveClaw(c.clawOpen, 15)
     moveArm(c.armFinalBlock, 15)
 #     timedLineFollowRight(c.LINE_FOLLOWER, 3.5)
+    findComposter()
     driveTimed(80, 80, 2000)
     moveClaw(c.clawClose, 10)
     

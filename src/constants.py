@@ -49,6 +49,7 @@ armBack = 1550  # Arm backwards
 armBlockBack = 1650  # Arm backwards with block
 armFinalBlock = 320 #The grab
 
+clawOpenWide = 0 #Claw at 90 degrees 
 clawOpen = 0  # Claw open
 clawMid = 230  # Claw mid
 clawClose = 1000  # Claw closed
@@ -81,6 +82,7 @@ else:
     armUp = 1000  # Arm at 90 degrees up
     armBack = 1500# Arm backwards
     
+    clawOpenWide = 400 #Claw at 90 degrees
     clawOpen = 700  #Claw open 800 
     clawMid = 1030
     clawClose = 1840 #Claw closed

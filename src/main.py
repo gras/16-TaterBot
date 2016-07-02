@@ -34,6 +34,7 @@ def main():
     act.grabCube()
     act.returnToBase()
     act.scoreCube()
+    DEBUG() # please don't remove
     
 if __name__ == '__main__':
     # set print to unbuffered
