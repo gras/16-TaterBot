@@ -161,6 +161,7 @@ def goToNorthernPile():
     while not onBlack(c.OUTRIGGER_TOPHAT):
         pass
     stop()
+    moveOutrigger(c.outriggerBack, 2000)
     moveArm(c.armFront, 20)
     stop()
     
