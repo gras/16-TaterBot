@@ -17,6 +17,8 @@ from wallaby import freeze
 
 import constants as c
 
+time = 0
+
 # reads the right button
 def getRBUTTON():
     return digital (c.RBUTTON)
@@ -34,6 +36,12 @@ def DEBUGwithWait():
     print 'Program stop for DEBUG\nSeconds: ', seconds() - c.startTime
     msleep(5000)
     exit(0)
+
+def PAUSE():
+    freeze(c.LMOTOR)
+    freeze(c.RMOTOR)
+    msleep(100)
+    waitForButton()
 
 def currentTime():
     print 'Current time: ', seconds() - c.startTime 
@@ -108,9 +116,42 @@ def testSensors():
         print "Problem with center tophat."
         print "Check for unplugged tophat or bad robot setup"
         DEBUG()
-   
+    if notOkBlack(c.OUTRIGGER_TOPHAT):
+        print "Problem with outrigger tophat."
+        print "white value is too high"
+        print "Press right button 3 times to ignore"
+        waitForButton()
+        waitForButton()
+        waitForButton()
+    if notOkBlack(c.LINE_FOLLOWER):
+        print "Problem with center tophat."
+        print "white value is too high"
+        print "Press right button 3 times to ignore"
+        waitForButton()
+        waitForButton()
+        waitForButton()
+
+def testOutriggerOut():
+    if notOkBlack(c.OUTRIGGER_TOPHAT):
+        print "Problem with outrigger tophat."
+        print "white value is too high"
+        print "Press right button 3 times to ignore"
+        waitForButton()
+        waitForButton()
+        waitForButton()
+
 def testET():
     while analog(c.ET)> 400:
         pass
     print "The ET has been tested."
+
+def notOkBlack(port):
+    return analog(port) > c.topHatSafeValue
+
+def setWait(delay):
+    time = seconds() + delay
     
+def getWait(): # returns True until elapsed time is greater
+    if seconds > time:
+        print "timed out"
+    return seconds < time

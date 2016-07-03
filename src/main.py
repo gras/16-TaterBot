@@ -28,8 +28,6 @@ def main():
     act.grabSouthPile()
     act.goToBlackLine()
     act.goToHome() 
-#     act.grabComposter()
-#     act.depositComposter()
     act.goToCenter()
     act.grabCube()
     act.returnToBase()

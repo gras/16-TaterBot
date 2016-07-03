@@ -67,11 +67,13 @@ outriggerFront = 1747 #1900
 outriggerValley = 387 #540
 outriggerNorthTurn = 297 #450
 outriggerApproachTurn = 1347 #1500
+outriggerCompostApproach = 2047
 
 # PRIME analog sensors values
 ceilingHeight = 700  # value of ET beneath crater rim
 armLength = 1000  # robot 1 claw length from bin
 topHatMidValue = 2000  # value between black and white top hat values
+topHatSafeValue = 500
 
 isClone = w.digital(CLONE_SWITCH)
 isPrime = not isClone
@@ -82,11 +84,12 @@ else:
     print("running CLONE!")
     armFront = 190
     armMid = 500  # Arm to score at bin
+    armComposter = 400
     armUp = 1000  # Arm at 90 degrees up
     armBack = 1500# Arm backwards
     
     clawOpenWide = 400 #Claw at 90 degrees
-    clawOpen = 1000  #Claw open 800 
+    clawOpen = 550  #Claw open 800 
     clawMid = 930
     clawClose = 1840 #Claw closed
     

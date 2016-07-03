@@ -6,7 +6,8 @@ Created on Mar 13, 2016
 @author: Dead Robot Society
 '''
 
-from sensors import waitForButton, crossBlack, DEBUGwithWait
+from sensors import waitForButton, crossBlack, DEBUGwithWait, PAUSE,\
+    testOutriggerOut, setWait, getWait
 from sensors import DEBUG
 from sensors import onBlack
 from sensors import currentTime
@@ -50,7 +51,7 @@ from constants import isPrime, outriggerFindLine
 #Four piles are called Western, Northern, Southern, and Center
 
 # tests sensors and sets prime and clone values
-def init():
+def init():      
     c.startTime = seconds()
     if c.isPrime:
         print "Running Tater - Prime"
@@ -64,6 +65,7 @@ def init():
     print "testET"
     testET()
     moveArm(c.armFront, 10)
+    testOutriggerOut()
     moveOutrigger(c.outriggerIn, 25)
     disable_servos()
     testBinGrab()
@@ -133,6 +135,7 @@ def backUpFromBin():
     else:
         driveTimed(-100, -100, 250)#**********************
         driveTimed(-100, -50, 1800)
+    freezeMotors()
     moveOutrigger(c.outriggerNorthTurn, 40)
     drive(100, 20)
     while not onBlack(c.OUTRIGGER_TOPHAT):
@@ -236,6 +239,9 @@ def grabSouthPile():
     moveClaw(c.clawOpen, 10)
     moveArm(c.armFront, 15)
     moveArm(c.armShovel, 10)
+    drive(0, 30)
+    while onBlack(c.OUTRIGGER_TOPHAT):
+        pass
     if c.isPrime:
         driveTimed(100, 100, 500)
     else:
@@ -255,8 +261,14 @@ def grabSouthPile():
     moveArm(c.armMid, 20)
     stop()
     deliverPoms()
+    drive(-30, -30)
     if onBlack(c.LINE_FOLLOWER):
         print "on black early"
+        while onBlack(c.LINE_FOLLOWER):
+            pass
+        freezeMotors()
+    if onBlack(c.LINE_FOLLOWER):
+        print "thats not good (265)"
         DEBUGwithWait()
     
 # goes to the black line
@@ -279,66 +291,107 @@ def goToBlackLine():
 def goToHome (): # goes home
     print "goToHome"
     driveTimed(100, 100, 500)
-    driveTimed(-80, 80, 2000)
-    driveTimed(-100, -100, 2000)
+    if c.isPrime:
+        driveTimed(-80, 80, 2000)
+    else:
+        driveTimed(-80, 80, 2200)
+#     driveTimed(-100, -100, 2300)
+    drive(-100, -100)
+    msleep(1800)
+    moveOutrigger(c.outriggerCompostApproach, 39)
     drive(-90, -100)
-    while not onBlack(c.OUTRIGGER_TOPHAT):
+    msleep(400)
+    setWait(15000)
+    while not onBlack(c.OUTRIGGER_TOPHAT) and getWait():
         pass
-    freezeMotors()
-    DEBUGwithWait()
-    if c.isPrime:
-        driveTimed(-100, -80, 4000)
-    else: 
-        driveTimed(-100, -80, 3500)
-    DEBUGwithWait()
+    while onBlack(c.OUTRIGGER_TOPHAT) and getWait():
+        pass
+    msleep(10)
+    while onBlack(c.OUTRIGGER_TOPHAT and getWait()):
+        pass
+    msleep(10)
+    while onBlack(c.OUTRIGGER_TOPHAT) and getWait():
+        pass    
+    driveTimed(-95, -100, 1800)
     binGrabDown()
-    moveArm(c.armUp, 20)
-    msleep(200)
-    if c.isPrime:
-        driveTimed(100, 100, 800)
-        driveTimed(-100, 0, 1300)
-    else:
-        driveTimed(100, 100, 800)
-        driveTimed(-100, 0, 1000)
-    
-    driveTimed(-100, -100, 500)
-    moveClaw(c.clawOpenWide, 20)
-    msleep(200)
-    moveArm(c.armWayBack, 20)
-    moveClaw(c.clawClose, 20)
-    msleep(100)
+    moveOutrigger(c.outriggerIn, 200)
+    driveTimed(100, 0, 4000)
+    drive(0, -100)
+    while not seeObject():
+        pass
+#     driveTimed(0, -100, 80)
+    freezeMotors()
+    moveClaw(c.clawOpenWide, 10)
+    moveArm(c.armComposter, 5)
+    moveClaw(c.clawClose, 200)
     moveArm(c.armUp, 10)
-    if c.isPrime:
-        driveTimed(100, 0, 1000)
-        freezeMotors()
-        driveTimed(0, -100, 300)
-    else:
-        driveTimed(100, 0, 1000)
-        freezeMotors()
-        driveTimed(0, -100, 100)
-    freezeMotors()
-#     driveTimed(-50, -50, 200)
-    freezeMotors()
+    driveTimed(0, 100, 100)
+    
+    driveTimed(-100, -100, 750)
+    driveTimed(0, 100, 1200)
+    driveTimed(-100, -80, 900)#750
     deliverPoms()
+    driveTimed(90, 100, 1500)
     
-    driveTimed(70, 100, 1000)
-    driveTimed(90, 100, 500)    
-    
-    
-    
-    
+#     driveTimed(-100, 0, 2800)
+#     driveTimed(100, 100, 2000)
+#     moveOutrigger(c.outriggerCompostApproach, 500)
+#     if not onBlack(c.OUTRIGGER_TOPHAT):
+#         driveTimed(80, 100, 1500)
+#     DEBUGwithWait()
+#     if c.isPrime:
+#         driveTimed(-100, -80, 4000)
+#     else: 
+#         driveTimed(-100, -80, 3500)
+#     DEBUGwithWait()
+#     binGrabDown()
+#     moveArm(c.armUp, 20)
+#     msleep(200)
+#     if c.isPrime:
+#         driveTimed(100, 100, 800)
+#         driveTimed(-100, 0, 1300)
+#     else:
+#         driveTimed(100, 100, 800)
+#         driveTimed(-100, 0, 1000)
 #     
-#     drive(30, 30)
-#     while onBlack(c.LINE_FOLLOWER):
-#         pass
-#     print "280"
-#     drive(0, 30)
-#     while not onBlack(c.LINE_FOLLOWER):
-#         pass
-#     msleep(1000)
-#     print "linefollow"
-#     lineFollowUntilEndRight2(c.LINE_FOLLOWER)
-#     driveTimed(90, 30, 400)
+#     driveTimed(-100, -100, 500)
+#     moveClaw(c.clawOpenWide, 20)
+#     msleep(200)
+#     moveArm(c.armWayBack, 20)
+#     moveClaw(c.clawClose, 20)
+#     msleep(100)
+#     moveArm(c.armUp, 10)
+#     if c.isPrime:
+#         driveTimed(100, 0, 1000)
+#         freezeMotors()
+#         driveTimed(0, -100, 300)
+#     else:
+#         driveTimed(100, 0, 1000)
+#         freezeMotors()
+#         driveTimed(0, -100, 100)
+#     freezeMotors()
+# #     driveTimed(-50, -50, 200)
+#     freezeMotors()
+#     deliverPoms()
+#     
+#     driveTimed(70, 100, 1000)
+#     driveTimed(90, 100, 500)    
+#     
+#     
+#     
+#     
+# #     
+# #     drive(30, 30)
+# #     while onBlack(c.LINE_FOLLOWER):
+# #         pass
+# #     print "280"
+# #     drive(0, 30)
+# #     while not onBlack(c.LINE_FOLLOWER):
+# #         pass
+# #     msleep(1000)
+# #     print "linefollow"
+# #     lineFollowUntilEndRight2(c.LINE_FOLLOWER)
+# #     driveTimed(90, 30, 400)
     
 #turns in start box to grab composter
 def grabComposter(): # grabs the composter
@@ -346,7 +399,7 @@ def grabComposter(): # grabs the composter
     if isPrime:
         driveTimed(100, 53, 1750) #1250
     else: 
-        driveTimed(100, 63,1750) #2000
+        driveTimed(100, 53, 1750) #2000
     freezeMotors()
     driveTimed(42, 100, 2200)
     freezeMotors()
@@ -357,7 +410,7 @@ def grabComposter(): # grabs the composter
     else:
         driveTimed(45,50,200)
         driveTimed(-50, 50, 100)
-        driveTimed(-50, -50, 300)
+#         driveTimed(-50, -50, 300)
     freezeMotors()
     drive(100, 100)
     while not onBlack(c.LINE_FOLLOWER):
@@ -481,7 +534,7 @@ def returnToBase():
 #     while not onBlack(c.OUTRIGGER_TOPHAT):
 #         pass
 #     driveTimed(-100, 0, 800)
-    driveTimed(-100, -73, 5000)
+    driveTimed(-100, -73, 3000)
 #     DEBUG()
     
     
