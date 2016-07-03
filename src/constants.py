@@ -59,6 +59,7 @@ outriggerIn = 97 #250
 outriggerBaseReturn = 187#340
 outriggerSpin = 263 #416
 outriggerBack = 302 #455 #450
+outriggerNorthBack = 2000
 outriggerBin = 927 #1080   
 outriggerFindLine = 1047 #1200
 outriggerApproach = 1347 #1500
@@ -72,7 +73,7 @@ outriggerCompostApproach = 2047
 # PRIME analog sensors values
 ceilingHeight = 700  # value of ET beneath crater rim
 armLength = 1000  # robot 1 claw length from bin
-topHatMidValue = 2000  # value between black and white top hat values
+topHatMidValue = 1200  # value between black and white top hat values
 topHatSafeValue = 500
 
 isClone = w.digital(CLONE_SWITCH)
@@ -97,6 +98,7 @@ else:
     outriggerBaseReturn = 230 
     outriggerSpin = 315 
     outriggerBack = 310 #335 
+    outriggerNorthBack = 2020
     outriggerBin = 950 
     outriggerFindLine = 1100
     outriggerApproach = 1400 #was 1400

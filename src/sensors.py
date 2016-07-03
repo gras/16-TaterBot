@@ -75,9 +75,14 @@ def wait4light():
     wait4(c.STARTLIGHT)
 
 def calibrate(port):
+    presses = 0
     print "Press A button with light on"
     while not a_button_clicked():
         if digital(13):
+            while digital(13):
+                pass
+            presses = presses + 1
+        if presses >= 2:
             DEBUG()
     lightOn = analog(port)
     print "On value =", lightOn
@@ -88,6 +93,10 @@ def calibrate(port):
     print "Press B button with light off"
     while not b_button_clicked():
         if digital(13):
+            while digital(13):
+                pass
+            presses = presses + 1
+        if presses >= 2:
             DEBUG()
     lightOff = analog(port)
     print "Off value =", lightOff
@@ -149,9 +158,15 @@ def notOkBlack(port):
     return analog(port) > c.topHatSafeValue
 
 def setWait(delay):
+    global time
     time = seconds() + delay
     
 def getWait(): # returns True until elapsed time is greater
-    if seconds > time:
+    global time
+    if seconds() > time:
         print "timed out"
-    return seconds < time
+    return seconds() < time
+
+def printWait():
+    print time
+    print seconds()
