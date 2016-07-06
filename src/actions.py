@@ -319,7 +319,10 @@ def goToHome (): # goes home
     
     driveTimed(-100, -100, 750)
     driveTimed(0, 100, 1200)
-    driveTimed(-100, -80, 900)#750
+    if c.isPrime:
+        driveTimed(-100, -80, 1000)#750
+    else:
+        driveTimed(-100, -80, 900)
     deliverPoms()
     driveTimed(30, 100, 1500)
     
@@ -399,7 +402,7 @@ def goToCenter():
         driveTimed(100, 60, 3000) 
     else:
         driveTimed(95, 100, 6000)#4000
-        driveTimed(100, 60, 3000)
+        driveTimed(100, 70, 3000)
     driveTimed(100,100, 500)
     drive(100, 100)
     crossBlack(c.LINE_FOLLOWER)
@@ -535,18 +538,22 @@ def findComposter():
     while seeObject():
         pass
     freezeMotors()
+    
+    setWait(1.5)
+    
     drive(-50, 50)
-    while not seeObject():
+    while not seeObject() and getWait():
         pass
     freezeMotors()
-    time = seconds()
-    drive(-50, 50)
-    while not seeObject():
-        pass
-    drive(-50, 50)
-    while seeObject():
-        pass
-    freezeMotors()
-    time = ((seconds() - time) / 2) * 1000
-    driveTimed(50, -50, int(time))
+    if getWait():
+        time = seconds()
+        drive(-50, 50)
+        while not seeObject():
+            pass
+        drive(-50, 50)
+        while seeObject():
+            pass
+        freezeMotors()
+        time = ((seconds() - time) / 2) * 1000
+        driveTimed(50, -50, int(time))
     
