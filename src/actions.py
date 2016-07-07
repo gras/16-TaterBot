@@ -258,9 +258,9 @@ def grabSouthPile():
         while onBlack(c.LINE_FOLLOWER):
             pass
         freezeMotors()
-    if onBlack(c.LINE_FOLLOWER):
-        print "thats not good (265)"
-        DEBUGwithWait()
+#     if onBlack(c.LINE_FOLLOWER):
+#         print "thats not good (265)"
+#         DEBUGwithWait()
     
 # goes to the black line
 def goToBlackLine():
@@ -302,10 +302,16 @@ def goToHome (): # goes home
         pass
     msleep(10)
     while onBlack(c.OUTRIGGER_TOPHAT) and getWait():
-        pass    
-    driveTimed(-95, -100, 1800)
+        pass
+    if c.isPrime:    
+        driveTimed(-95, -100, 2100)
+    else:
+        driveTimed(-95, -100, 1800)
     binGrabDown()
     moveOutrigger(c.outriggerIn, 200)
+    
+    driveTimed(-100, -100, 100)
+    
     driveTimed(100, 0, 4000)
     drive(0, -100)
     while not seeObject():
@@ -320,7 +326,7 @@ def goToHome (): # goes home
     driveTimed(-100, -100, 750)
     driveTimed(0, 100, 1200)
     if c.isPrime:
-        driveTimed(-100, -80, 1000)#750
+        driveTimed(-100, -80, 1200)#750
     else:
         driveTimed(-100, -80, 900)
     deliverPoms()
@@ -331,7 +337,7 @@ def goToHome (): # goes home
 def grabComposter(): # grabs the composter
     print("grabComposter")
     if isPrime:
-        driveTimed(100, 53, 1750) #1250
+        driveTimed(100, 53, 1500) #1750
     else: 
         driveTimed(100, 53, 1750) #2000
     freezeMotors()
