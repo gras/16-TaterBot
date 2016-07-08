@@ -407,7 +407,7 @@ def goToCenter():
         driveTimed(95, 100, 6000)#4000
         driveTimed(100, 60, 3000) 
     else:
-        driveTimed(95, 100, 6000)#4000
+        driveTimed(95, 100, 5500)#4000
         driveTimed(100, 70, 3000)
     driveTimed(100,100, 500)
     drive(100, 100)
