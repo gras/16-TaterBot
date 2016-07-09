@@ -203,7 +203,7 @@ def turnToSouth():
     if c.isPrime:
         driveTimed(100, 0, 500)#100,0,500
     else:
-        driveTimed(80, 0, 500)
+        driveTimed(100, 0, 500)#80, 0, 500
     moveOutrigger(c.outriggerOut, 100)
     
 # Grab the middle pile    
