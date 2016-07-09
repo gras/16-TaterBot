@@ -486,14 +486,24 @@ def scoreCube():
     stop()
     msleep(500)
     if c.isPrime:
-        driveTimed(45, 50, 600)
+        #driveTimed(45, 50, 600)
+        setWait(.6)
+        while getWait():
+            dropTest()
+            
     else:
-        driveTimed(45, 50, 800)#600
+        #driveTimed(45, 50, 800)#600
+        setWait(.8)
+        while getWait():
+            dropTest()
     freezeMotors()
     moveClaw(c.clawOpen, 25)
     msleep(300)
     moveArm(c.armUp, 10)
-    driveTimed(100, 100, 1100)
+    #driveTimed(100, 100, 1100)
+    setWait(1.1)
+    while getWait():
+        dropTest()
 
 def lineUpWithRamp():
     print("lineUpWithRamp")
@@ -562,4 +572,14 @@ def findComposter():
         freezeMotors()
         time = ((seconds() - time) / 2) * 1000
         driveTimed(50, -50, int(time))
-    
+
+def dropTime():
+    if seconds() - c.startTime > 119.25:
+        return False
+    return True
+
+def dropTest():
+    if dropTime():
+        print ("dropTest - Cube")
+        moveClaw(c.clawOpen, 10000)
+        DEBUG()
