@@ -13,10 +13,13 @@ startLightThresh = 2000
 # TIME
 startTime = -1
 
+# This is a new comment
+# and I am going to change a few things
+
 # MOTOR ports
-LMOTOR = 0
-RMOTOR = 3
-BIN = 2
+LMOTOR = 2
+RMOTOR = 4
+BIN = 99999
 
 
 # SERVO ports
@@ -94,3 +97,4 @@ else:
     outriggerFront = 2047
     outriggerBin = 1280
     outriggerFindLine = 1450
+
